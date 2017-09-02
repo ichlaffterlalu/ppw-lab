@@ -27,13 +27,11 @@ class HelloNameUnitTest(TestCase):
         self.assertIn('<h1>Hello my name is ' + mhs_name + '</h1>', html_response)
         self.assertFalse(len(mhs_name) == 0)
 
-    @unittest.skip('TODO Remove this line to complete last checklist')
     def test_calculate_age_is_correct(self):
         self.assertEqual(0, calculate_age(date.today().year))
         self.assertEqual(17, calculate_age(2000))
         self.assertEqual(27, calculate_age(1990))
 
-    @unittest.skip('TODO Remove this line to complete last checklist')
     def test_index_contains_age(self):
         request = HttpRequest()
         response = index(request)
