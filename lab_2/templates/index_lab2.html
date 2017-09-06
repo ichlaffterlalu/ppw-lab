@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Landing Page</title>
+</head>
+<style>
+    .status{
+        font-size: 20px;
+        font-family: "Comic Sans MS";
+        color: #6650ff;
+        text-align: justify;
+        text-justify: inter-word;
+    }
+    .name{
+        font-size: 20px;
+        font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+        color: #ff102c;
+    }
+    .center_screen {
+        position: absolute;
+        width: 500px;
+        height: 50px;
+        top: 50%;
+        left: 50%;
+        margin-left: -250px; /* margin is -0.5 * dimension */
+        margin-top: -25px;
+    }
+    #href_bio{
+
+    }
+</style>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<body style="background-color: lightgray">
+    <div class="center_screen">
+        <p class="status">Hello, this is {{ name }}. {{ content }} Check my <a id="href_bio">Biography</a>.</p>
+	</div>
+</body>
+<script>
+    $(document).ready(function(){
+        $("#href_bio").click(function(){
+            window.location.href = '/lab-2-addon/'
+        });
+
+    });
+</script>
+</html>

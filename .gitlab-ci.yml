@@ -2,7 +2,7 @@ stages:
   - test
   - deploy
 
-UnitTestLab1:
+UnitTest:
   image: python:3.6
   stage: test
   before_script:
@@ -11,13 +11,11 @@ UnitTestLab1:
     - python manage.py migrate
   when: on_success
   script:
-    - python manage.py test lab_1
-    - coverage run --include='lab_1/*' manage.py test lab_1
+    - coverage run --include='lab_*/*' manage.py test
     - coverage report -m
-  only:
-    - master
 
-Lab1Deploy:
+
+Deployment:
   image: ruby:2.4
   stage: deploy
   before_script:
@@ -27,6 +25,4 @@ Lab1Deploy:
   environment:
     name: production
     url: $HEROKU_APP_HOST
-  only:
-    - master
 
