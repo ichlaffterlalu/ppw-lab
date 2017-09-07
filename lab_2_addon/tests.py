@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.test import Client
 from django.urls import resolve
-from .views import index, landing_page_content, mhs_name
+from .views import index, mhs_name
 from django.http import HttpRequest
 from unittest import skip
 
