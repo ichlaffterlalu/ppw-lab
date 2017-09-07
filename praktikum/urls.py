@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.views.generic.base import RedirectView
 import lab_1.urls as lab_1
 from lab_1.views import index as index_lab1
 import lab_2.urls as lab_2
@@ -25,5 +26,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^lab-1/', include(lab_1,namespace='lab-1')),
     url(r'^lab-2/', include(lab_2,namespace='lab-2')),
-    url(r'^$', index_lab2, name='index_lab2')
+    url(r'^$', RedirectView.as_view(url="/lab-2/", permanent="True"), name='index_lab-2')
 ]
