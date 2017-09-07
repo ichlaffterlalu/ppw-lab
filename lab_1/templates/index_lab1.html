@@ -4,21 +4,30 @@
     <meta charset="UTF-8">
     <title>{{ name }}</title>
 	<style type="text/css">
+		body {background:url('/static/img/background.jpg'); background-size:100% 100vh;}
 		h1 {text-align:center; font-family:Old English Text MT;}
+		div#content {background-color:rgba(255, 255, 255, 0.4); position:absolute; top:0; bottom:0; right:0; left:0; padding:10px; margin:0px;}
 		div#story {font-size:14px;}
-		div#footer {border-style:dashed; border-radius:2px; border-width:1px; width:100%; font-size:10px; text-align:center;}
+		div#footer {background-color:rgba(229, 255, 243, 0.7); border-style:dashed; border-radius:12px; border-width:2px; font-size:12px; position:absolute; margin:5px; bottom:0; left:0; right:0;}
+		div#mainstory {padding:25px; margin:10px; border-style:groove; border-width:5px; border-radius:25px; background-color:rgba(229, 243, 255, 0.7);}
 		article {font-family:Consolas; color:red; font-weight:bold;}
-		p {font-family:Segoe UI;}
+		p,li {font-family:Segoe UI;}
 	</style>
 </head>
 <body>
-    <h1>Hello my name is {{ name }}</h1>
-	<div id="story">
-		<article>I am {{ age }} years old</article>
-		<p>I am learning <u>web programming</u> right now. Sorry for the "errors".</p>
-	</div>
-	<div id="footer">
-		<article>Specifically made for PPW 2017 lab session, on 02 September 2017.</article>
+	<div id="content">
+		<h1>Hello my name is {{ name }}</h1>
+		<div id="story">
+			<article>I am {{ age }} years old</article>
+			<div id="mainstory"><p><b>I am learning <u>web programming</u> right now.</b> Just let me advance myself through the errors.</p>
+			<ul><li>Do you know "Hello World"? That phrase is so common among n00b programmers, and that phrase will always make you feeling nostalgic.<br />
+			And that's also happened to me, feeling nostalgic about my old Foundations of Programming labs.</li>
+			<li>Now, I must do it again for Web Design and Programming. Yeah, I do it because these words: "Never stop learning, from the day you born till you die."</li>
+			<p align="right"><b>-Ichlasul Affan</b></p></div>
+		</div>
+		<div id="footer">
+			<article><marquee scrollamount="3">Specifically made for PPW 2017 lab session, created on 02 September 2017, modified for aesthetic purposes on 08 September 2017. This page is the implementation of Lab 1. || Why this page is so special? Just visit and you will understand my introvertly programmer life.</marquee></article>
+		</div>
 	</div>
 </body>
 </html>
