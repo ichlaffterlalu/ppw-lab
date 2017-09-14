@@ -2,15 +2,15 @@
 {% block content %}
 <style>
     .center_screen {
-        position: absolute;
-        width: 50%;
-        height: 50%;
+        position: fixed;
+        width: auto;
+        height: auto;
         top: 50%;
-        left: 25%;
-		text-align: center;
+        left: 50%;
+		transform: translate(-50%,-25%);
     }
 </style>
 <div class="center_screen">
-    <p width="100%" class="status" id="test">Hello, this is {{ name }}. {{ content }}.</p>
+    <p style="width:100%;height:100%" class="status" id="test">Hello, this is {{ name }}. {{ content }}.</p>
 </div>
 {% endblock %}
