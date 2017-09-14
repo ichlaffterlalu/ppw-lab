@@ -15,3 +15,10 @@ class Lab3Test(TestCase):
 	def test_lab_3_using_index_func(self):
 		found = resolve('/lab-3/')
 		self.assertEqual(found.func, index)
+		
+	def test_model_can_create_new_activity(self):
+		#Creating a new activity
+		new_activity = Diary.objects.create(date=timezone.now(),activity='Aku mau latihan ngoding deh')
+		#Retrieving all available activity
+		counting_all_available_activity = Diary.objects.all().count()
+		self.assertEqual(counting_all_available_activity,1)
