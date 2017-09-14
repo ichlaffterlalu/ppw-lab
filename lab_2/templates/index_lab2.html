@@ -3,15 +3,14 @@
 <style>
     .center_screen {
         position: absolute;
-        width: 500px;
-        height: 50px;
+        width: 50%;
+        height: 50%;
         top: 50%;
-        left: 50%;
-        margin-left: -250px; /* margin is -0.5 * dimension */
-        margin-top: -25px;
+        left: 25%;
+		text-align: center;
     }
 </style>
 <div class="center_screen">
-    <p class="status" id="test">Hello, this is {{ name }}. {{ content }}.</p>
+    <p width="100%" class="status" id="test">Hello, this is {{ name }}. {{ content }}.</p>
 </div>
 {% endblock %}
