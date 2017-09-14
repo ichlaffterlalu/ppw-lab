@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<h3 style="text-align: center">Hai semua, berikut adalah Catatan Harianku</h3>
+<br><br>
+<div class="row">
+    <div class="col-md-6 col-xs-6">
+        <table align="center" style="text-align: center">
+            <tr>
+                <th>Tanggal</th>
+                <th>Yang akan dikerjakan</th>
+            </tr>
+            {% for diary_data in diary_dict %}
+                <tr>
+                    <td class="date">{{ diary_data.date }}</td>
+                    <td class="activity">{{ diary_data.activity }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="col-md-6 col-xs-6">
+        <form method="POST" action="add_activity/">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td>
+                        Tanggal
+                    </td>
+                    <td>
+                        <input type="datetime-local" name="date" id="date" required="required"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Kegiatan
+                    </td>
+                    <td>
+                        <input type="text" name="activity" id="activity" size="25"/>
+                    </td>
+                </tr>
+            </table>
+            <button type="submit" class="button btn-success">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h3 style="text-align: center">Hi all, This is my complete biodata</h3>
+<table align="center" style="text-align: center">
+    {% for bio in bio_dict %}
+        <tr>
+            <td class="subject">{{ bio.subject }}</td>
+            <td class="value">{{ bio.value }}</td>
+        </tr>
+    {% endfor %}
+</table>
+<br><br>
+{% endblock %}
