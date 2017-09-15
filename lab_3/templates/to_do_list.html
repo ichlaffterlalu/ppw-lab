@@ -1,35 +1,37 @@
 {% extends "base.html" %}
 {% block content %}
-<h3 style="padding:10px;text-align: center">Hai semua, berikut adalah Catatan Harianku</h3>
-<div class="row" style="margin:10px">
+<h1 style="padding:10px;text-align: center;font-family:Agency FB">Hi all, this is my daily activities... :)</h3>
+<div class="row" style="margin:10px;left:0;right:0;background-color:rgba(224,255,255,0.7);">
 	<div class="col-12" style="border-radius:5px;border-style:groove;border-width:2px;padding:5px;">
+		<b>Insert your new activity:</b>
 		<form method="POST" action="add_activity/">
 			{% csrf_token %}
-			<div style="display:inline-block;padding:0px 2px;min-width:200px;width:25%;text-align:center">
+			<div style="display:inline-block;padding:2px;min-width:200px;width:25%;text-align:center">
 				Tanggal:
 				<input type="datetime-local" name="date" id="date" required="required" style="width:100%"/>
 			</div>
-			<div style="display:inline-block;padding:0px 2px;min-width:200px;width:60%;text-align:center">
+			<div style="display:inline-block;padding:2px;min-width:200px;width:60%;text-align:center">
 				Kegiatan:
 				<input type="text" name="activity" id="activity" style="display:inline-block;width:100%"/>
 			</div>
-			<div style="display:inline-block;width:5%;align:right;">
+			<div style="display:inline-block;padding:2px;">
 				<button type="submit" class="button btn-success">Submit</button>
 			</div>
 		</form>
 	</div>
 </div>
-<div class="row" style="padding:10px">
-    <div class="col-md-12 col-xs-12">
-        <table style="width:100%;">
+<div class="row" style="margin:10px;left:0;right:0;background-color:rgba(224,255,255,0.7);">
+    <div class="col-12" style="border-radius:5px;border-style:groove;border-width:2px;padding:10px;">
+        <b>Here are the activities:</b>
+		<table style="table-layout:fixed;width:100%;">
             <tr>
-                <th style="text-align:center;">Tanggal</th>
-                <th style="text-align:center;padding:2px">Yang akan dikerjakan</th>
+                <th style="text-align:center;width:200px;">Tanggal</th>
+                <th style="text-align:center;padding:2px;">Yang akan dikerjakan</th>
             </tr>
             {% for diary_data in diary_dict %}
                 <tr>
                     <td class="date" style="width:25%;text-align:center">{{ diary_data.date }}</td>
-                    <td class="activity" style="width:75%;padding-left:5px">{{ diary_data.activity }}</td>
+                    <td class="activity" style="width:75%;padding-left:5px;">{{ diary_data.activity }}</td>
                 </tr>
             {% endfor %}
         </table>
