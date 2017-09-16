@@ -1,6 +1,13 @@
 {% extends "base.html" %}
-{% block content %}
-<style>
+{% block style %}
+    .status {
+        font-family: "Comic Sans MS";
+        text-align: justify;
+        text-justify: inter-word;
+    }
+    .name {
+        font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+    }
     .center_screen {
         position: fixed;
         width: auto;
@@ -8,9 +15,14 @@
         top: 50%;
         left: 50%;
 		transform: translate(-50%,-25%);
+		vertical-align: middle;
+		padding: 5px;
+		border-radius: 5px;
+		background-color:rgba(224,255,255,0.7);
     }
-</style>
-<div class="center_screen" style="background-color:rgba(224,255,255,0.7);">
-    <p style="width:100%;height:100%" class="status" id="test">Hello, this is {{ name }}. {{ content }}.</p>
+{% endblock %}
+{% block content %}
+<div class="center_screen">
+    <div class="status" id="test">Hello, this is {{ name }}. {{ content }}.</div>
 </div>
 {% endblock %}
