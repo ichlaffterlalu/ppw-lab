@@ -45,11 +45,11 @@
 		<b>Insert your new activity:</b>
 		<form method="POST" action="add_activity/">
 			{% csrf_token %}
-			<div style="display:inline-block;padding:2px;min-width:200px;width:25%;text-align:center">
+			<div style="display:inline-block;padding:2px;min-width:200px;width:10%;text-align:center">
 				Tanggal:
 				<input type="datetime-local" name="date" id="date" required="required" style="width:100%"/>
 			</div>
-			<div style="display:inline-block;padding:2px;min-width:200px;width:60%;text-align:center">
+			<div style="display:inline-block;padding:2px;min-width:200px;width:80%;text-align:center">
 				Kegiatan:
 				<input type="text" name="activity" id="activity" style="display:inline-block;width:100%"/>
 			</div>
