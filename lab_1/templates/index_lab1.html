@@ -1,13 +1,55 @@
 {% extends "base.html" %}
 {% block title %}{{ name }}{% endblock %}
 {% block style %}
-	h1 {text-align:center; font-family:Old English Text MT;}
-	div#content {height:100%; bottom:0; padding:10px; margin:0px;}
-	div#story {font-size:14px;}
-	div#footer {background-color:rgba(229, 255, 243, 0.7); border-style:dashed; border-radius:12px; border-width:2px; font-size:12px; margin:5px;}
-	div#mainstory {padding:25px; margin:10px; border-style:groove; border-width:5px; border-radius:25px; background-color:rgba(229, 243, 255, 0.7);}
-	article {font-family:Consolas; color:red; font-weight:bold;}
-	p,li {font-family:Segoe UI;}
+	@font-face {
+		font-family: Old English Text MT;
+		src: url('/static/img/OldEnglishTextMT-Regular-webfont.woff')
+	}
+	@font-face {
+		font-family: Consolas;
+		src: url('/static/img/Consolas-Regular-webfont.woff')
+	}
+	@font-face {
+		font-family: Segoe UI;
+		src: url('/static/img/SegoeUI-Regular-webfont.woff')
+	}
+	h1 {
+		text-align: center;
+		font-family: Old English Text MT;
+	}
+	div#content {
+		height:100%;
+		bottom:0;
+		padding:10px;
+		margin:0px;
+	}
+	div#story {
+		font-size:14px;
+	}
+	div#footer {
+		background-color:rgba(229, 255, 243, 0.7);
+		border-style:dashed;
+		border-radius:12px;
+		border-width:2px;
+		font-size:12px;
+		margin:5px;
+	}
+	div#mainstory {
+		padding:25px;
+		margin:10px;
+		border-style:groove;
+		border-width:5px;
+		border-radius:25px;
+		background-color:rgba(229, 243, 255, 0.7);
+	}
+	article {
+		font-family:Consolas;
+		color:red;
+		font-weight:bold;
+	}
+	p,li {
+		font-family:Segoe UI;
+	}
 {% endblock %}
 {% block content %}
 <div id="content">
