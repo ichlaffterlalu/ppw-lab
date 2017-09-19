@@ -54,3 +54,13 @@ class Lab3Test(TestCase):
 		new_response = self.client.get('/lab-3/')
 		html_response = new_response.content.decode('utf8')
 		self.assertIn('ERROR: Activity should not be empty.', html_response)
+	
+	def test_can_handle_whitespace_only_activity(self):
+		response = self.client.post('/lab-3/add_activity/', data={'date': '2017-10-12T14:14', 'activity' : '\t'})
+		counting_all_available_activity = Diary.objects.all().count()
+		self.assertEqual(counting_all_available_activity, 0)
+		self.assertEqual(response.status_code, 302)
+		self.assertEqual(response['location'], '/lab-3/')
+		new_response = self.client.get('/lab-3/')
+		html_response = new_response.content.decode('utf8')
+		self.assertIn('ERROR: Activity should not be empty.', html_response)
