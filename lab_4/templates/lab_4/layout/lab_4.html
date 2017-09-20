@@ -1,0 +1,22 @@
+{% extends "lab_4/layout/base.html" %}
+
+{% block content %}
+<h1>Portofolio</h1>
+<hr/>
+<section name="bio">
+	<h2>Bio</h2>
+	<p>
+		{{content}}
+	</p>    
+</section>
+<hr/>
+<section name="about_me">
+	<h2>List</h2>
+	<ul>
+		{% for ii in about_me %}
+		<li> {{ ii }} </li>
+		{% endfor %}
+	</ul>
+</section>
+<hr/>
+{% endblock %}

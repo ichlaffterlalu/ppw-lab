@@ -1,0 +1,39 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="LAB 4">
+    <meta name="author" content="{{author}}">
+    <!-- bootstrap csss -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">    
+
+    <title> 
+        {% block title %} Lab 4 By {{author}}{% endblock %}
+    </title>
+</head>
+
+<body>
+    <header>
+        {% include "lab_4/partials/header.html" %}
+    </header>
+    <content>
+        <div class="container">
+            {% block content %}
+                <!-- content goes here -->
+            {% endblock %}
+        </div>
+
+    </content>
+    <footer>
+        <!-- TODO Block Footer dan include footer.html -->
+        {% block footer %}
+        {% include "lab_4/partials/footer.html" %}
+        {% endblock %}
+    </footer>
+
+    <!-- Jquery n Bootstrap Script -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="application/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
