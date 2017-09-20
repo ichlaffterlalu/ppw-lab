@@ -4,7 +4,6 @@ from django.http import HttpResponseRedirect
 from .forms import Message_Form
 from .models import Message
 
-
 # Create your views here.
 response = {'author': ""} #TODO Implement yourname
 about_me = []
@@ -30,3 +29,9 @@ def message_post(request):
         return render(request, html, response)
     else:        
         return HttpResponseRedirect('/lab-4/')
+
+def message_table(request):
+	message = Message.objects.all()
+	response['message'] = message
+	html = 'lab_4/table.html'
+	return render(request, html , response)

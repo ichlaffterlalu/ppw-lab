@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.test import Client
 from django.urls import resolve
 from django.http import HttpRequest
-from .views import index, about_me, landing_page_content, index, message_post
+from .views import index, about_me, landing_page_content, message_table, message_post
 from lab_1.views import mhs_name
 from .models import Message
 from .forms import Message_Form
@@ -66,3 +66,33 @@ class Lab4UnitTest(TestCase):
 		html_response = response.content.decode('utf8')
 		self.assertIn(anonymous,html_response)
 		self.assertIn(message,html_response)
+
+	def test_lab_4_table_url_exist(self):
+		response = Client().get('/lab-4/result_table')
+		self.assertEqual(response.status_code, 200)
+
+	def test_lab_4_table_using_message_table_func(self):
+		found = resolve('/lab-4/result_table')
+		self.assertEqual(found.func, message_table)
+
+	def test_lab_4_showing_all_messages(self):
+		name_budi = 'Budi'
+		email_budi = 'budi@ui.ac.id'
+		message_budi = 'Lanjutkan Kawan'
+		data_budi = {'name': name_budi, 'email': email_budi, 'message': message_budi}
+		post_data_budi = Client().post('/lab-4/add_message', data_budi)
+		self.assertEqual(post_data_budi.status_code, 200)
+
+		message_anonymous = 'Masih Jelek Nih'
+		data_anonymous = {'name': '', 'email': '', 'message': message_anonymous}
+		post_data_anonymous = Client().post('/lab-4/add_message', data_anonymous)
+		self.assertEqual(post_data_anonymous.status_code, 200)
+
+		response = Client().get('/lab-4/result_table')
+		html_response = response.content.decode('utf8')
+
+		for key,data in data_budi.items():
+			self.assertIn(data,html_response)
+
+		self.assertIn('Anonymous', html_response)
+		self.assertIn(message_anonymous, html_response)
