@@ -532,7 +532,7 @@ sebelum membuat _page_ tersebut
                     - layout
                         base.html
                     - partials
-                        navbar.html
+                        header.html
                         footer.html
                     table.html
                     lab_4.html
