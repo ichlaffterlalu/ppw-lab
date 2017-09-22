@@ -5,14 +5,12 @@ from .forms import Message_Form
 from .models import Message
 
 # Create your views here.
-response = {'author': ""} #TODO Implement yourname
-about_me = []
+response = {'author': "Ichlasul Affan"}
+about_me = ['Saya sedang belajar PPW.', 'Kenapa PPW pakai Django?', 'Karena sedang belajar TDD?', 'Atau tampaknya sedang dalam proses Pythonisasi?', 'Hmm... saya bingung.', 'Tanya ke asdos atau dosennya langsung mungkin lebih baik.']
 def index(request):
 	response['content'] = landing_page_content
 	html = 'lab_4/lab_4.html'
-	#TODO Implement, isilah dengan 6 kata yang mendeskripsikan anda
 	response['about_me'] = about_me
-	return render(request, html, response)
 	response['message_form'] = Message_Form
 	return render(request, html, response)
 
