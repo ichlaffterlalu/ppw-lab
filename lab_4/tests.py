@@ -12,6 +12,11 @@ class Lab4UnitTest(TestCase):
 	def test_lab_4_url_is_exist(self):
 		response = Client().get('/lab-4/')
 		self.assertEqual(response.status_code, 200)
+	
+	def test_root_url_now_is_using_index_page_from_lab_4(self):
+		response = Client().get('/')
+		self.assertEqual(response.status_code, 301)
+		self.assertRedirects(response,'/lab-4/',301,200)
 
 	def test_about_me_more_than_6(self):
 	   self.assertTrue(len(about_me) >= 6)
@@ -43,7 +48,7 @@ class Lab4UnitTest(TestCase):
 	def test_form_message_input_has_placeholder_and_css_classes(self):
 		form = Message_Form()
 		self.assertIn('class="form-control"', form.as_p())
-		self.assertIn('<label for="id_name">Nama:</label>', form.as_p())
+		self.assertIn('<label for="id_name">Name:</label>', form.as_p())
 		self.assertIn('<label for="id_email">Email:</label>', form.as_p())
 		self.assertIn('<label for="id_message">Message:</label>', form.as_p())
 

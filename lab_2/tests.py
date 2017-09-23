@@ -8,7 +8,6 @@ from unittest import skip
 # Create your tests here.
 
 class Lab2UnitTest(TestCase):
-
     def test_lab_2_url_is_exist(self):
         response = Client().get('/lab-2/')
         self.assertEqual(response.status_code,200)
