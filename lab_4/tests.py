@@ -3,6 +3,7 @@ from django.test import Client
 from django.urls import resolve
 from django.http import HttpRequest
 from .views import index, about_me, landing_page_content, message_table, message_post
+from .views import response as views_response
 from lab_1.views import mhs_name
 from .models import Message
 from .forms import Message_Form
@@ -18,8 +19,20 @@ class Lab4UnitTest(TestCase):
 		self.assertEqual(response.status_code, 301)
 		self.assertRedirects(response,'/lab-4/',301,200)
 
+	def test_lab_4_has_navbar(self):
+		request = HttpRequest()
+		response = index(request)
+		html_response = response.content.decode('utf8')
+		self.assertIn('<nav class="navbar', html_response)
+		
+	def test_lab_4_has_copyright(self):
+		request = HttpRequest()
+		response = index(request)
+		html_response = response.content.decode('utf8')
+		self.assertIn('<p class="copyright">&copy; ' + views_response['author'] + '</p>', html_response)
+		
 	def test_about_me_more_than_6(self):
-	   self.assertTrue(len(about_me) >= 6)
+		self.assertTrue(len(about_me) >= 6)
 
 	def test_lab4_using_index_func(self):
 		found = resolve('/lab-4/')
