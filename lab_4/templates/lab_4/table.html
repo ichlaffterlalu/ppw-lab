@@ -1,13 +1,29 @@
 {% extends "lab_4/layout/base.html" %}
 {% block title %}Kumpulan Pesan{% endblock %}
+{% block style %}
+	table {
+		font-size: 12px;
+		table-layout:fixed;
+		width:100%;
+	}
+	.name {
+		width: 20%;
+	}
+	.email {
+		width: 20%;
+	}
+	.time {
+		width: 90px;
+	}
+{% endblock %}
 {% block content %}
 <!--  Populate semua isi pesan dari model -->
 <table class="table">
 	<thead>
-		<th>Nama</th>
-		<th>Email</th>
-		<th>Pesan</th>
-		<th>Dibuat Pada</th>
+		<th class="name">Name</th>
+		<th class="email">Email</th>
+		<th class="message">Message</th>
+		<th class="time">Added at</th>
 	</thead>
 	<tbody>
 		<!-- TODO, Kalau nama/email anon maka tr classnya jadi warning -->
@@ -15,10 +31,10 @@
 		{% if i.name == 'Anonymous' or i.email == 'Anonymous' %}
 		<tr class="warning"> {% else %} <tr class="success">
 			{% endif %}
-			<td> {{i.name}} </td>
-			<td> {{i.email}} </td>
-			<td> {{i.message}} </td>
-			<td> {{i.created_date.time}} </td>
+			<td class="name"> {{i.name}} </td>
+			<td class="email"> {{i.email}} </td>
+			<td class="message"> {{i.message}} </td>
+			<td class="time"> {{i.created_date.time}} </td>
 		</tr>             
 		{% endfor %}
 	</tbody>
