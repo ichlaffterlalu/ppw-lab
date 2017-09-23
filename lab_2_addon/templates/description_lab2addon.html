@@ -1,4 +1,28 @@
 {% extends "base.html" %}
+{% block style %}
+	table, th, td {
+		background-color: rgba(255,255,255,0.4);
+		color: black;
+		border-radius: 50px;
+		border: 3px dotted black;
+		word-wrap:break-word;
+		padding: 10px;
+	}
+	table {
+		border-radius: 0px;
+	}
+	.subject{
+		font-size: 20px;
+		font-family: "Comic Sans MS";
+		color: #6650ff;
+	}
+	.value{
+		font-size: 20px;
+		font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+		color: #ff102c;
+	}
+{% endblock %}
+{% block header %}{% include "lab_2/partials/header.html" %}{% endblock %}
 {% block content %}
 <h3 style="padding:10px;text-align: center">Hi all, This is my complete biodata</h3>
 <table align="center" style="text-align: center">
@@ -11,3 +35,4 @@
 </table>
 <br><br>
 {% endblock %}
+{% block footer %}{% include "lab_2/partials/footer.html" %}{% endblock %}

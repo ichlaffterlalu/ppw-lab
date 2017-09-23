@@ -17,12 +17,22 @@
 		transform: translate(-50%,-25%);
 		vertical-align: middle;
 		padding: 5px;
-		border-radius: 5px;
-		background-color:rgba(224,255,255,0.7);
+		border-radius: 10px;
+		border-size: 2px;
+		border-style: dotted;
+		text-shadow: 0 0 3px #FF0000;
     }
+	p.copyright {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+	}
 {% endblock %}
+{% block header %}{% include "lab_2/partials/header.html" %}{% endblock %}
 {% block content %}
 <div class="center_screen">
     <div class="status" id="test">Hello, this is {{ name }}. {{ content }}.</div>
 </div>
 {% endblock %}
+{% block footer %}{% include "lab_2/partials/footer.html" %}{% endblock %}

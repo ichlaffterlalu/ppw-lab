@@ -11,10 +11,11 @@
 	}
 	#newActivityForm {
 		margin: 10px;
-		background-color:rgba(224,255,255,0.7);
-		font-size:12px;
+		font-size: 12px;
+		color: black;
 	}
 	#newActivityFormInner {
+		background-color: rgba(224,255,255,0.7);
 		border-radius: 5px;
 		border-style: groove;
 		border-width: 2px;
@@ -25,9 +26,10 @@
 		margin: 10px;
 		left: 0;
 		right: 0;
-		background-color: rgba(224,255,255,0.7);
+		color: black;
 	}
 	#activityListInner {
+		background-color: rgba(224,255,255,0.7);
 		border-radius: 5px;
 		border-style: groove;
 		border-width: 2px;
@@ -43,6 +45,7 @@
 		width: 100%;
 	}
 {% endblock %}
+{% block header %}{% include "lab_2/partials/header.html" %}{% endblock %}
 {% block content %}
 <h1>Hi all, this is my daily activities... :)</h3>
 <div class="row" id="newActivityForm">
@@ -85,3 +88,4 @@
     </div>
 </div>
 {% endblock %}
+{% block footer %}{% include "lab_2/partials/footer.html" %}{% endblock %}

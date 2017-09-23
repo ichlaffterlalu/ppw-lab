@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 {% block title %}{{ name }}{% endblock %}
 {% block style %}
 	@font-face {
@@ -17,16 +18,14 @@
 		text-align: center;
 		font-family: Old English Text MT;
 	}
-	div#content {
-		height:100%;
-		bottom:0;
+	content {
 		padding:10px;
 		margin:0px;
 	}
 	div#story {
 		font-size:14px;
 	}
-	div#footer {
+	footer {
 		background-color:rgba(229, 255, 243, 0.7);
 		border-style:dashed;
 		border-radius:12px;
@@ -51,19 +50,16 @@
 		font-family:Segoe UI;
 	}
 {% endblock %}
+{% block header %}{% include "lab_1/partials/header.html" %}{% endblock %}
 {% block content %}
-<div id="content">
-	<h1>Hello my name is {{ name }}</h1>
-	<div id="story">
-		<article>I am {{ age }} years old</article>
-		<div id="mainstory"><p><b>I am learning <u>web programming</u> right now.</b> Just let me advance myself through the errors.</p>
-		<ul><li>Do you know "Hello World"? That phrase is so common among n00b programmers, and that phrase will always make you feeling nostalgic.<br />
-		And that's also happened to me, feeling nostalgic about my old Foundations of Programming labs.</li>
-		<li>Now, I must do it again for Web Design and Programming. Yeah, I do it because these words: "Never stop learning, from the day you born till you die."</li>
-		<p align="right"><b>-Ichlasul Affan</b></p></div>
-	</div>
-	<div id="footer">
-		<article><marquee scrollamount="3">Specifically made for PPW 2017 lab session, created on 02 September 2017, modified for aesthetic purposes on 08 September 2017. This page is the implementation of Lab 1. || Why this page is so special? Just visit and you will understand my introvertly programmer life.</marquee></article>
-	</div>
+<h1>Hello my name is {{ name }}</h1>
+<div id="story">
+	<article>I am {{ age }} years old</article>
+	<div id="mainstory"><p><b>I am learning <u>web programming</u> right now.</b> Just let me advance myself through the errors.</p>
+	<ul><li>Do you know "Hello World"? That phrase is so common among n00b programmers, and that phrase will always make you feeling nostalgic.<br />
+	And that's also happened to me, feeling nostalgic about my old Foundations of Programming labs.</li>
+	<li>Now, I must do it again for Web Design and Programming. Yeah, I do it because these words: "Never stop learning, from the day you born till you die."</li>
+	<p align="right"><b>-Ichlasul Affan</b></p></div>
 </div>
 {% endblock %}
+{% block footer %}{% include "lab_1/partials/footer.html" %}{% endblock %}
