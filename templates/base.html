@@ -8,48 +8,8 @@
 		<!-- bootstrap css -->
 		<link rel="stylesheet" href="/static/css/bootstrap-4.0.0beta1.min.css">
 	{% endblock %}
+	<link rel="stylesheet" href="/static/css/base.css">
 	<title>{% block title %}My Biodata{% endblock %}</title>
-	<style>
-		@font-face {
-			font-family: Segoe Print;
-			src: url('/static/fonts/SegoePrint-Regular-webfont.woff')
-		}
-		@font-face {
-			font-family: Comic Sans MS;
-			src: url('/static/fonts/ComicSansMS-Regular-webfont.woff')
-		}
-		@font-face {
-			font-family: Roboto;
-			src: url('/static/fonts/Roboto-Regular-webfont.woff')
-		}
-		html, body {
-			font-family: Segoe Print;
-			width: 100%;
-			height: 100%;
-			min-width: 320;
-			min-height: 180;
-			color: white;
-			background-color: rgb(0,0,0);
-		}
-		content {
-			overflow-x: hidden;
-			overflow-y: auto;
-			width:100%;
-			min-width: 320;
-			min-height: 180;
-		}
-		table, th, td {
-			background-color: rgba(255,255,255,0.4);
-			color: black;
-			border: 1px solid black;
-			word-wrap:break-word;
-		}
-		p.copyright{
-			text-align: center;
-			margin-top: 20px;
-			padding: 5px;
-		}
-	</style>
 	<style>
 		{% block style %}{% endblock %}
 	</style>
