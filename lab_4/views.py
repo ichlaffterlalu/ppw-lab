@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib import messages
 from lab_2.views import landing_page_content
 from django.http import HttpResponseRedirect
 from .forms import Message_Form
@@ -26,6 +27,8 @@ def message_post(request):
         html ='lab_4/form_result.html'
         return render(request, html, response)
     else:        
+        for x in form.errors:
+            messages.add_message(request, messages.ERROR, form.errors[x])
         return HttpResponseRedirect('/lab-4/')
 
 def message_table(request):

@@ -70,7 +70,7 @@ class Lab4UnitTest(TestCase):
 		self.assertFalse(form.is_valid())
 		self.assertEqual(
 			form.errors['message'],
-			["I am sad if you are not filling this field :("]
+			["I am sad if you are not filling the message field with real messages... :("]
 		)
 	
 	def test_form_validation_for_invalid_email(self):
@@ -78,7 +78,7 @@ class Lab4UnitTest(TestCase):
 		self.assertFalse(form.is_valid())
 		self.assertEqual(
 			form.errors['email'],
-			["Well... I think you have put in something wrong :("]
+			["Well... I think you have put in something wrong on email field. Check again, please... :("]
 		)
 	
 	def test_form_validation_for_whitespaces_only_messages(self):
@@ -86,7 +86,7 @@ class Lab4UnitTest(TestCase):
 		self.assertFalse(form.is_valid())
 		self.assertEqual(
 			form.errors['message'],
-			["I am sad if you are not filling this field :("]
+			["I am sad if you are not filling the message field with real messages... :("]
 		)
 	
 	def test_lab4_post_fail_message_empty(self):

@@ -10,6 +10,16 @@
 		width: 100px;
 		border-radius: 50%;
 	}
+	#error-messages {
+		border-radius: 5px;
+		border: 1px solid white;
+		margin-bottom: 15px;
+		padding: 5px;
+		float: left
+	}
+	#submit {
+		float: right
+	}
 {% endblock %}
 {% block content %}
 <img id="myPhoto" src="/static/img/myPhoto.jpg"/>
@@ -36,8 +46,14 @@
 	<form id="form" method="POST" action="{% url 'lab-4:add_message' %}">
 		{% csrf_token %}
 		{{ message_form }}
-		<br>
-		<button type="submit" class="btn btn-default">Submit</button>
+		<br/>
+		{% if messages %}
+			<div id="error-messages">
+				Attention:
+				{% for message in messages %}<b style="color:red">{{ message }}</b>{% endfor %}
+			</div>
+		{% endif %}
+		<button id="submit" type="submit" class="btn btn-default">Submit</button>
 	</form>
 </section>
 {% endblock %}
