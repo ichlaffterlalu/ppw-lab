@@ -1,7 +1,7 @@
 from django import forms
 
 class Message_Form(forms.Form):
-    error_messages = {
+    error_default = {
         'required': 'I am sad if you are not filling this field :(',
         'invalid': 'Well... I think you have put in something wrong :(',
     }
@@ -18,6 +18,6 @@ class Message_Form(forms.Form):
         'placeholder': 'This is a message for you.'
     }
 
-    name = forms.CharField(label='Name', required=True, max_length=27, empty_value='Anonymous', widget=forms.TextInput(attrs=attrs_name))
-    email = forms.EmailField(required=False, widget=forms.EmailInput(attrs=attrs_email))
-    message = forms.CharField(widget=forms.Textarea(attrs=attrs_message), required=True)
+    name = forms.CharField(label='Name', max_length=27, empty_value='Anonymous', widget=forms.TextInput(attrs=attrs_name), required=False, error_messages=error_default)
+    email = forms.EmailField(widget=forms.EmailInput(attrs=attrs_email), required=False, error_messages=error_default)
+    message = forms.CharField(widget=forms.Textarea(attrs=attrs_message), required=True, error_messages=error_default)

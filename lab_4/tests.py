@@ -70,10 +70,35 @@ class Lab4UnitTest(TestCase):
 		self.assertFalse(form.is_valid())
 		self.assertEqual(
 			form.errors['message'],
-			["This field is required."]
+			["I am sad if you are not filling this field :("]
 		)
-	def test_lab4_post_fail(self):
-		response = Client().post('/lab-4/add_message', {'name': 'Anonymous', 'email': 'A', 'message': ''})
+	
+	def test_form_validation_for_invalid_email(self):
+		form = Message_Form(data={'name': '', 'email': 'A', 'message': ''})
+		self.assertFalse(form.is_valid())
+		self.assertEqual(
+			form.errors['email'],
+			["Well... I think you have put in something wrong :("]
+		)
+	
+	def test_form_validation_for_whitespaces_only_messages(self):
+		form = Message_Form(data={'name': '', 'email': '', 'message': ' 	 '})
+		self.assertFalse(form.is_valid())
+		self.assertEqual(
+			form.errors['message'],
+			["I am sad if you are not filling this field :("]
+		)
+	
+	def test_lab4_post_fail_message_empty(self):
+		response = Client().post('/lab-4/add_message', {'name': 'Anonymous', 'email': 'a@a.com', 'message': ''})
+		self.assertEqual(response.status_code, 302)
+	
+	def test_lab4_post_fail_invalid_email(self):
+		response = Client().post('/lab-4/add_message', {'name': 'Anonymous', 'email': 'A', 'message': 'Saya pergi ke pasar.'})
+		self.assertEqual(response.status_code, 302)
+	
+	def test_lab4_post_fail_message_whitespace_only(self):
+		response = Client().post('/lab-4/add_message', {'name': 'Anonymous', 'email': 'a@a.com', 'message': '	    	'})
 		self.assertEqual(response.status_code, 302)
 
 	def test_lab4_post_success_and_render_the_result(self):

@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Diary
 from datetime import datetime
-import pytz
 import json
 # Create your views here.
 diary_dict = {}
@@ -18,9 +17,9 @@ def add_activity(request):
         
         try:
             date = datetime.strptime(request.POST['date'],'%Y-%m-%dT%H:%M')
-            Diary.objects.create(date=date.replace(tzinfo=pytz.UTC),activity=request.POST['activity'].strip())
+            Diary.objects.create(date=date,activity=request.POST['activity'].strip())
             return redirect('/lab-3/')
-        except ValueError:
+        except (ValueError, OverflowError) as e:
             messages.add_message(request, messages.ERROR, 'ERROR: Date should be from 0001-01-01T00:00 to 9999-31-12T23:59.')
             return redirect('/lab-3/')
 

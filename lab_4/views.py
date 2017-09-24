@@ -17,9 +17,9 @@ def index(request):
 def message_post(request):
     form = Message_Form(request.POST or None)
     if(request.method == 'POST' and form.is_valid()):
-        response['name'] = request.POST['name'] if request.POST['name'] != "" else "Anonymous"
-        response['email'] = request.POST['email'] if request.POST['email'] != "" else "Anonymous"
-        response['message'] = request.POST['message']
+        response['name'] = request.POST['name'].strip() if request.POST['name'].strip() != "" else "Anonymous"
+        response['email'] = request.POST['email'].strip() if request.POST['email'].strip() != "" else "Anonymous"
+        response['message'] = request.POST['message'].strip()
         message = Message(name=response['name'], email=response['email'],
                           message=response['message'])
         message.save()
