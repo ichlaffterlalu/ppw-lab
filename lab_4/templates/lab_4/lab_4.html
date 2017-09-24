@@ -13,12 +13,13 @@
 	#error-messages {
 		border-radius: 5px;
 		border: 1px solid white;
-		margin-bottom: 15px;
-		padding: 5px;
-		float: left
+		margin: 15px 0px;
+		padding: 10px;
+		color: red;
+		background-color: rgba(255,255,255,0.75)
 	}
 	#submit {
-		float: right
+		float: right;
 	}
 {% endblock %}
 {% block content %}
@@ -46,12 +47,13 @@
 	<form id="form" method="POST" action="{% url 'lab-4:add_message' %}">
 		{% csrf_token %}
 		{{ message_form }}
-		<br/>
 		{% if messages %}
-			<div id="error-messages">
-				Attention:
-				{% for message in messages %}<b style="color:red">{{ message }}</b>{% endfor %}
-			</div>
+			<div id="error-messages"><b>
+				Attention:<br/>
+				{% for message in messages %}<p>{{ message }}</p>{% endfor %}
+			</b></div>
+		{% else %}
+		<br/>
 		{% endif %}
 		<button id="submit" type="submit" class="btn btn-default">Submit</button>
 	</form>

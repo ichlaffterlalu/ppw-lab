@@ -3,7 +3,7 @@ from django import forms
 class Message_Form(forms.Form):
     error_default = {
         'required': 'I am sad if you are not filling the message field with real messages... :(',
-        'invalid': 'Well... I think you have put in something wrong on email field. Check again, please... :(',
+        'invalid': 'Well... I think you have put something wrong to the email field. Check again, please... :(',
     }
     attrs_name = {
         'class': 'form-control',

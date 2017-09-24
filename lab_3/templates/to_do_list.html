@@ -1,49 +1,8 @@
 {% extends "base.html" %}
-{% block style %}
-	@font-face {
-		font-family: Agency FB;
-		src: url('/static/fonts/AgencyFB-Regular-webfont.woff')
-	}
-	h1 {
-		padding: 10px;
-		text-align: center;
-		font-family: Agency FB;
-	}
-	#newActivityForm {
-		margin: 10px;
-		font-size: 12px;
-		color: black;
-	}
-	#newActivityFormInner {
-		background-color: rgba(224,255,255,0.7);
-		border-radius: 5px;
-		border-style: groove;
-		border-width: 2px;
-		padding: 5px;
-	}
-	#activityList {
-		font-size: 12px;
-		margin: 10px;
-		left: 0;
-		right: 0;
-		color: black;
-	}
-	#activityListInner {
-		background-color: rgba(224,255,255,0.7);
-		border-radius: 5px;
-		border-style: groove;
-		border-width: 2px;
-		padding: 10px;
-	}
-	table {
-		table-layout:fixed;
-		width:100%;
-	}
-	.error-messages {
-		color: red;
-		text-align: center;
-		width: 100%;
-	}
+{% block stylescript %}
+	<!-- bootstrap css -->
+	<link rel="stylesheet" href="/static/css/bootstrap-4.0.0beta1.min.css">
+	<link rel="stylesheet" href="/static/css/lab_3.css">
 {% endblock %}
 {% block header %}{% include "lab_2/partials/header.html" %}{% endblock %}
 {% block content %}
@@ -74,16 +33,24 @@
     <div class="col-12" id="activityListInner">
         <b>Here are the activities:</b>
 		<table style="">
-            <tr>
+            <thead>
                 <th style="text-align:center;width:180px;">Date/Time</th>
                 <th style="text-align:center;padding:2px;">Activity</th>
-            </tr>
-            {% for diary_data in diary_dict %}
-                <tr>
-                    <td class="date" style="text-align:center">{{ diary_data.date }}</td>
-                    <td class="activity" style="padding-left:5px;">{{ diary_data.activity }}</td>
-                </tr>
-            {% endfor %}
+            </thead>
+			<tbody>
+				{% if diary_dict %}
+					{% for diary_data in diary_dict %}
+						<tr>
+							<td class="date" style="text-align:center">{{ diary_data.date }}</td>
+							<td class="activity" style="padding-left:5px;">{{ diary_data.activity }}</td>
+						</tr>
+					{% endfor %}
+				{% else %}
+					<tr class="warning">
+						<td colspan=2 style="text-align:center"><i>No messages yet.</i></td>
+					</tr>
+				{% endif %}
+			</tbody>
         </table>
     </div>
 </div>

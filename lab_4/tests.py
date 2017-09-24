@@ -78,7 +78,7 @@ class Lab4UnitTest(TestCase):
 		self.assertFalse(form.is_valid())
 		self.assertEqual(
 			form.errors['email'],
-			["Well... I think you have put in something wrong on email field. Check again, please... :("]
+			["Well... I think you have put something wrong to the email field. Check again, please... :("]
 		)
 	
 	def test_form_validation_for_whitespaces_only_messages(self):
