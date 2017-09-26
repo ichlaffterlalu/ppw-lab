@@ -1,0 +1,49 @@
+{% extends "lab_5/layout/base.html" %}
+
+{% block content %}
+<h1 class="main-title">TODOLIST</h1>
+<hr/>
+<section name="input-list" id="input-list">
+    <div class="container">
+        <form id="form" method="POST" action="{% url 'lab-5:add_todo' %}">
+            <h2>Input Todo</h2>
+            {% csrf_token %}
+            {{ todo_form }}
+            <input id="submit" type="submit" class="btn btn-lg btn-block btn-info" value="Submit">
+            <br>
+        </form>
+    </div>
+</section>
+<section name="my-list" id="my-list">
+    <div class="container">
+        <h2 class="my-list-title">My List</h2>
+        <div class="flex">
+            {% if todo %}
+                {% for data in todo %}
+                    <div class="flex-item">
+                        <div class="to-do-list">
+                            <div class="to-do-list-title">
+                                {{data.title}}
+                            </div>
+                            <div class="to-do-list-date-added">
+                                {{data.created_date}}
+                            </div>
+                            <div class="to-do-list-description">
+                                {{data.description}}
+                            </div>
+                            <div class="to-do-list-delete">
+                                <div class="to-do-list-delete-button" data-id="{{data.id}}">Delete</div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+            <div class="alert alert-danger text-center">
+                <strong>Oops!</strong> Tidak ada data Todo.
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

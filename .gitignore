@@ -152,3 +152,8 @@ ENV/
 /lab-1/db.sqlite3/
 /lab-1/hello_name/migrations/*.py
 db.sqlite3
+
+#ignore chromedriver
+chromedriver
+chromedriver.exe
+/praktikum/static/*

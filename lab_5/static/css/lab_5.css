@@ -1,0 +1,213 @@
+body{
+  margin-top: 70px;
+}
+
+/* Custom navbar style */
+.navbar-static-top {
+  margin-bottom: 19px;
+}
+.navbar-default .navbar-nav>li>a {
+    cursor: pointer;
+}
+
+/* Textarea not resizeable */
+textarea {
+    resize:none
+}
+section{
+  min-height: 600px;
+}
+/* animasi pada title */
+.main-title{
+  -webkit-animation: colorchange 1s infinite;
+  -webkit-animation-direction: alternate;
+  text-align: center;
+}
+
+/* animasi colorchange */
+@-webkit-keyframes colorchange {
+    0% {
+        -webkit-text-stroke: 5px #0fb8ad;
+    letter-spacing: 0;
+    }
+  50% {
+    -webkit-text-stroke: 7.5px  #1fc8db;
+  }
+    100% {
+        -webkit-text-stroke: 10px  #2cb5e8;
+    letter-spacing: 18px;
+    }
+}
+/* styling wrapper form */
+#input-list{
+  background: linear-gradient(to bottom right, #606062, #393939);
+}
+/* styling form */
+#input-list form{
+  width: 400px;
+  margin: 50px auto;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  background: white;
+  border: 0 none;
+  border-radius: 3px;
+  box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+  padding: 20px 30px;
+  box-sizing: border-box;
+  position: relative;
+}
+/* styling judul form, apakah arti dari tanda '>' ? */
+#input-list form > h2{
+  font-size: 1.3em;
+  text-transform: uppercase;
+  color: #2C3E50;
+  margin-bottom: 10px;
+}
+/* styling form input dan textarea, apakah arti dari tanda ',' ? */
+#input-list form > .todo-form-input, #input-list form > .todo-form-textarea{
+  padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    color: #2C3E50;
+    font-size: 13px;
+}
+/* styling footer */
+footer p{
+  text-align: center;
+  padding-top: 10px;
+}
+
+/* styling responsive max-width menandakan bahwa rule css ini hanya akan bekerja untuk layar dengan maksimal 768px, jika lebih dari 768px maka rule ini diabaikan */
+@media only screen and (max-width: 768px) {
+  #input-list form {
+      width: 290px;
+  }
+}
+
+#input-list{
+  background: linear-gradient(to bottom right, #606062, #393939);
+}
+#input-list form{
+  width: 400px;
+  margin: 50px auto;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  background: white;
+  border: 0 none;
+  border-radius: 3px;
+  box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+  padding: 20px 30px;
+  box-sizing: border-box;
+  position: relative;
+}
+#input-list form > h2{
+  font-size: 1.3em;
+  text-transform: uppercase;
+  color: #2C3E50;
+  margin-bottom: 10px;
+}
+#input-list form > .todo-form-input, #input-list form > .todo-form-textarea{
+  padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    color: #2C3E50;
+    font-size: 13px;
+}
+
+#my-list{
+  background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+}
+#my-list .my-list-title{
+  font-size: 40px;
+  margin-bottom: 1em;
+  color: white;
+  text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  text-align: center;
+}
+
+.to-do-list{
+  text-align: center;
+  background: #fff;
+  position: relative;
+  z-index: 15;
+  margin-bottom: 60px;
+  -webkit-box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.15);
+  -o-box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.15);
+  transition: 0.5s all;
+  -webkit-transition: 0.5s all;
+  -moz-transition: 0.5s all;
+  -o-transition: 0.5s all;
+}
+.to-do-list:after{
+    content:"";
+    display:block;
+    height:25px; /* Which is the padding of div.container */
+    background: #fff;
+}
+.flex{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+.flex-item{
+  padding: 0 15px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 25%;
+}
+
+.to-do-list .to-do-list-title {
+  font-size: 20px;
+  font-weight: 700;
+  padding: 10px 10px 0;
+}
+.to-do-list .to-do-list-date-added {
+  font-size: 12px;
+  padding: 0 10px;
+}
+.to-do-list .to-do-list-description {
+  padding: 10px 25px;
+  z-index: 15;
+  background: #fff;
+  height: 125px;
+  text-align: justify;
+  overflow: auto;
+}
+.to-do-list .to-do-list-delete {
+  background: #e45;
+  color: #fff;
+  padding: 10px;
+  font-size: 16px;
+  width: 100%;
+  height: 50px;
+  bottom: 1px;
+  position: absolute;
+  cursor: pointer;
+  z-index: -1;
+  -webkit-border-radius: 0 0px 2px 2px;
+  -moz-border-radius: 0 0px 2px 2px;
+  -o-border-radius: 0 0px 2px 2px;
+  border-radius: 0 0px 2px 2px;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.to-do-list .to-do-list-delete {
+  bottom: -50px;
+}

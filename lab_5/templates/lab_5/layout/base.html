@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="LAB 5">
+    <meta name="author" content="{{author}}">
+    <!-- bootstrap css -->
+	<link href="/static/css/bootstrap-3.3.7.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/static/css/lab_5.css" />
+    <title>
+        {% block title %} Lab 5 By {{author}} {% endblock %}
+    </title>
+</head>
+
+<body>
+    <header>
+        {% include "lab_5/partials/header.html" %}
+    </header>
+    <content>
+            {% block content %}
+                <!-- content goes here -->
+            {% endblock %}
+    </content>
+    <footer>
+        <!-- TODO Block Footer dan include footer.html -->
+        {% block footer %}
+        {% include "lab_5/partials/footer.html" %}
+        {% endblock %}
+    </footer>
+
+    <!-- Jquery n Bootstrap Script -->
+    <script src="/static/js/jquery-3.2.1.slim.min.js"></script>
+    <script type="application/javascript" src="/static/js/bootstrap-3.3.7.min.js"></script>
+    <script type="application/javascript">
+      $(function() {
+          $('a[href*="#"]:not([href="#"])').click(function() {
+            if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+              var target = $(this.hash);
+              target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+              if (target.length) {
+                $('html, body').animate({
+                  scrollTop: target.offset().top - 55
+                }, 1000);
+                return false;
+              }
+            }
+          });
+        });
+    </script>
+</body>
+</html>
