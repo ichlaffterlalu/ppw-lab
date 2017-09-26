@@ -516,8 +516,8 @@ sebelum membuat _page_ tersebut
 ## Checklist
 
 1. Membuat _Home Page_
-    1. [ ] Buatlah sebuah `app` baru dengan nama `lab-4`
-    2. [ ] Buat struktur template pada `app lab-4` seperti dibawah ini
+    1. [x] Buatlah sebuah `app` baru dengan nama `lab-4`
+    2. [x] Buat struktur template pada `app lab-4` seperti dibawah ini
         ```
             - lab_4
                 __init__.py
@@ -538,25 +538,25 @@ sebelum membuat _page_ tersebut
                     lab_4.html
                     from_result.html
         ```
-    3. [ ] Isi `navbar.html` dan `footer.html` dengan tag _HTML5_. Pastikan `navbar.html` mengandung tag `<nav>` dan `footer.html` mengandung lambang copyright &copy;
-    4. [ ] Isi `base.html` dengan tag _HTML5_ . Buatlah home page yang mendeskripsikan diri kalian. Silahkan berkreasi sesuka hati kalian. Referensi pendukung:
+    3. [x] Isi `navbar.html` dan `footer.html` dengan tag _HTML5_. Pastikan `navbar.html` mengandung tag `<nav>` dan `footer.html` mengandung lambang copyright &copy;
+    4. [x] Isi `base.html` dengan tag _HTML5_ . Buatlah home page yang mendeskripsikan diri kalian. Silahkan berkreasi sesuka hati kalian. Referensi pendukung:
         https://www.html-5-tutorial.com/all-html-tags.htm
         https://www.w3schools.com/TAGs/
-    5. [ ] Pada home page terdapat _Form_ untuk memberikan pesan
+    5. [x] Pada home page terdapat _Form_ untuk memberikan pesan
 2. Membuat page Untuk menampilkan semua message
-    1. [ ] Terdapat tabel yang menampilkan semua pesan yang telah di-submit
-    2. [ ] Pesan dari anonymous diberi warna baris yang berbeda
+    1. [x] Terdapat tabel yang menampilkan semua pesan yang telah di-submit
+    2. [x] Pesan dari anonymous diberi warna baris yang berbeda
 3. Pastikan kalian memiliki _Code Coverage_ yang baik
-    1. [ ] Jika kalian belum melakukan konfigurasi untuk menampilkan _Code Coverage_ di Gitlab maka lihat langkah `Show Code Coverage in Gitlab`
+    1. [x] Jika kalian belum melakukan konfigurasi untuk menampilkan _Code Coverage_ di Gitlab maka lihat langkah `Show Code Coverage in Gitlab`
     di [README.md](https://gitlab.com/PPW-2017/ppw-lab/blob/master/README.md)
-    2. [ ] Pastikan _Code Coverage_ kalian 100%
+    2. [x] Pastikan _Code Coverage_ kalian 100%
 4. Additional
-    1. [ ] Tampilkan Foto kalian. Gunakan tag `<img>` pada home page dengan bentuk image berbentuk lingkaran
-    2. [ ] Berikan tampilan yang menarik pada home page
-    3. [ ] Buatlah test baru untuk test keberadaan Navbar dan Copyright
-    4. [ ] Tampilkan Pesan error bilamana `Message` diisi kosong (Beserta Testnya)
-    5. [ ] Buatlah _custom_ pesan error agar lebih menarik (Beserta Testnya)
-    6. [ ] Ubah _Redirection_ ketika mengakses _Root_ URL (`<YOURAPPNAME>.herokuapp.com`) sehingga
+    1. [x] Tampilkan Foto kalian. Gunakan tag `<img>` pada home page dengan bentuk image berbentuk lingkaran
+    2. [x] Berikan tampilan yang menarik pada home page
+    3. [x] Buatlah test baru untuk test keberadaan Navbar dan Copyright
+    4. [x] Tampilkan Pesan error bilamana `Message` diisi kosong (Beserta Testnya)
+    5. [x] Buatlah _custom_ pesan error agar lebih menarik (Beserta Testnya)
+    6. [x] Ubah _Redirection_ ketika mengakses _Root_ URL (`<YOURAPPNAME>.herokuapp.com`) sehingga
     akan mengembalikan halaman _Home Page_ Lab 4 (Kondisikan _Test Case_ dari lab sebelumnya, dan buatlah _Test Case_ baru
     di `lab_4/tests.py` untuk memastikan bahwa _Root URL_ akan mengembalikan halaman _Home Page_ Lab 4)
-    7. [ ] Ubah _datetime_ sehingga menggunakan Waktu Lokal GMT + 7
+    7. [x] Ubah _datetime_ sehingga menggunakan Waktu Lokal GMT + 7

@@ -390,18 +390,18 @@ find your web page has been published.
 ## Checklist
 
 1. Creating Your own Gitlab Repo
-    1. [ ] Write your Gitlab Repo link in README.md
+    1. [x] Write your Gitlab Repo link in README.md
 2. Your web that deployed in Heroku Instance
-    1. [ ] Create your Heroku Account
-    2. [ ] Write your apps link (`######`.herokuapp.com) in README.md
+    1. [x] Create your Heroku Account
+    2. [x] Write your apps link (`######`.herokuapp.com) in README.md
 3. Creating a functionality in Django framework and content in HTML
-    1. [ ] Implement a new function to calculate age
-    2. [ ] Calculate your age by passing your birth year into the function
-    3. [ ] Pass the return value from age calculation into the template HTML
-    4. [ ] The return value is rendered within an `<article>` HTML5 tag
+    1. [x] Implement a new function to calculate age
+    2. [x] Calculate your age by passing your birth year into the function
+    3. [x] Pass the return value from age calculation into the template HTML
+    4. [x] The return value is rendered within an `<article>` HTML5 tag
 4. Check your pipelines.
-    1. [ ] Make sure the test stage is success, check the console by clicking the unit test. Makesure the coverage is 100%
-    2. [ ] Make sure the deployment script has successfully deploy your webpage to heroku. 
+    1. [x] Make sure the test stage is success, check the console by clicking the unit test. Makesure the coverage is 100%
+    2. [x] Make sure the deployment script has successfully deploy your webpage to heroku. 
     Check if there are some warning messages in the console.
 
 

@@ -279,28 +279,28 @@ di `lab_3/views.py` sehingga menjadi seperti berikut:
 ## Checklist
 
 1. Semua Halaman di URL `/lab-2/`, `/lab-2-addon/`, dan `/lab-3/` memiliki _Navigation Bar_
-    1. [ ] Terdapat `base.html` di dalam _folder_ templates di _Root Folder_
-    2. [ ] Menggunakan `index_lab2.html` yang terbaru
-    3. [ ] Menggunakan `description_lab2addon.html` yang terbaru
+    1. [x] Terdapat `base.html` di dalam _folder_ templates di _Root Folder_
+    2. [x] Menggunakan `index_lab2.html` yang terbaru
+    3. [x] Menggunakan `description_lab2addon.html` yang terbaru
 2. Membuat Fitur **Menulis Kegiatan** dan **Menampilkan Semua Kegiatan** di Halaman _Diary_ :
-    1. [ ] Membuat _apps_ baru bernama `lab_3`
-    2. [ ] Masukkan `lab_3` kedalam INSTALLED_APPS
-    3. [ ] Implementasi _Test Case_ di `lab_3/tests.py`
-    4. [ ] Implementasi `lab_3/views.py`
-    5. [ ] Implementasi konfigurasi URL di `lab_3/urls.py`
-    6. [ ] Ubah `praktikum/urls.py` sehingga konfigurasi `lab_3/urls.py` bisa diakses
+    1. [x] Membuat _apps_ baru bernama `lab_3`
+    2. [x] Masukkan `lab_3` kedalam INSTALLED_APPS
+    3. [x] Implementasi _Test Case_ di `lab_3/tests.py`
+    4. [x] Implementasi `lab_3/views.py`
+    5. [x] Implementasi konfigurasi URL di `lab_3/urls.py`
+    6. [x] Ubah `praktikum/urls.py` sehingga konfigurasi `lab_3/urls.py` bisa diakses
 3. Pastikan kalian memiliki _Code Coverage_ yang baik
-    1. [ ] Jika kalian belum melakukan konfigurasi untuk menampilkan _Code Coverage_ di Gitlab maka lihat langkah `Show Code Coverage in Gitlab`
+    1. [x] Jika kalian belum melakukan konfigurasi untuk menampilkan _Code Coverage_ di Gitlab maka lihat langkah `Show Code Coverage in Gitlab`
     di [README.md](https://gitlab.com/PPW-2017/ppw-lab/blob/master/README.md)
-    2. [ ] Pastikan _Code Coverage_ kalian 100%
+    2. [x] Pastikan _Code Coverage_ kalian 100%
 
 ## Challenge Checklist
 
 Cukup kerjakan salah satu nya saja:
-1. [ ] Perbaikan Warna dan layout yang lebih rapi lagi untuk tampilan _Website_
-2. [ ] Berikan _Input Validation_, ketika Input untuk tanggal tidak sesuai format, maka data tidak tersimpan
+1. [x] Perbaikan Warna dan layout yang lebih rapi lagi untuk tampilan _Website_
+2. [x] Berikan _Input Validation_, ketika Input untuk tanggal tidak sesuai format, maka data tidak tersimpan
 (Saat ini yang dilakukan oleh program adalah memberikan _stacktrace error_. Hal ini biasanya terjadi di _browser_ Mozilla)
 Validasi perlu dilakukan selain di browser (HTML5 atau Java-Script) dan
-3. [ ] _Input Validation_ di-server dalam bentuk
+3. [x] _Input Validation_ di-server dalam bentuk
 exception handling (sebagai bagian dari _best-practices_ yang salah satu manfaatnya
 untuk antisipasi _injection_).

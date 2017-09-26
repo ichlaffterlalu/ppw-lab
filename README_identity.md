@@ -1,15 +1,21 @@
-Name        : Ichlasul Affan
+Name          : Ichlasul Affan
 
-NPM         : 1606895606
+NPM           : 1606895606
 
-Class       : E
+Class         : E
 
-Hobby       : Programming
+Hobby         : Programming
 
-Gitlab      : https://gitlab.com/ichlaffterlalu/lab1-ppw.git
+Gitlab (Main) : https://gitlab.com/ichlaffterlalu/ppw-lab.git
 
-Heroku      : http://ppw-ichlasulaffan.herokuapp.com/
+Gitlab (Alt)  : https://gitlab.cs.ui.ac.id/ichlasul.affan/ppw-lab.git
 
-Pipeline    : [![pipeline status](https://gitlab.com/ichlaffterlalu/lab1-ppw/badges/master/pipeline.svg)]
+Heroku        : http://ppw-ichlasulaffan.herokuapp.com/
 
-Coverage    : [![coverage report](https://gitlab.com/ichlaffterlalu/lab1-ppw/badges/master/coverage.svg)](https://gitlab.com/ichlaffterlalu/lab1-ppw/commits/master)
+Pipeline (Main) : ![pipeline status](https://gitlab.com/ichlaffterlalu/ppw-lab/badges/master/pipeline.svg)
+
+Pipeline (Alt)  : ![pipeline status](https://gitlab.cs.ui.ac.id/ichlasul.affan/ppw-lab/badges/master/pipeline.svg)
+
+Coverage (Main) : [![coverage report](https://gitlab.com/ichlaffterlalu/ppw-lab/badges/master/coverage.svg)](https://gitlab.com/ichlaffterlalu/ppw-lab/commits/master)
+
+Coverage (Alt)  : [![coverage report](https://gitlab.cs.ui.ac.id/ichlasul.affan/ppw-lab/badges/master/coverage.svg)](https://gitlab.cs.ui.ac.id/ichlasul.affan/ppw-lab/commits/master)
