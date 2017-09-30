@@ -15,7 +15,7 @@ section{
 }
 /* animasi pada title */
 .main-title{
-  margin: 75px 0px 25px;
+  margin-bottom: 25px;
   -webkit-animation: colorchange 1s infinite;
   -webkit-animation-direction: alternate;
   text-align: center;
@@ -169,6 +169,10 @@ footer p{
 .to-do-list-delete {
   display: none;
 }
+a:hover, a:active, a:link, a:visited {
+  color: white;
+  text-decoration: none;
+}
 .to-do-list:hover > .to-do-list-delete {
   display: block;
   box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.4);
@@ -176,6 +180,7 @@ footer p{
 
 .to-do-list {
   height: 250px;
+  color: black;
 }
 
 .to-do-list .to-do-list-title {

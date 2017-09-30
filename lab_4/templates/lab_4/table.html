@@ -20,33 +20,35 @@
 	}
 {% endblock %}
 {% block content %}
-<!--  Populate semua isi pesan dari model -->
-<div class="title">Here are the messages: </div>
-<table class="table">
-	<thead>
-		<th class="name">Name</th>
-		<th class="email">Email</th>
-		<th class="message">Message</th>
-		<th class="time">Added at</th>
-	</thead>
-	<tbody>
-		{% if message %}
-			<!-- TODO, Kalau nama/email anon maka tr classnya jadi warning -->
-			{% for i in message %}
-			{% if i.name == 'Anonymous' or i.email == 'Anonymous' %}
-			<tr class="warning"> {% else %} <tr class="success">
-				{% endif %}
-				<td class="name"> {{i.name}} </td>
-				<td class="email"> {{i.email}} </td>
-				<td class="message"> {{i}} </td>
-				<td class="time"> {{i.created_date.time}} </td>
-			</tr>             
-			{% endfor %}
-		{% else %}
-			<tr class="warning">
-				<td colspan=4 style="text-align:center"><i>No messages yet.</i></td>
-			</tr>
-		{% endif %}
-	</tbody>
-</table>
+<div class="container content-out">
+	<!--  Populate semua isi pesan dari model -->
+	<div class="title">Here are the messages: </div>
+	<table class="table">
+		<thead>
+			<th class="name">Name</th>
+			<th class="email">Email</th>
+			<th class="message">Message</th>
+			<th class="time">Added at</th>
+		</thead>
+		<tbody>
+			{% if message %}
+				<!-- TODO, Kalau nama/email anon maka tr classnya jadi warning -->
+				{% for i in message %}
+				{% if i.name == 'Anonymous' or i.email == 'Anonymous' %}
+				<tr class="warning"> {% else %} <tr class="success">
+					{% endif %}
+					<td class="name"> {{i.name}} </td>
+					<td class="email"> {{i.email}} </td>
+					<td class="message"> {{i}} </td>
+					<td class="time"> {{i.created_date.time}} </td>
+				</tr>             
+				{% endfor %}
+			{% else %}
+				<tr class="warning">
+					<td colspan=4 style="text-align:center"><i>No messages yet.</i></td>
+				</tr>
+			{% endif %}
+		</tbody>
+	</table>
+</div>
 {% endblock %}

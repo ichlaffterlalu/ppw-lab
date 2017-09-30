@@ -8,8 +8,8 @@
 {% block stylescript %}
 	<!-- bootstrap css -->
     <link href="/static/css/bootstrap-3.3.7.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="/static/css/lab_4.css">
 {% endblock %}
+{% block stylescript_after %}<link rel="stylesheet" href="/static/css/lab_4.css">{% endblock %}
 {% block header %}{% include "lab_4/partials/header.html" %}{% endblock %}
 {% block footer %}{% include "lab_4/partials/footer.html" %}{% endblock %}
 {% block scripts %}

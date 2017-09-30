@@ -1,18 +1,21 @@
-<nav class="navbar navbar-default navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="{% url 'lab-1:index' %}">ppw-ichlasulaffan</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-	<span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-	<ul class="navbar-nav">
-	  <li class="nav-item dropdown">
-		<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Other Apps <b class="caret"></b></a>
-		<ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
-		  <li><a href="{% url 'lab-2:index' %}" class="nav-dd-item nav-item nav-link">Lab 2: Landing Page</a></li>
-		  <li><a href="{% url 'lab-3:index' %}" class="nav-dd-item nav-item nav-link">Lab 3: Diary</a></li>
-		  <li><a href="{% url 'lab-4:index' %}" class="nav-dd-item nav-item nav-link">Lab 4: Messages</a></li>
+<nav class="navbar navbar-default navbar-expand-lg fixed-top navbar-dark bg-dark">
+  <div class="container">
+	  <a class="navbar-brand" href="{% url 'lab-1:index' %}"><b>ppw-ichlasulaffan</b></a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	  </button>
+	  <div class="collapse navbar-collapse" id="navbarNav">
+		<ul class="navbar-nav">
+		  <li class="nav-item dropdown">
+			<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Other Apps <b class="caret"></b></a>
+			<ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
+			  <li><a href="{% url 'lab-2:index' %}" class="nav-dd-item nav-item nav-link">Lab 2: Landing Page</a></li>
+			  <li><a href="{% url 'lab-3:index' %}" class="nav-dd-item nav-item nav-link">Lab 3: Diary</a></li>
+			  <li><a href="{% url 'lab-4:index' %}" class="nav-dd-item nav-item nav-link">Lab 4: Messages</a></li>
+			  <li><a href="{% url 'lab-5:index' %}" class="nav-dd-item nav-item nav-link">Lab 5: TODOLIST</a></li>
+			</ul>
+		  </li>
 		</ul>
-	  </li>
-	</ul>
+	  </div>
   </div>
 </nav>

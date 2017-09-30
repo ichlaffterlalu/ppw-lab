@@ -2,57 +2,59 @@
 {% block stylescript %}
 	<!-- bootstrap css -->
 	<link rel="stylesheet" href="/static/css/bootstrap-4.0.0beta1.min.css">
-	<link rel="stylesheet" href="/static/css/lab_3.css">
 {% endblock %}
+{% block stylescript_after %}<link rel="stylesheet" href="/static/css/lab_3.css">{% endblock %}
 {% block header %}{% include "lab_2/partials/header.html" %}{% endblock %}
 {% block content %}
-<h1>Hi all, this is my daily activities... :)</h3>
-<div class="row" id="newActivityForm">
-	<div class="col-12" id = "newActivityFormInner">
-		<b>Insert your new activity:</b>
-		<form method="POST" action="add_activity/">
-			{% csrf_token %}
-			<div style="display:inline-block;padding:2px;min-width:200px;width:15%">
-				<b>Date and Time:</b>
-				<input type="datetime-local" name="date" id="date" required="required" style="width:100%"/>
-			</div>
-			<div style="display:inline-block;padding:2px;min-width:200px;width:75%">
-				<b>Activity:</b>
-				<input type="text" name="activity" id="activity" required="required" style="display:inline-block;width:100%"/>
-			</div>
-			<div style="display:inline-block;padding:2px;">
-				<button type="submit" class="button btn-success">Submit</button>
-			</div>
-		</form>
-		{% if messages %}
-			<div class="error-messages"><b>{% for message in messages %}{{ message }}<br />{% endfor %}</b></div>
-		{% endif %}
+<div class="container content-out">
+	<h1>Hi all, this is my daily activities... :)</h3>
+	<div class="row" id="newActivityForm">
+		<div class="col-12" id = "newActivityFormInner">
+			<b>Insert your new activity:</b>
+			<form method="POST" action="add_activity/">
+				{% csrf_token %}
+				<div style="display:inline-block;padding:2px;min-width:200px;width:15%">
+					<b>Date and Time:</b>
+					<input type="datetime-local" name="date" id="date" required="required" style="width:100%"/>
+				</div>
+				<div style="display:inline-block;padding:2px;min-width:200px;width:75%">
+					<b>Activity:</b>
+					<input type="text" name="activity" id="activity" required="required" style="display:inline-block;width:100%"/>
+				</div>
+				<div style="display:inline-block;padding:2px;">
+					<button type="submit" class="button btn-success">Submit</button>
+				</div>
+			</form>
+			{% if messages %}
+				<div class="error-messages"><b>{% for message in messages %}{{ message }}<br />{% endfor %}</b></div>
+			{% endif %}
+		</div>
 	</div>
-</div>
-<div class="row" id="activityList">
-    <div class="col-12" id="activityListInner">
-        <b>Here are the activities:</b>
-		<table style="">
-            <thead>
-                <th style="text-align:center;width:180px;">Date/Time</th>
-                <th style="text-align:center;padding:2px;">Activity</th>
-            </thead>
-			<tbody>
-				{% if diary_dict %}
-					{% for diary_data in diary_dict %}
-						<tr>
-							<td class="date" style="text-align:center">{{ diary_data.date }}</td>
-							<td class="activity" style="padding-left:5px;">{{ diary_data.activity }}</td>
+	<div class="row" id="activityList">
+		<div class="col-12" id="activityListInner">
+			<b>Here are the activities:</b>
+			<table style="">
+				<thead>
+					<th style="text-align:center;width:180px;">Date/Time</th>
+					<th style="text-align:center;padding:2px;">Activity</th>
+				</thead>
+				<tbody>
+					{% if diary_dict %}
+						{% for diary_data in diary_dict %}
+							<tr>
+								<td class="date" style="text-align:center">{{ diary_data.date }}</td>
+								<td class="activity" style="padding-left:5px;">{{ diary_data.activity }}</td>
+							</tr>
+						{% endfor %}
+					{% else %}
+						<tr class="warning">
+							<td colspan=2 style="text-align:center"><i>No messages yet.</i></td>
 						</tr>
-					{% endfor %}
-				{% else %}
-					<tr class="warning">
-						<td colspan=2 style="text-align:center"><i>No messages yet.</i></td>
-					</tr>
-				{% endif %}
-			</tbody>
-        </table>
-    </div>
+					{% endif %}
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>
 {% endblock %}
 {% block footer %}{% include "lab_2/partials/footer.html" %}{% endblock %}

@@ -23,3 +23,6 @@ def add_todo(request):
         return HttpResponseRedirect('/lab-5/')
     else:
         return HttpResponseRedirect('/lab-5/')
+
+def delete_todo(request):
+    pass

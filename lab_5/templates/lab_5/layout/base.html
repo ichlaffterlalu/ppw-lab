@@ -1,36 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+{% extends "base.html" %}
+{% block meta %}
     <meta name="description" content="LAB 5">
     <meta name="author" content="{{author}}">
+{% endblock %}
+{% block title %} Lab 5 By {{author}} {% endblock %}
+{% block stylescript %}
     <!-- bootstrap css -->
 	<link href="/static/css/bootstrap-3.3.7.min.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="/static/css/lab_5.css" />
-    <title>
-        {% block title %} Lab 5 By {{author}} {% endblock %}
-    </title>
-</head>
-
-<body>
-    <header>
-        {% include "lab_5/partials/header.html" %}
-    </header>
-    <content>
-            {% block content %}
-                <!-- content goes here -->
-            {% endblock %}
-    </content>
-    <footer>
-        <!-- TODO Block Footer dan include footer.html -->
-        {% block footer %}
-        {% include "lab_5/partials/footer.html" %}
-        {% endblock %}
-    </footer>
-
-    <!-- Jquery n Bootstrap Script -->
+{% endblock %}
+{% block stylescript_after %}<link rel="stylesheet" type="text/css" href="/static/css/lab_5.css" />{% endblock %}
+{% block header %}{% include "lab_5/partials/header.html" %}{% endblock %}
+{% block footer %}{% include "lab_5/partials/footer.html" %}{% endblock %}
+{% block scripts %}
     <script src="/static/js/jquery-3.2.1.slim.min.js"></script>
     <script type="application/javascript" src="/static/js/bootstrap-3.3.7.min.js"></script>
     <script type="application/javascript">
@@ -49,5 +30,4 @@
           });
         });
     </script>
-</body>
-</html>
+{% endblock %}

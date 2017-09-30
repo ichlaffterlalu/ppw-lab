@@ -24,15 +24,16 @@
 {% endblock %}
 {% block header %}{% include "lab_2/partials/header.html" %}{% endblock %}
 {% block content %}
-<h3 style="padding:10px;text-align: center">Hi all, This is my complete biodata</h3>
-<table align="center" style="text-align: center">
-    {% for bio in bio_dict %}
-        <tr>
-            <td class="subject">{{ bio.subject }}</td>
-            <td class="value">{{ bio.value }}</td>
-        </tr>
-    {% endfor %}
-</table>
-<br><br>
+<div class="container content-out">
+	<h3 style="padding:10px;text-align: center">Hi all, This is my complete biodata</h3>
+	<table align="center" style="text-align: center">
+		{% for bio in bio_dict %}
+			<tr>
+				<td class="subject">{{ bio.subject }}</td>
+				<td class="value">{{ bio.value }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+</div>
 {% endblock %}
 {% block footer %}{% include "lab_2/partials/footer.html" %}{% endblock %}
