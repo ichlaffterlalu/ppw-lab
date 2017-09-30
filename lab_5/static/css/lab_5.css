@@ -1,10 +1,6 @@
-body{
-  margin-top: 70px;
-}
-
 /* Custom navbar style */
-.navbar-static-top {
-  margin-bottom: 19px;
+.navbar-fixed-top {
+  width: 100%;
 }
 .navbar-default .navbar-nav>li>a {
     cursor: pointer;
@@ -19,6 +15,7 @@ section{
 }
 /* animasi pada title */
 .main-title{
+  margin: 75px 0px 25px;
   -webkit-animation: colorchange 1s infinite;
   -webkit-animation-direction: alternate;
   text-align: center;
@@ -26,25 +23,26 @@ section{
 
 /* animasi colorchange */
 @-webkit-keyframes colorchange {
-    0% {
-        -webkit-text-stroke: 5px #0fb8ad;
+  0% {
+    -webkit-text-stroke: 4px #0fb8ad;
     letter-spacing: 0;
-    }
-  50% {
-    -webkit-text-stroke: 7.5px  #1fc8db;
   }
-    100% {
-        -webkit-text-stroke: 10px  #2cb5e8;
-    letter-spacing: 18px;
-    }
+  50% {
+    -webkit-text-stroke: 5px  #1fc8db;
+  }
+  100% {
+    -webkit-text-stroke: 6px  #2cb5e8;
+    letter-spacing: 12px;
+  }
 }
+
 /* styling wrapper form */
 #input-list{
   background: linear-gradient(to bottom right, #606062, #393939);
 }
 /* styling form */
 #input-list form{
-  width: 400px;
+  width: 100%;
   margin: 50px auto;
   text-align: center;
   position: relative;
@@ -81,18 +79,13 @@ footer p{
   padding-top: 10px;
 }
 
-/* styling responsive max-width menandakan bahwa rule css ini hanya akan bekerja untuk layar dengan maksimal 768px, jika lebih dari 768px maka rule ini diabaikan */
-@media only screen and (max-width: 768px) {
-  #input-list form {
-      width: 290px;
-  }
-}
-
 #input-list{
   background: linear-gradient(to bottom right, #606062, #393939);
 }
 #input-list form{
-  width: 400px;
+  min-width: 240px;
+  max-width: 720px;
+  width: 100%;
   margin: 50px auto;
   text-align: center;
   position: relative;
@@ -163,16 +156,31 @@ footer p{
   align-content: flex-start;
   margin-right: -15px;
   margin-left: -15px;
+  @
 }
-.flex-item{
+.flex-item {
   padding: 0 15px;
-  flex-grow: 0;
-  flex-shrink: 0;
-  flex-basis: 25%;
+}
+
+.to-do-list:hover {
+  transform: translate(0px, -5px);
+  box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.4);
+}
+.to-do-list-delete {
+  display: none;
+}
+.to-do-list:hover > .to-do-list-delete {
+  display: block;
+  box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.4);
+}
+
+.to-do-list {
+  height: 250px;
 }
 
 .to-do-list .to-do-list-title {
   font-size: 20px;
+  word-wrap: break-word;
   font-weight: 700;
   padding: 10px 10px 0;
 }
@@ -187,6 +195,7 @@ footer p{
   height: 125px;
   text-align: justify;
   overflow: auto;
+  word-wrap: break-word;
 }
 .to-do-list .to-do-list-delete {
   background: #e45;
@@ -210,4 +219,30 @@ footer p{
 }
 .to-do-list .to-do-list-delete {
   bottom: -50px;
+}
+
+/* styling responsive max-width menandakan bahwa rule css ini hanya akan bekerja untuk layar dengan maksimal 768px, jika lebih dari 768px maka rule ini diabaikan */
+@media only screen and (max-width: 768px) {
+  #input-list form {
+      min-width: 240px;
+	  max-width: 600px;
+	  width: 100%;
+  }
+  .flex {
+	  justify-content: center;
+  }
+  .flex-item {
+	  flex-grow: 0;
+	  flex-shrink: 0;
+	  width: 100%;
+	  max-width: 600px;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .flex-item {
+    flex-grow: 0;
+    flex-shrink: 0;
+    min-width: 150px;
+	width: 25%;
+  }
 }
