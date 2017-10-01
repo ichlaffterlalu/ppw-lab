@@ -1,11 +1,7 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block title %}{{ name }}{% endblock %}
-{% block stylescript %}
-	<!-- bootstrap css -->
-	<link rel="stylesheet" href="/static/css/bootstrap-4.0.0beta1.min.css">
-{% endblock %}
-{% block stylescript_after %}<link rel="stylesheet" href="/static/css/lab_1.css">{% endblock %}
+{% block stylescript_app %}<link rel="stylesheet" href="{% static 'css/lab_1.css'%}">{% endblock %}
 {% block header %}{% include "lab_1/partials/header.html" %}{% endblock %}
 {% block content %}
 <div class="container content-out">

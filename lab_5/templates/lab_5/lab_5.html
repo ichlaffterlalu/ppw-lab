@@ -1,5 +1,5 @@
 {% extends "lab_5/layout/base.html" %}
-
+{% load staticfiles %}
 {% block content %}
 <div class="content-out">
 	<h1 class="main-title">TODOLIST</h1>
@@ -32,7 +32,7 @@
 									{{data.description}}
 								</div>
 								<div class="to-do-list-delete">
-									<a class="to-do-list-delete-button" href="/delete_todo/{{data.id}}/" data-id="{{data.id}}">Delete</a>
+									<a class="to-do-list-delete-button" data-id="{{data.id}}" href="{% url 'lab-5:delete_todo' %}?id={{data.id}}">Delete</a>
 								</div>
 							</div>
 						</div>

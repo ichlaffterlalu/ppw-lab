@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,10 +9,10 @@
 	{% block meta %}{% endblock %}
 	{% block stylescript %}
 		<!-- bootstrap css -->
-		<link rel="stylesheet" href="/static/css/bootstrap-4.0.0beta1.min.css">
+		<link rel="stylesheet" href="{% static 'css/bootstrap-4.0.0beta1.min.css' %}">
 	{% endblock %}
-	<link rel="stylesheet" href="/static/css/base.css">
-	{% block stylescript_after %}{% endblock %}
+	<link rel="stylesheet" href="{% static 'css/base.css' %}">
+	{% block stylescript_app %}{% endblock %}
 	<title>{% block title %}My Biodata{% endblock %}</title>
 	<style>
 		{% block style %}{% endblock %}
@@ -32,9 +33,9 @@
 </body>
 {% block scripts %}
 <!-- Jquery n Bootstrap Script -->
-<script type="application/javascript" src="/static/js/jquery-3.2.1.slim.min.js"></script>
-<script type="application/javascript" src="/static/js/popper.min.js"></script>
-<script type="application/javascript" src="/static/js/bootstrap-4.0.0beta1.min.js"></script>
+<script type="application/javascript" src="{% static 'js/jquery-3.2.1.slim.min.js' %}"></script>
+<script type="application/javascript" src="{% static 'js/popper.min.js' %}"></script>
+<script type="application/javascript" src="{% static 'js/bootstrap-4.0.0beta1.min.js' %}"></script>
 {% endblock %}
 {% block jquery %}{% endblock %}
 </html>
