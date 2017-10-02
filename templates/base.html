@@ -1,41 +1,37 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang=en>
 <head>
-    <meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	{% block meta %}{% endblock %}
-	{% block stylescript %}
-		<!-- bootstrap css -->
-		<link rel="stylesheet" href="{% static 'css/bootstrap-4.0.0beta1.min.css' %}">
-	{% endblock %}
-	<link rel="stylesheet" href="{% static 'css/base.css' %}">
-	{% block stylescript_app %}{% endblock %}
-	<title>{% block title %}My Biodata{% endblock %}</title>
-	<style>
-		{% block style %}{% endblock %}
-	</style>
+<meta charset=UTF-8>
+<meta name=viewport content="width=device-width, initial-scale=1.0">
+<meta name=viewport content="width=device-width, initial-scale=1">
+<meta http-equiv=X-UA-Compatible content="IE=edge">
+{% block meta %}{% endblock %}
+{% block stylescript %}
+<link rel=stylesheet href="{% static 'css/bootstrap-4.0.0beta1.min.css' %}">
+{% endblock %}
+<link rel=stylesheet href="{% static 'css/base.css' %}">
+{% block stylescript_app %}{% endblock %}
+<title>{% block title %}My Biodata{% endblock %}</title>
+<style>{% block style %}{% endblock %}</style>
 </head>
 <body>
-	<div class="main-container">
-		<header>
-			{% block header %}{% endblock %}
-		</header>
-		<content>
-			{% block content %}{% endblock %}
-		</content>
-		<footer>
-			{% block footer %}{% endblock %}
-		</footer>
-	</div>
+<div class=main-container>
+<header>
+{% block header %}{% endblock %}
+</header>
+<content>
+{% block content %}{% endblock %}
+</content>
+<footer>
+{% block footer %}{% endblock %}
+</footer>
+</div>
 </body>
 {% block scripts %}
-<!-- Jquery n Bootstrap Script -->
-<script type="application/javascript" src="{% static 'js/jquery-3.2.1.slim.min.js' %}"></script>
-<script type="application/javascript" src="{% static 'js/popper.min.js' %}"></script>
-<script type="application/javascript" src="{% static 'js/bootstrap-4.0.0beta1.min.js' %}"></script>
+<script type=application/javascript src="{% static 'js/jquery-3.2.1.slim.min.js' %}"></script>
+<script type=application/javascript src="{% static 'js/popper.min.js' %}"></script>
+<script type=application/javascript src="{% static 'js/bootstrap-4.0.0beta1.min.js' %}"></script>
 {% endblock %}
 {% block jquery %}{% endblock %}
 </html>

@@ -1,39 +1,10 @@
 {% extends "base.html" %}
 {% load staticfiles %}
-{% block style %}
-    .status {
-        font-family: "Comic Sans MS";
-        text-align: justify;
-        text-justify: inter-word;
-    }
-    .name {
-        font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
-    }
-    .center_screen {
-        position: fixed;
-        width: auto;
-        height: auto;
-        top: 50%;
-        left: 50%;
-		transform: translate(-50%,-25%);
-		vertical-align: middle;
-		padding: 5px;
-		border-radius: 10px;
-		border-size: 2px;
-		border-style: dotted;
-		text-shadow: 0 0 3px #FF0000;
-    }
-	p.copyright {
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		right: 0;
-	}
-{% endblock %}
+{% block stylescript_app %}<link rel="stylesheet" href="{% static 'css/lab_2.css'%}">{% endblock %}
 {% block header %}{% include "lab_2/partials/header.html" %}{% endblock %}
 {% block content %}
 <div class="center_screen">
-    <div class="status" id="test">Hello, this is {{ name }}. {{ content }}.</div>
+<div class="status" id="test">Hello, this is {{ name }}. {{ content }}.</div>
 </div>
 {% endblock %}
 {% block footer %}{% include "lab_2/partials/footer.html" %}{% endblock %}

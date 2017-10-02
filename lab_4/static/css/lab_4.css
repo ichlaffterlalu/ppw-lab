@@ -1,7 +1,1 @@
-.navbar-static-top {
-  margin-bottom: 20px;
-}
-/*Textarea not resizeable*/
-textarea {
-    resize:none
-}
+.navbar-static-top{margin-bottom:20px}textarea{resize:none}
