@@ -68,10 +68,22 @@ class Lab5UnitTest(TestCase):
 
 	def test_lab5_can_delete_todo(self):
 		previous_count = Todo.objects.all().count()
-		response=Client().get('/lab-5/delete_todo?id=0')
+		response_post = Client().post('/lab-5/add_todo', {'title': 'bener', 'description': 'bener'})
+		
+		idPost = Todo.objects.all()[0].id
+		
+		response=Client().get('/lab-5/delete_todo?id=' + str(idPost), follow=True)
 		
 		counting_all_available_todo = Todo.objects.all().count()
 		self.assertEqual(counting_all_available_todo, previous_count)
+		
+		html_response = response.content.decode('utf8')
+		self.assertIn("Todo has been deleted.", html_response)
+	
+	def test_lab5_handled_error_delete_todo(self):
+		response=Client().get('/lab-5/delete_todo?id=10000000000000', follow=True)
+		html_response = response.content.decode('utf8')
+		self.assertIn("The todo does not exist.", html_response)
 		
 		
 class Lab5FunctionalTest(TestCase):
