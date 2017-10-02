@@ -1,253 +1,50 @@
-/* Custom navbar style */
-.navbar-fixed-top {
-  width: 100%;
-}
-.navbar-default .navbar-nav>li>a {
-    cursor: pointer;
-}
-
-/* Textarea not resizeable */
-textarea {
-    resize:none
-}
-section{
-  min-height: 600px;
-}
-/* animasi pada title */
-.main-title{
-  margin-bottom: 25px;
-  -webkit-animation: colorchange 1s infinite;
-  -webkit-animation-direction: alternate;
-  text-align: center;
+/* Animations */
+@-webkit-keyframes colorchange{
+	0%{-webkit-text-stroke:4px #0fb8ad;letter-spacing:0}
+	50%{-webkit-text-stroke:5px #1fc8db}
+	100%{-webkit-text-stroke:6px #2cb5e8;letter-spacing:12px}
 }
 
-/* animasi colorchange */
-@-webkit-keyframes colorchange {
-  0% {
-    -webkit-text-stroke: 4px #0fb8ad;
-    letter-spacing: 0;
-  }
-  50% {
-    -webkit-text-stroke: 5px  #1fc8db;
-  }
-  100% {
-    -webkit-text-stroke: 6px  #2cb5e8;
-    letter-spacing: 12px;
-  }
+/* Navbar styles */
+.navbar-fixed-top{width:100%}
+.navbar-default .navbar-nav>li>a{cursor:pointer}
+
+/* Main page styles */
+.main-title{margin-bottom:25px;-webkit-animation:colorchange 1s infinite;-webkit-animation-direction:alternate;text-align:center}
+section{min-height:600px}
+#input-list form,.to-do-list{text-align:center;position:relative}
+textarea{resize:none}
+a:active,a:hover,a:link,a:visited{color:#fff;text-decoration:none}
+footer p{text-align:center;padding-top:10px}
+
+/* Input form styles */
+#input-list{background:linear-gradient(to bottom right,#606062,#393939)}
+#input-list form{min-width:240px;max-width:720px;width:100%;margin:50px auto;z-index:1;background:#fff;border:0;border-radius:3px;box-shadow:0 0 15px 1px rgba(0,0,0,.4);padding:20px 30px;box-sizing:border-box}
+#input-list form>h2{font-size:1.3em;text-transform:uppercase;color:#2C3E50;margin-bottom:10px}
+#input-list form>.todo-form-input,#input-list form>.todo-form-textarea{padding:15px;border:1px solid #ccc;border-radius:3px;margin-bottom:10px;width:100%;box-sizing:border-box;color:#2C3E50;font-size:13px}
+
+/* Todo list styles */
+#my-list{background:linear-gradient(141deg,#0fb8ad 0,#1fc8db 51%,#2cb5e8 75%)}
+#my-list .my-list-title{font-size:40px;margin-bottom:1em;color:#fff;text-shadow:3px 3px 0 #000,-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;text-align:center}
+.to-do-list{background:#fff;z-index:1;margin-bottom:60px;-webkit-box-shadow:0 5px 10px 0 rgba(0,0,0,.15);-moz-box-shadow:0 5px 10px 0 rgba(0,0,0,.15);-o-box-shadow:0 5px 10px 0 rgba(0,0,0,.15);box-shadow:0 5px 10px 0 rgba(0,0,0,.15);transition:all .4s ease;-webkit-transition:all .4s ease;-moz-transition:all .4s ease;-o-transition:all .4s ease}
+.flex{display:flex;flex-direction:row;flex-wrap:wrap;justify-content:flex-start;align-items:flex-start;align-content:flex-start;margin-right:-15px;margin-left:-15px;@}
+.flex-item{padding:0 15px}
+.to-do-list{height:100%;color:#000;-webkit-border-radius:20px 20px 0 0;-moz-border-radius:20px 20px 0 0;-o-border-radius:20px 20px 0 0;border-radius:20px 20px 0 0;background-color:rgba(255,255,220,0.5)}
+.to-do-list .to-do-list-title{font-size:20px;word-wrap:break-word;font-weight:700;padding-top:10px}
+.to-do-list .to-do-list-date-added{font-size:12px;padding:5px}
+.to-do-list .to-do-list-description{padding:10px 25px;max-height:200px;background-color:#ffe;height:100%;text-align:justify;overflow:auto;word-wrap:break-word}
+.to-do-list .to-do-list-delete{background:#e45;color:#fff;padding:10px;font-size:16px;width:100%;height:55px;position:absolute;cursor:pointer;-webkit-border-radius:0 0 20px 20px;-moz-border-radius:0 0 20px 20px;-o-border-radius:0 0 20px 20px;border-radius:0 0 20px 20px;-webkit-transition:all .4s ease;-moz-transition:all .4s ease;-o-transition:all .4s ease;transition:all .4s ease;left:0px;bottom:0px;visibility:hidden}
+.to-do-list:hover{transform:translate(0,-5px);box-shadow:0 0 20px 5px rgba(0,0,0,.4);background-color:rgba(255,200,200,0.9)}
+.to-do-list:hover>.to-do-list-delete{bottom:-50px;box-shadow:0 0 20px 5px rgba(0,0,0,.4);visibility:visible}
+
+/* Screens below 768px */
+@media only screen and (max-width:768px){
+	#input-list form{min-width:240px;max-width:600px;width:100%}
+	.flex{justify-content:center}
+	.flex-item{flex-grow:0;flex-shrink:0;width:100%;max-width:600px}
 }
 
-/* styling wrapper form */
-#input-list{
-  background: linear-gradient(to bottom right, #606062, #393939);
-}
-/* styling form */
-#input-list form{
-  width: 100%;
-  margin: 50px auto;
-  text-align: center;
-  position: relative;
-  z-index: 1;
-  background: white;
-  border: 0 none;
-  border-radius: 3px;
-  box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
-  padding: 20px 30px;
-  box-sizing: border-box;
-  position: relative;
-}
-/* styling judul form, apakah arti dari tanda '>' ? */
-#input-list form > h2{
-  font-size: 1.3em;
-  text-transform: uppercase;
-  color: #2C3E50;
-  margin-bottom: 10px;
-}
-/* styling form input dan textarea, apakah arti dari tanda ',' ? */
-#input-list form > .todo-form-input, #input-list form > .todo-form-textarea{
-  padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    margin-bottom: 10px;
-    width: 100%;
-    box-sizing: border-box;
-    color: #2C3E50;
-    font-size: 13px;
-}
-/* styling footer */
-footer p{
-  text-align: center;
-  padding-top: 10px;
-}
-
-#input-list{
-  background: linear-gradient(to bottom right, #606062, #393939);
-}
-#input-list form{
-  min-width: 240px;
-  max-width: 720px;
-  width: 100%;
-  margin: 50px auto;
-  text-align: center;
-  position: relative;
-  z-index: 1;
-  background: white;
-  border: 0 none;
-  border-radius: 3px;
-  box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
-  padding: 20px 30px;
-  box-sizing: border-box;
-  position: relative;
-}
-#input-list form > h2{
-  font-size: 1.3em;
-  text-transform: uppercase;
-  color: #2C3E50;
-  margin-bottom: 10px;
-}
-#input-list form > .todo-form-input, #input-list form > .todo-form-textarea{
-  padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    margin-bottom: 10px;
-    width: 100%;
-    box-sizing: border-box;
-    color: #2C3E50;
-    font-size: 13px;
-}
-
-#my-list{
-  background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
-}
-#my-list .my-list-title{
-  font-size: 40px;
-  margin-bottom: 1em;
-  color: white;
-  text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-  text-align: center;
-}
-
-.to-do-list{
-  text-align: center;
-  background: #fff;
-  position: relative;
-  z-index: 15;
-  margin-bottom: 60px;
-  -webkit-box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.15);
-  -moz-box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.15);
-  -o-box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.15);
-  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.15);
-  transition: 0.5s all;
-  -webkit-transition: 0.5s all;
-  -moz-transition: 0.5s all;
-  -o-transition: 0.5s all;
-}
-.to-do-list:after{
-    content:"";
-    display:block;
-    height:25px; /* Which is the padding of div.container */
-    background: #fff;
-}
-.flex{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-  align-content: flex-start;
-  margin-right: -15px;
-  margin-left: -15px;
-  @
-}
-.flex-item {
-  padding: 0 15px;
-}
-
-.to-do-list:hover {
-  transform: translate(0px, -5px);
-  box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.4);
-}
-.to-do-list-delete {
-  display: none;
-}
-a:hover, a:active, a:link, a:visited {
-  color: white;
-  text-decoration: none;
-}
-.to-do-list:hover > .to-do-list-delete {
-  display: block;
-  box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.4);
-}
-
-.to-do-list {
-  height: 250px;
-  color: black;
-}
-
-.to-do-list .to-do-list-title {
-  font-size: 20px;
-  word-wrap: break-word;
-  font-weight: 700;
-  padding: 10px 10px 0;
-}
-.to-do-list .to-do-list-date-added {
-  font-size: 12px;
-  padding: 0 10px;
-}
-.to-do-list .to-do-list-description {
-  padding: 10px 25px;
-  z-index: 15;
-  background: #fff;
-  height: 125px;
-  text-align: justify;
-  overflow: auto;
-  word-wrap: break-word;
-}
-.to-do-list .to-do-list-delete {
-  background: #e45;
-  color: #fff;
-  padding: 10px;
-  font-size: 16px;
-  width: 100%;
-  height: 50px;
-  bottom: 1px;
-  position: absolute;
-  cursor: pointer;
-  z-index: -1;
-  -webkit-border-radius: 0 0px 2px 2px;
-  -moz-border-radius: 0 0px 2px 2px;
-  -o-border-radius: 0 0px 2px 2px;
-  border-radius: 0 0px 2px 2px;
-  -webkit-transition: all 0.3s ease;
-  -moz-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
-  transition: all 0.3s ease;
-}
-.to-do-list .to-do-list-delete {
-  bottom: -50px;
-}
-
-/* styling responsive max-width menandakan bahwa rule css ini hanya akan bekerja untuk layar dengan maksimal 768px, jika lebih dari 768px maka rule ini diabaikan */
-@media only screen and (max-width: 768px) {
-  #input-list form {
-      min-width: 240px;
-	  max-width: 600px;
-	  width: 100%;
-  }
-  .flex {
-	  justify-content: center;
-  }
-  .flex-item {
-	  flex-grow: 0;
-	  flex-shrink: 0;
-	  width: 100%;
-	  max-width: 600px;
-  }
-}
-@media only screen and (min-width: 768px) {
-  .flex-item {
-    flex-grow: 0;
-    flex-shrink: 0;
-    min-width: 150px;
-	width: 25%;
-  }
+/* Screens above 768px */
+@media only screen and (min-width:768px){
+	.flex-item{flex-grow:0;flex-shrink:0;min-width:150px;width:25%}
 }

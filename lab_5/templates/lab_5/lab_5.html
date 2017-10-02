@@ -6,10 +6,19 @@
 	<section name="input-list" id="input-list">
 		<div class="container">
 			<form id="form" method="POST" action="{% url 'lab-5:add_todo' %}">
+				{% if messages %}
+					{% for message in messages %}
+						{% if message.extra_tags == "add" %}
+							<div class="alert alert-{{message.level_tag}} text-center">
+								<strong>{% if message.level_tag == "danger" %}Oops!{% else %}Success!{% endif %}</strong> {{message|striptags}}
+							</div>
+						{% endif %}
+					{% endfor %}
+				{% endif %}
 				<h2>Input Todo</h2>
 				{% csrf_token %}
 				{{ todo_form }}
-				<input id="submit" type="submit" class="btn btn-lg btn-block btn-info" value="Submit">
+				<input id="submit" type="submit" class="btn btn-lg btn-block btn-info" value="Submit" onsubmit="showmessage('m-submit')">
 				<br>
 			</form>
 		</div>
@@ -17,11 +26,20 @@
 	<section name="my-list" id="my-list">
 		<div class="container">
 			<h2 class="my-list-title">My List</h2>
-			<div class="flex">
-				{% if todo %}
+			{% if messages %}
+				{% for message in messages %}
+					{% if message.extra_tags == "delete" %}
+						<div class="alert alert-{{message.level_tag}} text-center">
+							<strong>{% if message.level_tag == "danger" %}Oops!{% else %}Success!{% endif %}</strong> {{message|striptags}}
+						</div>
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+			{% if todo %}
+				<div class="flex">
 					{% for data in todo %}
 						<div class="flex-item">
-							<div class="to-do-list">
+							<div class="to-do-list" id="todo-{{data.id}}">
 								<div class="to-do-list-title">
 									{{data.title}}
 								</div>
@@ -31,18 +49,16 @@
 								<div class="to-do-list-description">
 									{{data.description}}
 								</div>
-								<div class="to-do-list-delete">
-									<a class="to-do-list-delete-button" data-id="{{data.id}}" href="{% url 'lab-5:delete_todo' %}?id={{data.id}}">Delete</a>
-								</div>
+								<a class="to-do-list-delete" href="{% url 'lab-5:delete_todo' %}?id={{data.id}}" style="z-index:-1" onclick="showmessage('m-submit')">Delete</a>
 							</div>
 						</div>
 					{% endfor %}
-				{% else %}
-				<div class="alert alert-danger text-center">
-					<strong>Oops!</strong> Tidak ada data Todo.
 				</div>
-				{% endif %}
+			{% else %}
+			<div class="alert alert-danger text-center">
+				<strong>Oops!</strong> Nothing here. Please fill the form above.
 			</div>
+			{% endif %}
 		</div>
 	</section>
 </div>

@@ -1,3 +1,4 @@
+import time
 from django.test import TestCase
 from django.test import Client
 from django.urls import resolve
@@ -8,6 +9,7 @@ from .forms import Todo_Form
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.action_chains import ActionChains
 
 # Create your tests here.
 class Lab5UnitTest(TestCase):
@@ -39,8 +41,13 @@ class Lab5UnitTest(TestCase):
 		self.assertFalse(form.is_valid())
 		self.assertEqual(
 			form.errors['description'],
-			["This field is required."]
+			["Please fill the description with real thing."]
 		)
+		self.assertEqual(
+			form.errors['title'],
+			["Please fill the title with real thing."]
+		)
+		
 	def test_lab5_post_success_and_render_the_result(self):
 		test = 'Anonymous'
 		response_post = Client().post('/lab-5/add_todo', {'title': test, 'description': test})
@@ -58,31 +65,60 @@ class Lab5UnitTest(TestCase):
 		response= Client().get('/lab-5/')
 		html_response = response.content.decode('utf8')
 		self.assertNotIn(test, html_response)
+
+	def test_lab5_can_delete_todo(self):
+		previous_count = Todo.objects.all().count()
+		response=Client().get('/lab-5/delete_todo?id=0')
+		
+		counting_all_available_todo = Todo.objects.all().count()
+		self.assertEqual(counting_all_available_todo, previous_count)
+		
 		
 class Lab5FunctionalTest(TestCase):
+	def setUp(self):
+		chrome_options = Options()
+		self.selenium  = webdriver.Chrome('chromedriver.exe', chrome_options=chrome_options)
+		super(Lab5FunctionalTest, self).setUp()
 
-    def setUp(self):
-        chrome_options = Options()
-        self.selenium  = webdriver.Chrome('chromedriver.exe', chrome_options=chrome_options)
-        super(Lab5FunctionalTest, self).setUp()
+	def tearDown(self):
+		self.selenium.quit()
+		super(Lab5FunctionalTest, self).tearDown()
 
-    def tearDown(self):
-        self.selenium.quit()
-        super(Lab5FunctionalTest, self).tearDown()
+	def test_input_todo(self):
+		selenium = self.selenium
+		# Opening the link we want to test
+		selenium.get('http://127.0.0.1:8000/lab-5/')
+		# find the form element
+		title = selenium.find_element_by_id('id_title')
+		description = selenium.find_element_by_id('id_description')
 
-    def test_input_todo(self):
-        selenium = self.selenium
-        # Opening the link we want to test
-        selenium.get('http://127.0.0.1:8000/lab-5/')
-        # find the form element
-        title = selenium.find_element_by_id('id_title')
-        description = selenium.find_element_by_id('id_description')
+		submit = selenium.find_element_by_id('submit')
 
-        submit = selenium.find_element_by_id('submit')
+		# Fill the form with data
+		title.send_keys('Mengerjakan Lab PPW')
+		description.send_keys('Lab kali ini membahas tentang CSS dengan penggunaan Selenium untuk Test nya')
 
-        # Fill the form with data
-        title.send_keys('Mengerjakan Lab PPW')
-        description.send_keys('Lab kali ini membahas tentang CSS dengan penggunaan Selenium untuk Test nya')
-
-        # submitting the form
-        submit.send_keys(Keys.RETURN)
+		# submitting the form
+		submit.send_keys(Keys.RETURN)
+		
+		# check if there's a success message
+		self.assertIn('Todo has been created.', selenium.page_source)
+	
+	def test_delete_todo(self):
+		selenium = self.selenium
+		# Opening the link we want to test
+		self.test_input_todo()
+		selenium.get('http://127.0.0.1:8000/lab-5/')
+		
+		# find the delete button
+		todo_item = selenium.find_element_by_css_selector("div[id*='todo-']")
+		delete_button = selenium.find_element_by_css_selector("a[href*='/lab-5/delete_todo?id=']")
+		
+		# click the delete button
+		hover = ActionChains(selenium).move_to_element(todo_item)
+		hover.perform()
+		time.sleep(1)
+		delete_button.click()
+		
+		# check if there's a success message
+		self.assertIn('Todo has been deleted.', selenium.page_source)
