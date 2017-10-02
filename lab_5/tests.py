@@ -89,7 +89,12 @@ class Lab5UnitTest(TestCase):
 class Lab5FunctionalTest(TestCase):
 	def setUp(self):
 		chrome_options = Options()
-		self.selenium  = webdriver.Chrome('chromedriver.exe', chrome_options=chrome_options)
+		chrome_options.add_argument('--dns-prefetch-disable')
+		chrome_options.add_argument('--no-sandbox')        
+		chrome_options.add_argument('--headless')
+		chrome_options.add_argument('disable-gpu')
+		try: self.selenium  = webdriver.Chrome('./chromedriver.exe', chrome_options=chrome_options)
+		except: self.selenium  = webdriver.Chrome('./chromedriver', chrome_options=chrome_options)
 		super(Lab5FunctionalTest, self).setUp()
 
 	def tearDown(self):
