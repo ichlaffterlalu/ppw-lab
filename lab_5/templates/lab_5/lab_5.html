@@ -46,10 +46,10 @@
 								<div class="to-do-list-date-added">
 									{{data.created_date}}
 								</div>
+								<a class="to-do-list-delete" href="{% url 'lab-5:delete_todo' %}?id={{data.id}}" style="z-index:-1" onclick="showmessage('m-submit')">Delete</a>
 								<div class="to-do-list-description">
 									{{data.description}}
 								</div>
-								<a class="to-do-list-delete" href="{% url 'lab-5:delete_todo' %}?id={{data.id}}" style="z-index:-1" onclick="showmessage('m-submit')">Delete</a>
 							</div>
 						</div>
 					{% endfor %}
