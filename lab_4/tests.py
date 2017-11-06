@@ -13,24 +13,19 @@ class Lab4UnitTest(TestCase):
 	def test_lab_4_url_is_exist(self):
 		response = Client().get('/lab-4/')
 		self.assertEqual(response.status_code, 200)
-	
-	def test_root_url_now_is_using_index_page_from_lab_4(self):
-		response = Client().get('/')
-		self.assertEqual(response.status_code, 301)
-		self.assertRedirects(response,'/lab-4/',301,200)
 
 	def test_lab_4_has_navbar(self):
 		request = HttpRequest()
 		response = index(request)
 		html_response = response.content.decode('utf8')
 		self.assertIn('<nav class="navbar', html_response)
-		
+
 	def test_lab_4_has_copyright(self):
 		request = HttpRequest()
 		response = index(request)
 		html_response = response.content.decode('utf8')
 		self.assertIn('<p class="copyright">&copy; ' + views_response['author'] + '</p>', html_response)
-		
+
 	def test_about_me_more_than_6(self):
 		self.assertTrue(len(about_me) >= 6)
 
@@ -72,7 +67,7 @@ class Lab4UnitTest(TestCase):
 			form.errors['message'],
 			["I am sad if you are not filling the message field with real messages... :("]
 		)
-	
+
 	def test_form_validation_for_invalid_email(self):
 		form = Message_Form(data={'name': '', 'email': 'A', 'message': ''})
 		self.assertFalse(form.is_valid())
@@ -80,7 +75,7 @@ class Lab4UnitTest(TestCase):
 			form.errors['email'],
 			["Well... I think you have put something wrong to the email field. Check again, please... :("]
 		)
-	
+
 	def test_form_validation_for_whitespaces_only_messages(self):
 		form = Message_Form(data={'name': '', 'email': '', 'message': ' 	 '})
 		self.assertFalse(form.is_valid())
@@ -88,15 +83,15 @@ class Lab4UnitTest(TestCase):
 			form.errors['message'],
 			["I am sad if you are not filling the message field with real messages... :("]
 		)
-	
+
 	def test_lab4_post_fail_message_empty(self):
 		response = Client().post('/lab-4/add_message', {'name': 'Anonymous', 'email': 'a@a.com', 'message': ''})
 		self.assertEqual(response.status_code, 302)
-	
+
 	def test_lab4_post_fail_invalid_email(self):
 		response = Client().post('/lab-4/add_message', {'name': 'Anonymous', 'email': 'A', 'message': 'Saya pergi ke pasar.'})
 		self.assertEqual(response.status_code, 302)
-	
+
 	def test_lab4_post_fail_message_whitespace_only(self):
 		response = Client().post('/lab-4/add_message', {'name': 'Anonymous', 'email': 'a@a.com', 'message': '	    	'})
 		self.assertEqual(response.status_code, 302)

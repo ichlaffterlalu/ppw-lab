@@ -12,6 +12,7 @@
 {% endblock %}
 <link rel=stylesheet href="{% static 'css/base.css' %}">
 {% block stylescript_app %}{% endblock %}
+{% block stylescript_page %}{% endblock %}
 <title>{% block title %}My Biodata{% endblock %}</title>
 <style>{% block style %}{% endblock %}</style>
 </head>
@@ -33,5 +34,6 @@
 <script type=application/javascript src="{% static 'js/popper.min.js' %}"></script>
 <script type=application/javascript src="{% static 'js/bootstrap-4.0.0beta1.min.js' %}"></script>
 {% endblock %}
-{% block jquery %}{% endblock %}
+{% block scripts_app %}{% endblock %}
+{% block script_page %}{% endblock %}
 </html>
