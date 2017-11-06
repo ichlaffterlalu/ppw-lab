@@ -1,6 +1,5 @@
 {% extends "lab_6/layout/base.html" %}
 
-{% block stylescript_page %}<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />{% endblock %}
 {% block content %}
     <!-- ChatBox Section -->
     <section name="Chatbox" id="chatbox">
@@ -72,5 +71,8 @@
             </div>
         </div>
     </section>
+    <section name="theme">
+        <select class="my-select"></select>
+        <button class="apply-button">apply</button>
+    </section>
 {% endblock %}
-{% block script_page %}<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>{% endblock %}
