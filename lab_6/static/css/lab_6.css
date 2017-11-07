@@ -1,3 +1,15 @@
+@font-face {
+  font-family: 'Droid Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Droid Sans Regular'), local('DroidSans-Regular'), url(/static/fonts/DroidSans-Regular.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Droid Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Droid Sans Bold'), local('DroidSans-Bold'), url(/static/fonts/DroidSans-Bold.woff2) format('woff2');
+}
 *{
   padding: 0px;
   margin: 0px;
@@ -35,7 +47,7 @@ body{
 .chat-head img{
   cursor: pointer;
   float: right;
-  width: 24px;
+  width: 16px;
   margin: 10px;
 }
 .chat-body{

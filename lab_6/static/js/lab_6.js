@@ -2,16 +2,24 @@
 var print = document.getElementById('print');
 
 var go = function(x) {
-    if (x === 'ac') {
+    if (print.value.length > 25) {
+        return;
+    } else if (x === '.') {
+        for (i = print.value.length-1; i >= 0; i--) {
+            if (print.value[i] === x) return;
+            else if (print.value[i] === '+' || print.value[i] === '-' || print.value[i] === '*' || print.value[i] === '/') break;
+        }
+        print.value += x;
+    } else if (x === 'ac') {
         print.value = '0';
     } else if (x === 'eval') {
-        print.value = evil(print.value).toPrecision(4);
+        print.value = Math.round(evil(print.value)*100000)/100000;
     } else if (x === 'sin') {
-        print.value = Math.sin(print.value * Math.PI / 180).toPrecision(4);
+        print.value = Math.round(Math.sin(print.value * Math.PI / 180)*100000)/100000;
     } else if (x === 'tan') {
-        print.value = Math.tan(print.value * Math.PI / 180).toPrecision(4);
+        print.value = Math.round(Math.tan(print.value * Math.PI / 180)*100000)/100000;
     } else if (x === 'log') {
-        print.value = Math.log10(print.value).toPrecision(4);
+        print.value = Math.round(Math.log10(print.value)*100000)/100000;
     } else if (x === ' + ' || x === ' - ' || x === ' / ' || x === ' * ') {
         var y = print.value.substring(print.value.length-2, print.value.length);
         if (y === '+ ' || y === '- ' || y === '/ ' || y === '* ')  {
