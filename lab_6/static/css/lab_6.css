@@ -81,11 +81,12 @@ body{
 }
 .msg-send, .msg-receive{
   width: 200px;
-  height: 35px;
   padding: 5px 5px 5px 10px;
   margin: 10px auto;
-  border-radius: 3px;
+  border-radius: 6px;
   line-height: 30px;
+  white-space: pre-wrap;
+  word-break: break-word;
   position: relative;
   color: white;
 }
@@ -97,7 +98,7 @@ body{
   border: 15px solid;
   border-color: transparent #3498db transparent transparent;
   left: -29px;
-  top: 7px;
+  top: 2.5px;
 }
 .msg-send:after{
   content: '';
@@ -113,8 +114,8 @@ body{
   opacity: .9;
 }
 .calculator {
-  margin-top: 15%;
-  margin-bottom: 15%
+  margin-top: 100px;
+  margin-bottom: 100px;
 }
 
 /* Calculator */

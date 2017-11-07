@@ -14,7 +14,7 @@
                 <div class="msg-insert">
                 </div>
                 <div class="chat-text">
-                    <textarea class="chat-textarea" placeholder="Press Enter"></textarea>
+                    <textarea class="chat-textarea" style="width:255px" placeholder="Press Enter"></textarea>
                     <button class="chat-button" onClick="sendChat();">Enter</button>
                 </div>
             </div>
@@ -26,9 +26,14 @@
             <div class="model col-lg-5">
                 <div class="container-fluid">
                     <div class="row" id="title">
-                        <h1 class="text-center">
-                            CALCULATOR
-                        </h1>
+                        <div class="col calc-title" style="float:left;height:100%">
+                            <h1 class="col">CALCULATOR</h1>
+                        </div>
+                        <div class="col theme" style="float:right;height:100%;vertical-align:middle;padding:10px">
+                            Theme:
+                            <select class="my-select"></select>
+                            <button class="apply-button" style="color:black;padding:2px">Apply</button>
+                        </div>
                     </div>
                     <div class="row" id="calcs-section">
                         <div class="row">
@@ -71,10 +76,6 @@
                 </div>
             </div>
         </div>
-    </section>
-    <section name="theme">
-        <select class="my-select"></select>
-        <button class="apply-button">apply</button>
     </section>
 {% endblock %}
 {% block scripts_page %}<script src="{% static 'js/lab_6_test.js' %}"></scrip<script src="{% static 'js/lab_6_test.js' %}"></script>{% endblock %}
