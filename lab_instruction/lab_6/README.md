@@ -141,7 +141,7 @@ JavaScript identifiers bersifat case sensitive.
 
 __Aritmatika__
 
-Javascript juga dapat melakukan operasi aritmatika, contoh dibawah ini adalahkalkulator 
+Javascript juga dapat melakukan operasi aritmatika, contoh dibawah ini adalahkalkulator
 sederhana dengan menggunakan HTML DOM (DOM akan dijelaskan di bawah).
 
 Kode index.html
@@ -280,7 +280,7 @@ __HTML DOM__
 
 HTML DOM (Document Object Model) adalah standar bagaimana mengubah,
 mengambil, menghapus HTML elements. HTML DOM dapat diakses melalui JavaScript atau
-dengan bahasa pemrograman lainnya. Dengan lengkapnya dapat dilihat 
+dengan bahasa pemrograman lainnya. Dengan lengkapnya dapat dilihat
 [disini](https://www.w3schools.com/js/js_htmldom.asp)
 
 Berikut contoh implementasinya :
@@ -304,7 +304,7 @@ document.getElementById("demo").innerHTML = "YOU CLICKED ME!";
 __CSS DOM__
 
 Sama dengan HTML DOM, DOM CSS dapat mengubah CSS secara dinamis melalui
-JavaScript. Lebih lengkapnya terdapat [disini](https://www.w3schools.com/js/js_htmldom_css.asp) 
+JavaScript. Lebih lengkapnya terdapat [disini](https://www.w3schools.com/js/js_htmldom_css.asp)
 Berikut ini adalah contohnya :
 
 index.html
@@ -377,7 +377,7 @@ __sessionStorage Object__
 Sama dengan yang atas cuma diganti menggunakan sessionStorage. Yang terjadi adalah apabila browser di close
 dan membuka lagi page tersebut, click count akan kembali menjadi 0.
 
-Berikut lebih lengkapanya untuk 
+Berikut lebih lengkapanya untuk
 [HTML5 WebStorage](http://www.w3im.com/id/html/html5_webstorage.html)
 
 
@@ -749,35 +749,35 @@ Lebih lengkap mengenai static files
 Langkah:
 1. Import library select2 dan css select2 ke `lab_6.html`. Silakan gunakan CDN yang telah disediakan dari halaman select2.org untuk import library select2 dan css select2 pada bagian head lab_6.html
     ```html
-    
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
-    
+
     ```
 1. Buatlah sebuah elemen ```<select>``` dan apply button pada `lab_6.html`. Tambahkan elemen ```<select>``` pada halaman `lab_6.html`. Contoh:
     ```html
-    
+
     <select class="my-select"></select>
     ...
     <button class="apply-button">apply</button>
-    
+
     ```
     Posisikan kedua lemen tersebut dengan rapi pada halaman `lab_6.html`
 1. Buka file lab_6.js tambahkan kode berikut untuk melakukan inisiasi select2
     ```javascript
-    
+
     $(document).ready(function() {
         $('.my-select').select2();
     });
-    
+
     ```
     Kode tersebut diperlukan untuk melakukan inisiasi select2 ke elemen ```<select>``` yang dituju. Pastikan bahwa class sesuai.
 1. Lakukan inisiasi data JSON themes dan selected theme di Local Storage.
-    
+
     `themes`
-    
+
     ```java
-    
+
     "[
         {"id":0,"text":"Red","bcgColor":"#F44336","fontColor":"#FAFAFA"},
         {"id":0,"text":"Pink","bcgColor":"#E91E63","fontColor":"#FAFAFA"},
@@ -791,35 +791,35 @@ Langkah:
         {"id":0,"text":"Orange","bcgColor":"#FF5722","fontColor":"#212121"},
         {"id":0,"text":"Brown","bcgColor":"#795548","fontColor":"#FAFAFA"}
     ]"
-    
+
     ```
-    
+
     `selectedTheme`
-    
+
     ```
-    
+
     {"Indigo":{"bcgColor":"#3F51B5","fontColor":"#FAFAFA"}}
-    
+
     ```
     Silakan eksplorasi cara menggunakan JSON.parse() dan JSON.stringify() pada tautan [JSON Parse](https://www.w3schools.com/js/js_json_parse.asp) dan [JSON Stringify](https://www.w3schools.com/js/js_json_stringify.asp)
 1. Load JSON dari Local Storage
 
     Load themes dari local storage sebagai data untuk select2.
     Load selectedTheme dari local storage sebagai data untuk default theme. Nilai dari selectedTheme akan digunakan untuk default them saat page di load pertama kali.
-    
+
     Ingat kembali cara mengambil value dari local storage seperti yang telah dicontohkan sebelumnya diatas.
 
 1. Populate data themes untuk select2
 
     Populate data select2 menggunakan options ynag telah didefinisikan oleh dokumentasi select2.
     Silakan refer ke halaman [http://select2.org/data-sources/formats](https://select2.org/data-sources/formats) untuk format yang lebih jelas.
-    
+
     ```javascript
-    
+
     $('.my-select').select2({
         'data': JSON.parse(**ISI DENGAN DATA THEMES DARI LOCAL STORAGE**)
     })
-    
+
     ```
 
     Jangan lupa untuk parse data JSON dari local storage terlebih dahulu sebelum digunakan.
@@ -828,23 +828,23 @@ Langkah:
 
     Ketika tombol apply ditekan maka theme yang dipilih harus langsung diaplikasikan ke halaman.
     Berikan handler onClick untuk elemem button Apply.
-    
+
     ```javascript
-    
+
     $('.apply-button-class').on('click', function(){  // sesuaikan class button
         // [TODO] ambil value dari elemen select .my-select
-        
+
         // [TODO] cocokan ID theme yang dipilih dengan daftar theme yang ada
-        
+
         // [TODO] ambil object theme yang dipilih
-        
+
         // [TODO] aplikasikan perubahan ke seluruh elemen HTML yang perlu diubah warnanya
-        
+
         // [TODO] simpan object theme tadi ke local storage selectedTheme
     })
-    
+
     ```
-    
+
     Jika berhasil maka warna background dan font element HTML yang dipilih akan berubah warna sesuai theme yang dipilih.
     Selain itu data selectedTheme pada local storage juga akan berubah ke theme yang telah Anda pilih.
 
@@ -853,7 +853,7 @@ Langkah:
 1. Tambahkan kode berikut di dalam `lab_6/layout/base.html` kalian :
 
     ```html
-    
+
     <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.4.1.css">
     <head>
     ......
@@ -864,28 +864,28 @@ Langkah:
         <script src="{% static 'js/lab_6.js' %}"></script>
         <script src="https://code.jquery.com/qunit/qunit-2.4.1.js"></script>
     .....
-    
+
     ```
 
 2. _Reload_ lah halaman _web_ kalian maka kalian akan melihat di atas kalkulator akan muncul tampilan Qunit
 3. Kita akan mencoba membuat _Unit Test_ untuk Kalkulator yang sudah kita buat. Buatlah sebuah file `static/js/test.js`
 di dalam `lab_6` apps. Isikan kode berikut kedalam berkas tersebut
     ```javascript
-        
+
         $( document ).ready(function() {
         var button_8 = $('button:contains("8")');
         var button_4 = $('button:contains("4")');
-    
+
         var button_add = $('button:contains("+")');
         var button_sub = $('button:contains("-")');
         var button_mul = $('button:contains("*")');
         var button_div = $('button:contains("/")');
-    
+
         var button_clear = $('button:contains("AC")');
         var button_res = $('button:contains("=")');
-    
-    
-    
+
+
+
         QUnit.test( "Addition Test", function( assert ) {
           button_8.click();
           button_add.click();
@@ -895,7 +895,7 @@ di dalam `lab_6` apps. Isikan kode berikut kedalam berkas tersebut
           button_clear.click();
         });
     });
-    
+
     ```
 
 4. Jalankan _Page_ Lab 6 maka kalian akan melihat deskripsi bahwa _Unit Test Passed_
@@ -903,7 +903,7 @@ di dalam `lab_6` apps. Isikan kode berikut kedalam berkas tersebut
 Masukkan kode berikut ke dalam `static/js/test.js`
 
     ```javascript
-    
+
     .....
         QUnit.test( "Substraction Test", function( assert ) {
           button_8.click();
@@ -914,9 +914,9 @@ Masukkan kode berikut ke dalam `static/js/test.js`
           button_clear.click();
         });
     .....
-    
+
     ```
-    
+
 6. Jalankan _Page_ Lab 6 maka kalian akan melihat deskripsi bahwa _Unit Test Fail_.
     > Sekarang kalian sudah bisa melihat perbedaan tampilan Test yang failed dengan yang passed
 7. Perbaiki _Test Case_ tersebut agar _passed_
@@ -939,7 +939,7 @@ Masukkan kode berikut ke dalam `static/js/test.js`
       assert.equal( $('#print').val(), 2, "8 / 4 must be 2" );
       button_clear.click();
     });
-``` 
+```
 9. _Hide_ tampilan dari Qunit _report_ yang ada di dalam `lab_6/layout/base.html`
 ```html
 .....
@@ -950,34 +950,34 @@ Masukkan kode berikut ke dalam `static/js/test.js`
 ## Checklist
 
 1.  Membuat Halaman Chat Box
-    1. [ ] Tambahkan _lab_6.html_ pada folder templates
-    2. [ ] Tambahkan _lab_6.css_ pada folder _./static/css_
-    3. [ ] Tambahkan file _lab_6.js_ pada folder _lab_6/static/js_
-    4. [ ] Lengkapi potongan kode pada _lab_6.js_ agar dapat berjalan
+    1. [x] Tambahkan _lab_6.html_ pada folder templates
+    2. [x] Tambahkan _lab_6.css_ pada folder _./static/css_
+    3. [x] Tambahkan file _lab_6.js_ pada folder _lab_6/static/js_
+    4. [x] Lengkapi potongan kode pada _lab_6.js_ agar dapat berjalan
 
 2. Mengimplementasikan Calculator
-    1. [ ] Tambahkan potongan kode ke dalam file _lab_6.html_ pada folder templates
-    2. [ ] Tambahkan potongan kode ke dalam file _lab_6.css_ pada folder _./static/css_
-    3. [ ] Tambahkan potongan kode ke dalam file _lab_6.js_ pada folder _lab_6/static/js_
-    4. [ ] Implementasi fungsi `AC`.
+    1. [x] Tambahkan potongan kode ke dalam file _lab_6.html_ pada folder templates
+    2. [x] Tambahkan potongan kode ke dalam file _lab_6.css_ pada folder _./static/css_
+    3. [x] Tambahkan potongan kode ke dalam file _lab_6.js_ pada folder _lab_6/static/js_
+    4. [x] Implementasi fungsi `AC`.
 
 3.  Mengimplementasikan select2
-    1. [ ] Load theme default sesuai selectedTheme
-    2. [ ] Populate data themes dari local storage ke select2
-    3. [ ] Local storage berisi themes dan selectedTheme
-    4. [ ] Warna berubah ketika theme dipilih
+    1. [x] Load theme default sesuai selectedTheme
+    2. [x] Populate data themes dari local storage ke select2
+    3. [x] Local storage berisi themes dan selectedTheme
+    4. [x] Warna berubah ketika theme dipilih
 
 4.  Pastikan kalian memiliki _Code Coverage_ yang baik
-    1. [ ]  Jika kalian belum melakukan konfigurasi untuk menampilkan _Code Coverage_ di Gitlab maka lihat langkah `Show Code Coverage in Gitlab` di [README.md](https://gitlab.com/PPW-2017/ppw-lab/blob/master/README.md).
-    2. [ ] Pastikan _Code Coverage_ kalian 100%.
+    1. [x]  Jika kalian belum melakukan konfigurasi untuk menampilkan _Code Coverage_ di Gitlab maka lihat langkah `Show Code Coverage in Gitlab` di [README.md](https://gitlab.com/PPW-2017/ppw-lab/blob/master/README.md).
+    2. [x] Pastikan _Code Coverage_ kalian 100%.
 
 ###  Challenge Checklist
 1. Latihan Qunit
-    1. [ ] Implementasi dari latihan Qunit
+    1. [x] Implementasi dari latihan Qunit
 1. Cukup kerjakan salah satu nya saja:
     1. Implementasikan tombol enter pada chat box yang sudah tersedia
-        1. [ ] Buatlah sebuah _Unit Test_ menggunakan Qunit
-        2. [ ] Bulah fungsi yang membuat _Unit Test_ Tersebut _passed_ 
+        1. [x] Buatlah sebuah _Unit Test_ menggunakan Qunit
+        2. [x] Bulah fungsi yang membuat _Unit Test_ Tersebut _passed_
     1. Implementasikan fungsi `sin`, `log`, dan `tan`. (HTML sudah tersedia di dalam potongan kode)
-        1. [ ] Buatlah sebuah _Unit Test_ menggunakan Qunit
-        2. [ ] Bulah fungsi yang membuat _Unit Test_ Tersebut _passed_
+        1. [x] Buatlah sebuah _Unit Test_ menggunakan Qunit
+        2. [x] Bulah fungsi yang membuat _Unit Test_ Tersebut _passed_
