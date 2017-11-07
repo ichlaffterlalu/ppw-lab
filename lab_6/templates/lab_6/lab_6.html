@@ -1,6 +1,7 @@
 {% extends "lab_6/layout/base.html" %}
-
+{% load staticfiles %}
 {% block content %}
+    <div id="qunit" style="margin-top:50px" hidden></div>
     <!-- ChatBox Section -->
     <section name="Chatbox" id="chatbox">
         <div class="wrapper">
@@ -13,8 +14,8 @@
                 <div class="msg-insert">
                 </div>
                 <div class="chat-text">
-                    <textarea placeholder="Press Enter"></textarea>
-                </div>
+                    <textarea class="chat-textarea" placeholder="Press Enter"></textarea>
+                    <button class="chat-button" onClick="sendChat();">Enter</button>
                 </div>
             </div>
         </div>
@@ -76,3 +77,4 @@
         <button class="apply-button">apply</button>
     </section>
 {% endblock %}
+{% block scripts_page %}<script src="{% static 'js/lab_6_test.js' %}"></scrip<script src="{% static 'js/lab_6_test.js' %}"></script>{% endblock %}

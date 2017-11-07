@@ -12,6 +12,14 @@ var go = function(x) {
         print.value = Math.tan(print.value * Math.PI / 180).toPrecision(4);
     } else if (x === 'log') {
         print.value = Math.log10(print.value).toPrecision(4);
+    } else if (x === ' + ' || x === ' - ' || x === ' / ' || x === ' * ') {
+        var y = print.value.substring(print.value.length-2, print.value.length);
+        if (y === '+ ' || y === '- ' || y === '/ ' || y === '* ')  {
+            print.value = print.value.substring(0, print.value.length-3) + x;
+        }
+        else {
+            print.value += x;
+        }
     } else {
         if (print.value === '0') {
             print.value = x;
@@ -44,6 +52,16 @@ var applyTheme = function(theme) {
     $("footer").css({"color":fontColor});
 }
 // END
+
+// CHAT FUNCTIONS
+var sendChat = function() {
+    var input = $(".chat-textarea").val().trim();
+
+    $(".chat-textarea").val("");
+    if (input !== "") {
+        $(".msg-insert").append('<p class="msg-send">'+input+'</p>');
+    }
+}
 
 // Default Themes
 var themes = [{"id":0,"text":"Red","bcgColor":"#F44336","fontColor":"#FAFAFA"},
@@ -110,11 +128,9 @@ $(".chat-text").keypress(function(e) {
     // check whether Enter is pressed key
     if (e.which == 13) {
         e.preventDefault();
-        var input = $("textarea").val().trim();
-
-        $("textarea").val("");
-        if (input !== "") {
-            $(".msg-insert").append('<p class="msg-send">'+input+'</p><br/>');
-        }
+        sendChat();
     }
 });
+
+// chatbox button press handler
+$(".chat-button").on('click', sendChat());

@@ -12,6 +12,7 @@ body{
 /* Chat box */
 .chat-box{
   position: fixed;
+  z-index: 10;
   right: 20px;
   bottom: 0px;
   background: white;
@@ -27,16 +28,18 @@ body{
 .chat-head h2{
   color: white;
   padding: 8px;
+  font-size: 24px;
   display: inline-block;
+  margin: 0px;
 }
 .chat-head img{
   cursor: pointer;
   float: right;
-  width: 25px;
+  width: 24px;
   margin: 10px;
 }
 .chat-body{
-  height: 355px;
+  height: 240px;
   width: inherit;
   overflow: auto;
   margin-bottom: 45px;
@@ -54,6 +57,18 @@ body{
   border: 1px solid #bdc3c7;
   padding: 10px;
   resize: none;
+}
+.chat-button{
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 45px;
+  box-sizing: border-box;
+  border: 1px solid #bdc3c7;
+  padding: 10px;
+  resize: none;
+  background-color: black;
+  color: white;
 }
 .chat-text textarea:active, .chat-text textarea:focus, .chat-text textarea:hover{
   border-color: royalblue;

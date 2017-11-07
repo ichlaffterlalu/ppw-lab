@@ -7,18 +7,21 @@
 {% block title %} Lab 6 By {{author}} {% endblock %}
 {% block stylescript %}
     <!-- bootstrap csss -->
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'css/bootstrap-3.3.7.min.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
+    <link href="{% static 'css/select2-4.0.6rc0.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/qunit-git.min.css' %}" rel="stylesheet" />
+
 {% endblock %}
 {% block stylescript_app %}<link rel="stylesheet" type="text/css" href="{% static 'css/lab_6.css' %}" />{% endblock %}
 {% block header %}{% include "lab_6/partials/header.html" %}{% endblock %}
 {% block footer %}{% include "lab_5/partials/footer.html" %}{% endblock %}
 {% block scripts %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="application/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type=application/javascript src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <script type="application/javascript" src="{% static 'js/bootstrap-3.3.7.min.js' %}"></script>
+    <script src="{% static 'js/select2-4.0.6rc0.min.js' %}"></script>
 {% endblock %}
 {% block scripts_app %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
     <script src="{% static 'js/lab_6.js' %}"></script>
+    <script src="{% static 'js/qunit-git.min.js' %}"></script>
 {% endblock %}
