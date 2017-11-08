@@ -4,8 +4,8 @@
     3. [Lab 3](lab_instruction/lab_3/README.md) - Introduction to _Models_ Django and Heroku Database with TDD Discipline
     4. [Lab 4](lab_instruction/lab_4/README.md) - Pengenalan _HTML5_
     5. [Lab 5](lab_instruction/lab_5/README.md) - Pengenalan _CSS_
-    6. [Lab 6](lab_instruction/lab_6/README.md) - Lab 6: Pengenalan _Javascript dan JQuery_
-    7. [Lab 7](#) - TBA
+    6. [Lab 6](lab_instruction/lab_6/README.md) - Pengenalan _Javascript dan JQuery_
+    7. [Lab 7](lab_instruction/lab_7/README.md) - Pengenalan _Web Service_
     8. [Lab 8](#) - TBA
     9. [Lab 9](#) - TBA
     10. [Lab 10](#) - TBA
@@ -34,7 +34,7 @@ Working on a tutorial problem set (This instructions applied for 3rd tutorials a
 
 1. Pull any updates from `upstream`
 2. Create new apps on Django Project based on your tutorials `python manage.py startapp lab_n` where **n** is turoial number. E.g. **lab_2**
-3. Do the exercises as instructed in README.md file ([click this](lab_instruction/lab_6/README.md) to see this week Tutorials README.md)
+3. Do the exercises as instructed in README.md file ([click this](lab_instruction/lab_7/README.md) to see this week Tutorials README.md)
 4. Commit your work frequently
 5. Write good commit message(s)
 6. If your work is ready for grading: `git push origin master`
