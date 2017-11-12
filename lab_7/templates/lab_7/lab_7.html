@@ -58,7 +58,7 @@
         var addFriend = function(nama, npm) {
             $.ajax({
                 method: "POST",
-                url: "{% url "lab-7:add-friend" %}",
+                url: '{% url "lab-7:add-friend" %}',
                 data: { name: nama, npm: npm},
                 success : function (friend) {
                     friend = JSON.parse(friend);

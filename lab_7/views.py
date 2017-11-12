@@ -29,6 +29,20 @@ def friend_list(request):
     html = 'lab_7/daftar_teman.html'
     return render(request, html, response)
 
+def friend_list_json(request):
+    if request.method == 'GET':
+        friend_list = list(Friend.objects.all())
+        page = int(request.GET['page'])-1 # page number
+        per = int(request.GET['per']) # items per page
+        limit = (page+1)*per if (page+1)*per <= len(friend_list) else len(friend_list)
+
+        result = list()
+        for i in range(page*per, limit):
+            result.append(model_to_dict(friend_list[i]))
+
+        return HttpResponse(json.dumps(result))
+
+
 @csrf_exempt
 def add_friend(request):
     if request.method == 'POST':
