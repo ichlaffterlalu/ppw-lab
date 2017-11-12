@@ -1,0 +1,14 @@
+body{
+    margin-top: 70px;
+}
+/* Custom navbar style */
+.navbar-static-top {
+    margin-bottom: 19px;
+}
+.navbar-default .navbar-nav>li>a {
+    cursor: pointer;
+}
+/* Textarea not resizeable */
+textarea {
+    resize:none
+}

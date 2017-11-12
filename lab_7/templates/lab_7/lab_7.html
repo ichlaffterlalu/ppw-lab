@@ -1,0 +1,56 @@
+{% extends "lab_7/layout/base.html" %}
+{% load staticfiles %}
+{% block content %}
+    <section name="mahasiswa-list" id="mahasiswa-list">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-lg-8">
+                    <h2> Mahasiswa Fasilkom</h2>
+                    <div class="list-group">
+                        {% if mahasiswa_list %}
+                            {% for mahasiswa in mahasiswa_list %}
+                                <a class="list-group-item clearfix">
+                                    {{ mahasiswa.nama }} ({{ mahasiswa.npm }})
+                                    <span class="pull-right">
+                                        <span class="btn btn-xs btn-default" onClick="addFriend('{{ mahasiswa.nama }}', '{{ mahasiswa.npm }}')">
+                                            Tambah sebagai teman
+                                        </span>
+                                    </span>
+                                </a>
+                            {% endfor %}
+                        {% else %}
+                            <div class="alert alert-danger text-center">
+                                <strong>Opps!</strong> Tidak ada mahasiswa
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <h2> Teman Saya </h2>
+                    <div class="list-group" id="friend-list">
+                        {% if friend_list %}
+                            {% for friend in friend_list %}
+                                <a class="list-group-item clearfix">
+                                    {{ friend.friend_name }} ({{ friend.npm }})
+                                </a>
+                            {% endfor %}
+                        {% else %}
+                            <div class="alert alert-danger text-center">
+                                <strong>Opps!</strong> Tidak ada teman
+                            </div>
+                        {% endif %}
+                    </div>
+                    <form id="add-friend" action="#">
+                        {% csrf_token %}
+                        <label for="field_npm">npm</label>
+                        <input id="field_npm" type="text" name="npm" class="form-control"/>
+                        <label for="field_name">name</label>
+                        <input id="field_name" type="text" name="name" class="form-control"/>
+                        <button type="submit">Tambah</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block scripts_page %}<script src="{% static 'js/lab_7_std.js' %}"></script>{% endblock %}

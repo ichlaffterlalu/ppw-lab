@@ -588,6 +588,6 @@ Silahkan tambah pengetahuan kalian, google adalah teman kalian yang baik.
 
 ### Additional
 
-1. Membuat halaman yang menampilkan data lengkap teman 
+1. Membuat halaman yang menampilkan data lengkap teman
     1. [ ] Halaman dibuka setiap kali user mengklik salah satu teman pada halaman yang menampilkan daftar teman
     1. [ ] Tambahkan google maps yang menampilkan alamat teman pada halaman informasi detail (hint: https://developers.google.com/maps/documentation/javascript/)

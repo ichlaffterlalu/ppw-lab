@@ -5,15 +5,15 @@ from .views import index
 
 # Create your tests here.
 class Lab6UnitTest(TestCase):
-	def test_lab_6_url_is_exist(self):
-		response = Client().get('/lab-6/')
+	def test_lab_7_url_is_exist(self):
+		response = Client().get('/lab-7/')
 		self.assertEqual(response.status_code, 200)
 
-	def test_lab_6_using_index_func(self):
-		found = resolve('/lab-6/')
+	def test_lab_7_using_index_func(self):
+		found = resolve('/lab-7/')
 		self.assertEqual(found.func, index)
 
-	def test_root_url_now_is_using_index_page_from_lab_6(self):
+	def test_root_url_now_is_using_index_page_from_lab_7(self):
 		response = Client().get('/')
 		self.assertEqual(response.status_code, 301)
-		self.assertRedirects(response,'/lab-6/',301,200)
+		self.assertRedirects(response,'/lab-7/',301,200)

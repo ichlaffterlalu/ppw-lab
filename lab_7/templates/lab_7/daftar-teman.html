@@ -1,0 +1,17 @@
+{% extends "lab_7/layout/base.html" %}
+{% load staticfiles %}
+{% block content %}
+    <section name="friend-list" id="friend-list">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-lg-8">
+                    <h2> friend Fasilkom</h2>
+                    <div id="friend-list" class="list-group">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block scripts_page %}<script src="{% static 'js/lab_7_friend_list.js' %}"></script>{% endblock %}
