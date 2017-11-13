@@ -12,7 +12,7 @@
                                 <a class="list-group-item clearfix">
                                     {{ mahasiswa.nama }} ({{ mahasiswa.npm }})
                                     <span class="pull-right">
-                                        <span class="btn btn-xs btn-default" onClick="addFriend('{{ mahasiswa.nama }}', '{{ mahasiswa.npm }}')">
+                                        <span class="btn btn-xs btn-default" onClick="addFriendFromAPI('{{ mahasiswa.nama }}', '{{ mahasiswa.npm }}')">
                                             Tambah sebagai teman
                                         </span>
                                     </span>
@@ -73,30 +73,46 @@
             });
         };
 
-        $("#add-friend").on("submit", function () {
-        name = $("#field_name").val()
-        npm = $("#field_npm").val()
-            addFriend(name, npm)
-            event.preventDefault();
-        });
-
-        $("#field_npm").change(function () {
-            console.log( $(this).val() );
-            npm = $(this).val();
+        var validateNpm = function(npm) {
+            var isTaken = false;
             $.ajax({
                 method: "POST",
                 url: '{% url "lab-7:validate-npm" %}',
                 data: {
                     'npm': npm
                 },
+                async: false,
                 dataType: 'json',
                 success: function (data) {
-                    console.log(data)
-                    if (data.is_taken) {
-                        alert("Mahasiswa dengan npm seperti ini sudah ada");
-                    }
+                    if (data.is_taken) alert("Mahasiswa dengan NPM seperti ini sudah ada");
+                    isTaken = data.is_taken;
                 }
             });
+
+            return isTaken;
+        }
+
+        var addFriendFromAPI = function(nama, npm) {
+            validator = validateNpm(npm);
+            if (!validator) addFriend(nama, npm);
+        }
+
+        $("#add-friend").on("submit", function () {
+            name = $("#field_name").val()
+            npm = $("#field_npm").val()
+            isTaken = validateNpm(npm);
+
+            if (!isTaken) addFriend(name, npm);
+            else {
+                $("#field_name").val("");
+                $("#field_npm").val("");
+            }
+            event.preventDefault();
+        });
+
+        $("#field_npm").change(function () {
+            npm = $(this).val();
+            validateNpm(npm);
         });
     </script>
 {% endblock %}

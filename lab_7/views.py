@@ -32,16 +32,16 @@ def friend_list(request):
 def friend_list_json(request):
     if request.method == 'GET':
         friend_list = list(Friend.objects.all())
-        page = int(request.GET['page'])-1 # page number
-        per = int(request.GET['per']) # items per page
-        limit = (page+1)*per if (page+1)*per <= len(friend_list) else len(friend_list)
+        start = int(request.GET['start'])
+        end = int(request.GET['end'])
 
+        end = end if end <= len(friend_list) else len(friend_list)
         result = list()
-        for i in range(page*per, limit):
-            result.append(model_to_dict(friend_list[i]))
+        for i in range(start, end):
+            try: result.append(model_to_dict(friend_list[i]))
+            except: pass
 
         return HttpResponse(json.dumps(result))
-
 
 @csrf_exempt
 def add_friend(request):
@@ -53,15 +53,21 @@ def add_friend(request):
         data = model_to_dict(friend)
         return HttpResponse(data)
 
-def delete_friend(request, friend_id):
-    Friend.objects.filter(id=friend_id).delete()
-    return HttpResponseRedirect('/lab-7/')
+def delete_friend(request):
+    if request.method == 'GET':
+        try:
+            friend_id = int(request.GET["friend_id"])
+            obj = Friend.objects.filter(id=friend_id)
+            obj.delete()
+            return JsonResponse({"result":True})
+        except:
+            return JsonResponse({"result":False})
 
 @csrf_exempt
 def validate_npm(request):
     npm = request.POST.get('npm', None)
     data = {
-        'is_taken': not find_friend(npm) #lakukan pengecekan apakah Friend dgn npm tsb sudah ada
+        'is_taken': find_friend(npm) #lakukan pengecekan apakah Friend dgn npm tsb sudah ada
     }
     return JsonResponse(data)
 
@@ -69,11 +75,15 @@ def find_friend(npm):
     try:
         Friend.objects.get(npm=npm)
         return True
+    except Friend.MultipleObjectsReturned:
+        return True
     except Friend.DoesNotExist:
         return False
 
 def model_to_dict(obj):
     data = serializers.serialize('json', [obj,])
     struct = json.loads(data)
-    data = json.dumps(struct[0]["fields"])
+    data_dict = struct[0]["fields"]
+    data_dict.update({"id":obj.id})
+    data = json.dumps(data_dict)
     return data

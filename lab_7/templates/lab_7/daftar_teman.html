@@ -1,27 +1,23 @@
 {% extends "lab_7/layout/base.html" %}
 {% load staticfiles %}
 {% block content %}
-    <section name="friend-list" id="friend-list">
+    <section name="friend-list" id="friend-list-section">
         <div class="container">
-            <div class="row">
-                <div class="col-md-8 col-lg-8">
-                    <h2>Friend: Fasilkom</h2>
-                    <div id="friend-list" class="list-group">
+            <h2>Friend: Fasilkom</h2>
+            <div id="friend-list" class="list-group">
 
-                    </div>
-                </div>
             </div>
         </div>
     </section>
 {% endblock %}
 {% block scripts_page %}
     <script>
-        $( document ).ready(function () {
+        var loadFriend = function (page, per) {
             // lengkapi pemanggilan ajax berikut untuk mengambil daftar teman yang ada di database
             $.ajax({
                 method: "GET",
                 url: '{% url "lab-7:get-friend-list" %}', //URL untuk mendapatkan list teman
-                data: {page: 1, per: 10},
+                data: {'start': (page-1)*per, 'end': page*per},
                 success: function (response) {
                     //tampilkan list teman ke halaman
                     //hint : gunakan fungsi jquery append()
@@ -35,12 +31,15 @@
                     else {
                         for (i=0; i<friendList.length; i++) {
                             curr = JSON.parse(friendList[i]);
+                            id = curr.id;
                             name = curr.friend_name;
                             npm = curr.npm;
                             date = curr.added_at;
 
-                            html = '<a class="list-group-item clearfix">' +
-                                name + ' (' + npm + ') [added at: ' + date + ']</a>';
+                            html = '<a class="list-group-item clearfix" id="' + id +
+                                '">' + name + ' (' + npm + ') [added at: ' + date + ']</a>' +
+                                '<a class="delete-item" id="del-' + id +
+                                '" onclick="deleteFriend(' + id + ')">Delete</a>';
                             $("#friend-list").append(html);
                         }
                     }
@@ -52,6 +51,55 @@
                     $("#friend-list").append(html);
                 }
             });
-        });
+        };
+
+        var loadFriendOneAfterPage = function (page, per) {
+            var position = (page)*per;
+
+            // lengkapi pemanggilan ajax berikut untuk mengambil daftar teman yang ada di database
+            $.ajax({
+                method: "GET",
+                url: '{% url "lab-7:get-friend-list" %}', //URL untuk mendapatkan list teman
+                data: {start: position, end: position+1},
+                success: function (response) {
+                    //tampilkan teman setelahnya
+                    friendList = JSON.parse(response);
+                    if (friendList.length !== 0) {
+                        friend = JSON.parse(friendList[0]);
+                        id = friend.id;
+                        name = friend.friend_name;
+                        npm = friend.npm;
+                        date = friend.added_at;
+
+                        html = '<a class="list-group-item clearfix" id="' + id +
+                            '">' + name + ' (' + npm + ') [added at: ' + date + ']</a>' +
+                            '<a class="delete-item" id="del-' + id +
+                            '" onclick="deleteFriend(' + id + ')">Delete</a>';
+                        $("#friend-list").append(html);
+                    }
+                }
+            });
+        };
+
+        var deleteFriend = function (id) {
+            // lengkapi pemanggilan ajax berikut untuk mengambil daftar teman yang ada di database
+            $.ajax({
+                method: "GET",
+                url: '/lab-7/delete-friend/', //URL untuk mendapatkan list teman
+                data: {friend_id:id},
+                success: function(response) {
+                    $("#"+id).remove();
+                    $("#del-"+id).remove();
+                    loadFriendOneAfterPage(1, 10);
+                },
+                error: function(error){
+                    //tampilkan pesan error
+                    html = '<div class="alert alert-danger text-center">' +
+                        '<strong>Oops!</strong> Penghapusan gagal</div>';
+                    $("#friend-list").html(html);
+                }
+            });
+        };
+        $( document ).ready(loadFriend(1, 10));
     </script>
 {% endblock %}
