@@ -38,16 +38,16 @@ class CSUIhelper:
 
         def get_auth_param_dict(self):
             dict = {}
-            acces_token = self.get_access_token()
+            access_token = self.get_access_token()
             client_id = self.get_client_id()
-            dict['access_token'] = acces_token
+            dict['access_token'] = access_token
             dict['client_id'] = client_id
 
             return dict
 
-        def get_mahasiswa_list(self):
+        def get_mahasiswa_list(self, page=1):
             response = requests.get(API_MAHASISWA_LIST_URL,
-                                    params={"access_token": self.access_token, "client_id": self.client_id})
+                                    params={"access_token": self.access_token, "client_id": self.client_id, "page":page})
             mahasiswa_list = response.json()["results"]
             return mahasiswa_list
 

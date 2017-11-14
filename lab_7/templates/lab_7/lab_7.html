@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-md-8 col-lg-8">
                     <h2> Mahasiswa Fasilkom</h2>
-                    <div class="list-group">
+                    <div class="list-group" id="mhs-list-group">
                         {% if mahasiswa_list %}
                             {% for mahasiswa in mahasiswa_list %}
                                 <a class="list-group-item clearfix">
@@ -50,6 +50,16 @@
                     </form>
                 </div>
             </div>
+            <div class="row pagination">
+                <a href="#">&laquo;</a>
+                <a onclick="changePageMahasiswa(1,2)">1</a>
+                <a class="active" href="#">2</a>
+                <a onclick="changePageMahasiswa(3,2)">3</a>
+                <a onclick="changePageMahasiswa(4,2)">4</a>
+                <a onclick="changePageMahasiswa(5,2)">5</a>
+                <a onclick="changePageMahasiswa(6,2)">6</a>
+                <a onclick="#">&raquo;</a>
+            </div>
         </div>
     </section>
 {% endblock %}
@@ -65,7 +75,7 @@
                     html = '<a class="list-group-item clearfix">' +
                         friend.friend_name + ' (' + friend.npm +
                         ')</a>';
-                    $("#friend-list").append(html)
+                    $("#friend-list").append(html);
                 },
                 error : function (error) {
                     alert("Mahasiswa tersebut sudah ditambahkan sebagai teman")
@@ -88,13 +98,41 @@
                     isTaken = data.is_taken;
                 }
             });
-
             return isTaken;
         }
 
         var addFriendFromAPI = function(nama, npm) {
             validator = validateNpm(npm);
             if (!validator) addFriend(nama, npm);
+        }
+
+        var changePageMahasiswa = function(page, from) {
+            $.ajax({
+                method: "GET",
+                url: '{% url "lab-7:index" %}',
+                data: {"page":page,"from":from},
+                success : function (friendList) {
+                    friendList = JSON.parse(friendList);
+                    $("#mhs-list-group").empty();
+                    for (i=0; i<friendList.length; i++) {
+                        html = '<a class="list-group-item clearfix">' +
+                                friendList[i].nama + ' (' + friendList[i].npm +
+                                ')<span class="pull-right"><span class="btn ' +
+                                'btn-xs btn-default" onClick="addFriendFromAPI("' +
+                                friendList[i].nama + '", "' + friendList[i].npm + '")">' +
+                                'Tambah sebagai teman </span></span></a>';
+                        $("#mhs-list-group").append(html);
+                    }
+
+                },
+                error : function (error) {
+                    alert("ID page tidak ditemukan.")
+                }
+            });
+        }
+
+        var changePageFriend = function(page, per) {
+
         }
 
         $("#add-friend").on("submit", function () {

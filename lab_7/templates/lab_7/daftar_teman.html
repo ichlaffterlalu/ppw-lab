@@ -4,24 +4,44 @@
     <section name="friend-list" id="friend-list-section">
         <div class="container">
             <h2>Friend: Fasilkom</h2>
-            <div id="friend-list" class="list-group">
-
+            <div id="friend-list" class="list-group"></div>
+            <div class="row pagination">
+                    <a href="#">&laquo;</a>
+                    <a onclick="loadPage(1)">1</a>
+                    <a class="active" href="#">2</a>
+                    <a onclick="loadPage(3)">3</a>
+                    <a onclick="loadPage(4)">4</a>
+                    <a onclick="loadPage(5)">5</a>
+                    <a onclick="loadPage(6)">6</a>
+                    <a onclick="#">&raquo;</a>
             </div>
         </div>
     </section>
 {% endblock %}
 {% block scripts_page %}
     <script>
-        var loadFriend = function (page, per) {
+        var currentPage = {{page}};
+        var currentCount = {{per}};
+
+        var loadPage = function(page) {
+            $("#friend-list").empty();
+            currentPage = page;
+            loadFriend();
+        };
+
+        var loadFriend = function () {
             // lengkapi pemanggilan ajax berikut untuk mengambil daftar teman yang ada di database
             $.ajax({
                 method: "GET",
                 url: '{% url "lab-7:get-friend-list" %}', //URL untuk mendapatkan list teman
-                data: {'start': (page-1)*per, 'end': page*per},
+                data: {'start': (currentPage-1)*currentCount, 'end': currentPage*currentCount},
                 success: function (response) {
                     //tampilkan list teman ke halaman
                     //hint : gunakan fungsi jquery append()
                     friendList = JSON.parse(response);
+                    window.history.pushState({"html":response.html,"pageTitle":response.pageTitle}, "",
+                                '{% url "lab-7:friend-list" %}?page='+currentPage+'&per='+currentCount);
+
                     if (friendList.length === 0) {
                         //tampilkan pesan error
                         html = '<div class="alert alert-danger text-center">' +
@@ -37,9 +57,10 @@
                             date = curr.added_at;
 
                             html = '<a class="list-group-item clearfix" id="' + id +
-                                '">' + name + ' (' + npm + ') [added at: ' + date + ']</a>' +
-                                '<a class="delete-item" id="del-' + id +
-                                '" onclick="deleteFriend(' + id + ')">Delete</a>';
+                                '">' + name + ' (' + npm + ') [added at: ' + date + ']' +
+                                '<span class="pull-right"><span class="btn btn-xs btn-default"' +
+                                'id="del-' + id + '" onClick="deleteFriend('+ id +')">' +
+                                'Hapus' + '</span></span></a>';
                             $("#friend-list").append(html);
                         }
                     }
@@ -47,14 +68,14 @@
                 error: function(error){
                     //tampilkan pesan error
                     html = '<div class="alert alert-danger text-center">' +
-                        '<strong>Oops!</strong> Tidak ada teman</div>';
+                        '<strong>Oops!</strong> Ada kesalahan pada server.</div>';
                     $("#friend-list").append(html);
                 }
             });
         };
 
-        var loadFriendOneAfterPage = function (page, per) {
-            var position = (page)*per;
+        var loadFriendOneAfterPage = function () {
+            var position = (currentPage)*currentCount;
 
             // lengkapi pemanggilan ajax berikut untuk mengambil daftar teman yang ada di database
             $.ajax({
@@ -72,10 +93,24 @@
                         date = friend.added_at;
 
                         html = '<a class="list-group-item clearfix" id="' + id +
-                            '">' + name + ' (' + npm + ') [added at: ' + date + ']</a>' +
-                            '<a class="delete-item" id="del-' + id +
-                            '" onclick="deleteFriend(' + id + ')">Delete</a>';
+                            '">' + name + ' (' + npm + ') [added at: ' + date + ']' +
+                            '<span class="pull-right"><span class="btn btn-xs btn-default"' +
+                            'id="del-' + id + '" onClick="deleteFriend('+ id +')">' +
+                            'Hapus' + '</span></span></a>';
                         $("#friend-list").append(html);
+                    }
+                    else {
+                        itemCount = $.trim($("#friend-list").html()).length;
+                        if (!itemCount && currentPage > 1) {
+                            currentPage--;
+                            loadFriend(currentPage, currentCount);
+                        }
+                        else if (!itemCount) {
+                            //tampilkan pesan error
+                            html = '<div class="alert alert-danger text-center">' +
+                                    '<strong>Oops!</strong> Tidak ada teman</div>';
+                            $("#friend-list").append(html);
+                        }
                     }
                 }
             });
@@ -90,7 +125,7 @@
                 success: function(response) {
                     $("#"+id).remove();
                     $("#del-"+id).remove();
-                    loadFriendOneAfterPage(1, 10);
+                    loadFriendOneAfterPage(currentPage, currentCount);
                 },
                 error: function(error){
                     //tampilkan pesan error
@@ -100,6 +135,6 @@
                 }
             });
         };
-        $( document ).ready(loadFriend(1, 10));
+        $( document ).ready(loadFriend());
     </script>
 {% endblock %}
