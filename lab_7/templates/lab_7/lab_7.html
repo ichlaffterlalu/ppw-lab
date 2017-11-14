@@ -5,9 +5,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-lg-8">
-                    <h2 style="float:left">Mahasiswa Fasilkom</h2>
+                    <h2 style="float:left">Students of Fasilkom UI</h2>
                     <div class="pagination" style="float:right">
                         <a id="to-prev">&laquo;</a>
+                        <a id="counter"></a>
                         <a id="to-next">&raquo;</a>
                     </div>
                     <br style="clear:both;" />
@@ -18,14 +19,14 @@
                                     {{ mahasiswa.nama }} ({{ mahasiswa.npm }})
                                     <span class="pull-right">
                                         <span class="btn btn-xs btn-default" onClick="addFriendFromAPI('{{ mahasiswa.nama }}', '{{ mahasiswa.npm }}')">
-                                            Tambah sebagai teman
+                                            Add as Friend
                                         </span>
                                     </span>
                                 </a>
                             {% endfor %}
                         {% else %}
                             <div class="alert alert-danger text-center">
-                                <strong>Oops!</strong> Tidak ada mahasiswa
+                                <strong>Oops!</strong> No students available.
                             </div>
                         {% endif %}
                     </div>
@@ -41,7 +42,7 @@
                             {% endfor %}
                         {% else %}
                             <div id="error-nofriend" class="alert alert-danger text-center">
-                                <strong>Oops!</strong> Tidak ada teman
+                                <strong>Oops!</strong> You have no friends here.
                             </div>
                         {% endif %}
                     </div>
@@ -80,7 +81,7 @@
                     friendCount++;
                 },
                 error : function (error) {
-                    alert("Mahasiswa tersebut sudah ditambahkan sebagai teman")
+                    alert("Ada kesalahan pada server.")
                 }
             });
         };
@@ -96,7 +97,7 @@
                 async: false,
                 dataType: 'json',
                 success: function (data) {
-                    if (data.is_taken) alert("Mahasiswa dengan NPM seperti ini sudah ada");
+                    if (data.is_taken) alert("Mahasiswa dengan NPM seperti ini sudah ada dalam daftar teman milikmu.");
                     isTaken = data.is_taken;
                 }
             });
@@ -128,10 +129,13 @@
                     }
 
                     currentPage = page;
-                    history.pushState("", "", '{% url "lab-7:index" %}?page='+page+'&from='+from);
+                    history.pushState("", "", '{% url "lab-7:index" %}?page='+page);
+                    $("#counter").html(currentPage+" of "+pageCount);
                 }
             });
         }
+
+        $(document).ready(function() {$("#counter").html(currentPage+" of "+pageCount)});
 
         $("#add-friend").on("submit", function () {
             name = $("#field_name").val()
@@ -153,10 +157,10 @@
 
         $("#to-next").click(function(e) {
             if (currentPage < pageCount) changePageMahasiswa(currentPage+1, "nav");
-        })
+        });
 
         $("#to-prev").click(function(e) {
             if (currentPage > 1) changePageMahasiswa(currentPage-1, "nav");
-        })
+        });
     </script>
 {% endblock %}

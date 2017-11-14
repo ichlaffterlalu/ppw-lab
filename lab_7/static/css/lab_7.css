@@ -48,3 +48,9 @@ textarea {
     height: 400px;
     width: 100%;
 }
+
+#items-per-page {
+    font-size: 12px;
+    padding: 6px;
+    height: 38px;
+}

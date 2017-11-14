@@ -45,6 +45,16 @@ def friend_detail(request):
         response['kd_pos_mhs'] = api_response.get("kd_pos_mhs","-")
         response['kota_lahir'] = api_response.get("kota_lahir","-")
         response['tgl_lahir'] = api_response.get("tgl_lahir","-")
+        try:
+            response['kd_org'] = api_response["program"][0].get("kd_org","--.--.--.--")
+            response['nm_org'] = api_response["program"][0].get("nm_org","-")
+            response['nm_prg'] = api_response["program"][0].get("nm_prg","undefined")
+            response['angkatan'] = api_response["program"][0].get("angkatan","-")
+        except KeyError:
+            response['kd_org'] = "-"
+            response['nm_org'] = "-"
+            response['nm_prg'] = "-"
+            response['angkatan'] = "-"
         html = 'lab_7/detil_teman.html'
         return render(request, html, response)
 

@@ -6,6 +6,15 @@
             <h2 style="float:left">Teman dari Fasilkom</h2>
             <div class="pagination" style="float:right">
                 <a id="to-prev">&laquo;</a>
+                <a id="counter"></a>
+                <a id="items-per-page">
+                    <select>
+                        <option value=10>10</option>
+                        <option value=25>25</option>
+                        <option value=50>50</option>
+                        <option value=100>100</option>
+                    </select>
+                </a>
                 <a id="to-next">&raquo;</a>
             </div>
             <br style="clear:both;" />
@@ -18,7 +27,7 @@
         var currentPage = {{page}};
         var currentCount = {{per}};
         var friendCount = {{friend_count}};
-        var pageCount = Math.ceil(currentCount/friendCount);
+        var pageCount = Math.ceil(friendCount/currentCount);
 
         var loadPage = function(page) {
             $("#friend-list").empty();
@@ -37,6 +46,7 @@
                     //hint : gunakan fungsi jquery append()
                     friendList = JSON.parse(response);
                     history.pushState("", "", '{% url "lab-7:friend-list" %}?page='+currentPage+'&per='+currentCount);
+                    $("#counter").html(currentPage+" of "+pageCount);
 
                     if (friendList.length === 0) {
                         //tampilkan pesan error
@@ -56,7 +66,7 @@
                             html = '<span class="list-group-item clearfix" id="' + id +
                                 '"><a href=\'{% url "lab-7:friend-detail" %}?npm=' + npm + '\'>' +
                                 name + ' (' + npm + ') [added at: ' + date + ']' +
-                                '</a><span class="pull-right"><button class="del btn btn-xs btn-default"' +
+                                '</a><span class="pull-right"><button class="btn btn-xs btn-default"' +
                                 'id="del-' + id + '" onClick="deleteFriend('+ id +')">' +
                                 'Hapus' + '</button></span></span>';
                             $("#friend-list").append(html);
@@ -93,7 +103,7 @@
                         html = '<span class="list-group-item clearfix" id="' + id +
                             '"><a href=\'{% url "lab-7:friend-detail" %}?npm=' + npm + '\'>' +
                             name + ' (' + npm + ') [added at: ' + date + ']' +
-                            '</a><span class="pull-right"><button class="del btn btn-xs btn-default"' +
+                            '</a><span class="pull-right"><button class="btn btn-xs btn-default"' +
                             'id="del-' + id + '" onClick="deleteFriend('+ id +')">' +
                             'Hapus' + '</button></span></span>';
                         $("#friend-list").append(html);
@@ -102,7 +112,7 @@
                         itemCount = $.trim($("#friend-list").html()).length;
                         if (!itemCount && currentPage > 1) {
                             currentPage--;
-                            loadFriend(currentPage, currentCount);
+                            loadFriend();
                         }
                         else if (!itemCount) {
                             //tampilkan pesan error
@@ -136,7 +146,11 @@
             });
         };
 
-        $( document ).ready(loadFriend());
+        $(document).ready(function() {
+            $("#counter").html(currentPage+" of "+pageCount);
+            $("#items-per-page select").val(currentCount);
+            loadFriend();
+        });
 
         $("#to-next").click(function(e) {
             if (currentPage < pageCount) loadPage(currentPage+1);
@@ -146,14 +160,12 @@
             if (currentPage > 1) loadPage(currentPage-1);
         });
 
-        $(".del").click(function(e) {
-            e.stopImmediatePropagation();
-            e.stopPropagation();
-        })
-
-        $(".del").hover(function(e) {
-            alert("hehe");
-            $(this).parent("a").removeAttr("href");
-        })
+        $('#items-per-page select').on('change', function() {
+            currentCount = this.value;
+            pageCount = Math.ceil(friendCount/currentCount);
+            if (currentPage > pageCount) currentPage = pageCount;
+            $("#counter").html(currentPage+" of "+pageCount);
+            loadPage(currentPage);
+        });
     </script>
 {% endblock %}
