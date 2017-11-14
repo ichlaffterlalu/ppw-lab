@@ -35,7 +35,7 @@
                     <div class="list-group" id="friend-list">
                         {% if friend_list %}
                             {% for friend in friend_list %}
-                                <a class="list-group-item clearfix">
+                                <a class="list-group-item clearfix" href='{% url "lab-7:friend-detail" %}?npm={{friend.npm}}'>
                                     {{ friend.friend_name }} ({{ friend.npm }})
                                 </a>
                             {% endfor %}
@@ -73,9 +73,9 @@
                     $("#error-nofriend").remove();
                     if (friendCount >= 50) $("#friend-list").find(':first-child').remove();
                     friend = JSON.parse(friend);
-                    html = '<a class="list-group-item clearfix">' +
-                        friend.friend_name + ' (' + friend.npm +
-                        ')</a>';
+                    html = '<a class="list-group-item clearfix"' +
+                        'href=\'{% url "lab-7:friend-detail" %}?npm=' + friend.npm + '\'>' +
+                        friend.friend_name + ' (' + friend.npm + ')</a>';
                     $("#friend-list").append(html);
                     friendCount++;
                 },
@@ -117,7 +117,8 @@
                     friendList = JSON.parse(friendList);
                     $("#mhs-list-group").empty();
                     for (i=0; i<friendList.length; i++) {
-                        html = '<a class="list-group-item clearfix">' +
+                        html = '<a class="list-group-item clearfix"' +
+                                'href=\'{% url "lab-7:friend-detail" %}?npm=' + friendList[i].npm + '\'>' +
                                 friendList[i].nama + ' (' + friendList[i].npm +
                                 ')<span class="pull-right"><span class="btn ' +
                                 'btn-xs btn-default" onClick=\'addFriendFromAPI("' +

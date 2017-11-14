@@ -3,12 +3,13 @@
 {% block content %}
     <section name="friend-list" id="friend-list-section">
         <div class="container">
-            <h2>Friend: Fasilkom</h2>
-            <div id="friend-list" class="list-group"></div>
-            <div class="row pagination">
-                    <a id="to-prev">&laquo;</a>
-                    <a id="to-next">&raquo;</a>
+            <h2 style="float:left">Teman dari Fasilkom</h2>
+            <div class="pagination" style="float:right">
+                <a id="to-prev">&laquo;</a>
+                <a id="to-next">&raquo;</a>
             </div>
+            <br style="clear:both;" />
+            <div id="friend-list" class="list-group"></div>
         </div>
     </section>
 {% endblock %}
@@ -35,7 +36,7 @@
                     //tampilkan list teman ke halaman
                     //hint : gunakan fungsi jquery append()
                     friendList = JSON.parse(response);
-                    window.history.pushState("", "", '{% url "lab-7:friend-list" %}?page='+currentPage+'&per='+currentCount);
+                    history.pushState("", "", '{% url "lab-7:friend-list" %}?page='+currentPage+'&per='+currentCount);
 
                     if (friendList.length === 0) {
                         //tampilkan pesan error
@@ -52,11 +53,12 @@
                             npm = curr.npm;
                             date = curr.added_at;
 
-                            html = '<a class="list-group-item clearfix" id="' + id +
-                                '">' + name + ' (' + npm + ') [added at: ' + date + ']' +
-                                '<span class="pull-right"><span class="btn btn-xs btn-default"' +
+                            html = '<span class="list-group-item clearfix" id="' + id +
+                                '"><a href=\'{% url "lab-7:friend-detail" %}?npm=' + npm + '\'>' +
+                                name + ' (' + npm + ') [added at: ' + date + ']' +
+                                '</a><span class="pull-right"><button class="del btn btn-xs btn-default"' +
                                 'id="del-' + id + '" onClick="deleteFriend('+ id +')">' +
-                                'Hapus' + '</span></span></a>';
+                                'Hapus' + '</button></span></span>';
                             $("#friend-list").append(html);
                         }
                     }
@@ -88,11 +90,12 @@
                         npm = friend.npm;
                         date = friend.added_at;
 
-                        html = '<a class="list-group-item clearfix" id="' + id +
-                            '">' + name + ' (' + npm + ') [added at: ' + date + ']' +
-                            '<span class="pull-right"><span class="btn btn-xs btn-default"' +
+                        html = '<span class="list-group-item clearfix" id="' + id +
+                            '"><a href=\'{% url "lab-7:friend-detail" %}?npm=' + npm + '\'>' +
+                            name + ' (' + npm + ') [added at: ' + date + ']' +
+                            '</a><span class="pull-right"><button class="del btn btn-xs btn-default"' +
                             'id="del-' + id + '" onClick="deleteFriend('+ id +')">' +
-                            'Hapus' + '</span></span></a>';
+                            'Hapus' + '</button></span></span>';
                         $("#friend-list").append(html);
                     }
                     else {
@@ -137,10 +140,20 @@
 
         $("#to-next").click(function(e) {
             if (currentPage < pageCount) loadPage(currentPage+1);
-        })
+        });
 
         $("#to-prev").click(function(e) {
             if (currentPage > 1) loadPage(currentPage-1);
+        });
+
+        $(".del").click(function(e) {
+            e.stopImmediatePropagation();
+            e.stopPropagation();
+        })
+
+        $(".del").hover(function(e) {
+            alert("hehe");
+            $(this).parent("a").removeAttr("href");
         })
     </script>
 {% endblock %}

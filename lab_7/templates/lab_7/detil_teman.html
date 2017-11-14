@@ -1,0 +1,42 @@
+{% extends "lab_7/layout/base.html" %}
+{% load staticfiles %}
+{% block content %}
+<section name="friend-list" id="friend-list-section">
+    <div class="container">
+        <h2>Details of {{friend.friend_name}}</h2>
+        <ul>
+            <li>NPM: {{friend.npm}}</li>
+            <li>Alamat: {{alamat_mhs}}, {{kd_pos_mhs}}</li>
+            <li>Tempat Tanggal Lahir: {{kota_lahir}}, {{tgl_lahir}}</li>
+        </ul>
+        <div id="map"></div>
+    </div>
+</section>
+{% endblock %}
+{% block scripts_page %}
+<script>
+    function initMap() {
+        var mapOptions = {
+            zoom: 12
+        }
+        map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+        geocoder = new google.maps.Geocoder();
+        var address = "{{alamat_mhs}}".split(/\s+/).slice(0,4).join(" ");;
+        geocoder.geocode( { 'address': address}, function(results, status) {
+          if (status == 'OK') {
+            map.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+                map: map,
+                position: results[0].geometry.location
+            });
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+        });
+    }
+
+      $(document).ready(initMap());
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLM1kUUbuJ8Cxak1JJ9toBNEXBYOAvjQs&callback=initMap"></script>
+{% endblock %}

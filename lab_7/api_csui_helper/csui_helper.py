@@ -6,7 +6,7 @@ root = environ.Path(__file__) - 3 # three folder back (/a/b/c/ - 3 = /)
 env = environ.Env(DEBUG=(bool, False),)
 environ.Env.read_env('.env')
 API_MAHASISWA_LIST_URL = "https://api.cs.ui.ac.id/siakngcs/mahasiswa-list/"
-
+API_MAHASISWA_DETIL_URL = "https://api.cs.ui.ac.id/siakngcs/mahasiswa/"
 
 class CSUIhelper:
     class __CSUIhelper:
@@ -42,7 +42,6 @@ class CSUIhelper:
             client_id = self.get_client_id()
             dict['access_token'] = access_token
             dict['client_id'] = client_id
-
             return dict
 
         def get_mahasiswa_list(self, page=1):
@@ -52,6 +51,12 @@ class CSUIhelper:
             mahasiswa_list = json_response["results"]
             count = json_response["count"]
             return (mahasiswa_list, count)
+
+        def get_detail_mhs_by_npm(self, npm=0):
+            response = requests.get(API_MAHASISWA_DETIL_URL+str(npm)+"/",
+                                    params={"access_token": self.access_token, "client_id": self.client_id})
+            json_response = response.json()
+            return json_response
 
     instance = None
 

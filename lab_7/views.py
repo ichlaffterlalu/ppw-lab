@@ -36,6 +36,18 @@ def friend_list(request):
     html = 'lab_7/daftar_teman.html'
     return render(request, html, response)
 
+def friend_detail(request):
+    if request.method == 'GET':
+        npm = request.GET.get("npm",0)
+        api_response = csui_helper.instance.get_detail_mhs_by_npm(npm)
+        response['friend'] = Friend.objects.filter(npm=npm)[0]
+        response['alamat_mhs'] = api_response.get("alamat_mhs","-")
+        response['kd_pos_mhs'] = api_response.get("kd_pos_mhs","-")
+        response['kota_lahir'] = api_response.get("kota_lahir","-")
+        response['tgl_lahir'] = api_response.get("tgl_lahir","-")
+        html = 'lab_7/detil_teman.html'
+        return render(request, html, response)
+
 def friend_list_json(request):
     if request.method == 'GET':
         friend_list = list(Friend.objects.all())
