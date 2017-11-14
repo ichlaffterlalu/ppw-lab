@@ -309,7 +309,7 @@ Silahkan tambah pengetahuan kalian, google adalah teman kalian yang baik.
         response['friend_list'] = friend_list
         html = 'lab_7/daftar_teman.html'
         return render(request, html, response)
-    
+
     def friend_list_json(request): # update
         friends = [obj.as_dict() for obj in Friend.objects.all()]
         return JsonResponse({"results": friends}, content_type='application/json')
@@ -579,24 +579,24 @@ Silahkan tambah pengetahuan kalian, google adalah teman kalian yang baik.
 
 ### Mandatory
 1. Membuat halaman untuk menampilkan semua mahasiswa fasilkom
-    1. [ ] Terdapat list yang berisi daftar mahasiswa fasilkom, yang dipanggil dari django model.
-    2. [ ] Buatlah tombol untuk dapat menambahkan list mahasiswa kedalam daftar teman (implementasikan menggunakan ajax).
-    3. [ ] Mengimplentasikan validate_npm untuk mengecek apakah teman yang ingin dimasukkan sudah ada didalam daftar teman atau belum.
-    4. [ ] Membuat pagination (hint: salah satu data yang didapat dari kembalian api.cs.ui.ac.id adalah `next` dan `previous` yang bisa digunakan dalam membuat pagination)
+    1. [x] Terdapat list yang berisi daftar mahasiswa fasilkom, yang dipanggil dari django model.
+    2. [x] Buatlah tombol untuk dapat menambahkan list mahasiswa kedalam daftar teman (implementasikan menggunakan ajax).
+    3. [x] Mengimplentasikan validate_npm untuk mengecek apakah teman yang ingin dimasukkan sudah ada didalam daftar teman atau belum.
+    4. [x] Membuat pagination (hint: salah satu data yang didapat dari kembalian api.cs.ui.ac.id adalah `next` dan `previous` yang bisa digunakan dalam membuat pagination)
 2. Membuat halaman untuk menampilkan daftar teman
-    1. [ ] Terdapat list yang berisi daftar teman, data daftar teman didapat menggunakan ajax.
-    2. [ ] Buatlah tombol untuk dapat menghapus teman dari daftar teman (implementasikan menggunakan ajax).
+    1. [x] Terdapat list yang berisi daftar teman, data daftar teman didapat menggunakan ajax.
+    2. [x] Buatlah tombol untuk dapat menghapus teman dari daftar teman (implementasikan menggunakan ajax).
 3. Pastikan kalian memiliki _Code Coverage_ yang baik
-    1. [ ] Jika kalian belum melakukan konfigurasi untuk menampilkan _Code Coverage_ di Gitlab maka lihat langkah `Show Code Coverage in Gitlab` di [README.md](https://gitlab.com/PPW-2017/ppw-lab/blob/master/README.md)
-    2. [ ] Pastikan _Code Coverage_ kalian 100%
+    1. [x] Jika kalian belum melakukan konfigurasi untuk menampilkan _Code Coverage_ di Gitlab maka lihat langkah `Show Code Coverage in Gitlab` di [README.md](https://gitlab.com/PPW-2017/ppw-lab/blob/master/README.md)
+    2. [x] Pastikan _Code Coverage_ kalian 100%
 
 
 ### Additional
 
 1. Membuat halaman yang menampilkan data lengkap teman
-    1. [ ] Halaman dibuka setiap kali user mengklik salah satu teman pada halaman yang menampilkan daftar teman
-    1. [ ] Tambahkan google maps yang menampilkan alamat teman pada halaman informasi detail (hint: https://developers.google.com/maps/documentation/javascript/)
-1. Berkas ".env" untuk menyimpan username dan password, dapat menyebabkan akun anda terbuka untuk orang yang memiliki 
+    1. [x] Halaman dibuka setiap kali user mengklik salah satu teman pada halaman yang menampilkan daftar teman
+    1. [x] Tambahkan google maps yang menampilkan alamat teman pada halaman informasi detail (hint: https://developers.google.com/maps/documentation/javascript/)
+1. Berkas ".env" untuk menyimpan username dan password, dapat menyebabkan akun anda terbuka untuk orang yang memiliki
    akses ke repository bila berkas tersebut ter-push ke repository.
    Hal ini sangat tidak baik dan bisa memalukan karena dapat membuka rahasia/privacy anda sendiri.
-    1. [ ] Pastikan kerahasiaan dan privacy anda. Ubah mekanisme penyimpanan dan pengambilan bila diperlukan. 
+    1. [x] Pastikan kerahasiaan dan privacy anda. Ubah mekanisme penyimpanan dan pengambilan bila diperlukan.
