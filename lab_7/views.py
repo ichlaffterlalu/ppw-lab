@@ -67,8 +67,7 @@ def friend_list_json(request):
         end = end if end <= len(friend_list) else len(friend_list)
         result = list()
         for i in range(start, end):
-            try: result.append(model_to_dict(friend_list[i]))
-            except: pass
+            result.append(model_to_dict(friend_list[i]))
 
         return HttpResponse(json.dumps(result))
 
@@ -86,7 +85,7 @@ def delete_friend(request):
     if request.method == 'GET':
         try:
             friend_id = int(request.GET["friend_id"])
-            obj = Friend.objects.filter(id=friend_id)
+            obj = Friend.objects.get(id=friend_id)
             obj.delete()
             return JsonResponse({"result":True})
         except:
