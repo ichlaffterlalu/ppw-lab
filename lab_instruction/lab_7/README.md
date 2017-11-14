@@ -591,3 +591,7 @@ Silahkan tambah pengetahuan kalian, google adalah teman kalian yang baik.
 1. Membuat halaman yang menampilkan data lengkap teman
     1. [ ] Halaman dibuka setiap kali user mengklik salah satu teman pada halaman yang menampilkan daftar teman
     1. [ ] Tambahkan google maps yang menampilkan alamat teman pada halaman informasi detail (hint: https://developers.google.com/maps/documentation/javascript/)
+1. Berkas ".env" untuk menyimpan username dan password, dapat menyebabkan akun anda terbuka untuk orang yang memiliki 
+   akses ke repository bila berkas tersebut ter-push ke repository.
+   Hal ini sangat tidak baik dan bisa memalukan karena dapat membuka rahasia/privacy anda sendiri.
+    1. [ ] Pastikan kerahasiaan dan privacy anda. Ubah mekanisme penyimpanan dan pengambilan bila diperlukan. 
