@@ -118,8 +118,7 @@
                     friendList = JSON.parse(friendList);
                     $("#mhs-list-group").empty();
                     for (i=0; i<friendList.length; i++) {
-                        html = '<a class="list-group-item clearfix"' +
-                                'href=\'{% url "lab-7:friend-detail" %}?npm=' + friendList[i].npm + '\'>' +
+                        html = '<a class="list-group-item clearfix">' +
                                 friendList[i].nama + ' (' + friendList[i].npm +
                                 ')<span class="pull-right"><span class="btn ' +
                                 'btn-xs btn-default" onClick=\'addFriendFromAPI("' +
