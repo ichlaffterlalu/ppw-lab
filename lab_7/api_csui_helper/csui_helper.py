@@ -48,8 +48,10 @@ class CSUIhelper:
         def get_mahasiswa_list(self, page=1):
             response = requests.get(API_MAHASISWA_LIST_URL,
                                     params={"access_token": self.access_token, "client_id": self.client_id, "page":page})
-            mahasiswa_list = response.json()["results"]
-            return mahasiswa_list
+            json_response = response.json()
+            mahasiswa_list = json_response["results"]
+            count = json_response["count"]
+            return (mahasiswa_list, count)
 
     instance = None
 

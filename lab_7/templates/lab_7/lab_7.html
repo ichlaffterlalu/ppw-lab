@@ -5,7 +5,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-lg-8">
-                    <h2> Mahasiswa Fasilkom</h2>
+                    <h2 style="float:left">Mahasiswa Fasilkom</h2>
+                    <div class="pagination" style="float:right">
+                        <a id="to-prev">&laquo;</a>
+                        <a id="to-next">&raquo;</a>
+                    </div>
+                    <br style="clear:both;" />
                     <div class="list-group" id="mhs-list-group">
                         {% if mahasiswa_list %}
                             {% for mahasiswa in mahasiswa_list %}
@@ -26,7 +31,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <h2> Teman Saya </h2>
+                    <h2> My Last 50 Friends </h2>
                     <div class="list-group" id="friend-list">
                         {% if friend_list %}
                             {% for friend in friend_list %}
@@ -35,7 +40,7 @@
                                 </a>
                             {% endfor %}
                         {% else %}
-                            <div class="alert alert-danger text-center">
+                            <div id="error-nofriend" class="alert alert-danger text-center">
                                 <strong>Oops!</strong> Tidak ada teman
                             </div>
                         {% endif %}
@@ -43,39 +48,36 @@
                     <form id="add-friend" action="#">
                         {% csrf_token %}
                         <label for="field_npm">npm</label>
-                        <input id="field_npm" type="text" name="npm" class="form-control"/>
+                        <input id="field_npm" type="text" name="npm" class="form-control" required/>
                         <label for="field_name">name</label>
-                        <input id="field_name" type="text" name="name" class="form-control"/>
-                        <button type="submit">Tambah</button>
+                        <input id="field_name" type="text" name="name" class="form-control" required/>
+                        <button class="btn btn-xs btn-default" style="margin:10px 0" type="submit">Tambah</button>
                     </form>
                 </div>
-            </div>
-            <div class="row pagination">
-                <a href="#">&laquo;</a>
-                <a onclick="changePageMahasiswa(1,2)">1</a>
-                <a class="active" href="#">2</a>
-                <a onclick="changePageMahasiswa(3,2)">3</a>
-                <a onclick="changePageMahasiswa(4,2)">4</a>
-                <a onclick="changePageMahasiswa(5,2)">5</a>
-                <a onclick="changePageMahasiswa(6,2)">6</a>
-                <a onclick="#">&raquo;</a>
             </div>
         </div>
     </section>
 {% endblock %}
 {% block scripts_page %}
     <script>
+        var friendCount = {{friend_count}};
+        var pageCount = Math.ceil({{mhs_count}}/100);
+        var currentPage = {{page}};
+
         var addFriend = function(nama, npm) {
             $.ajax({
                 method: "POST",
                 url: '{% url "lab-7:add-friend" %}',
                 data: { name: nama, npm: npm},
                 success : function (friend) {
+                    $("#error-nofriend").remove();
+                    if (friendCount >= 50) $("#friend-list").find(':first-child').remove();
                     friend = JSON.parse(friend);
                     html = '<a class="list-group-item clearfix">' +
                         friend.friend_name + ' (' + friend.npm +
                         ')</a>';
                     $("#friend-list").append(html);
+                    friendCount++;
                 },
                 error : function (error) {
                     alert("Mahasiswa tersebut sudah ditambahkan sebagai teman")
@@ -118,21 +120,16 @@
                         html = '<a class="list-group-item clearfix">' +
                                 friendList[i].nama + ' (' + friendList[i].npm +
                                 ')<span class="pull-right"><span class="btn ' +
-                                'btn-xs btn-default" onClick="addFriendFromAPI("' +
-                                friendList[i].nama + '", "' + friendList[i].npm + '")">' +
+                                'btn-xs btn-default" onClick=\'addFriendFromAPI("' +
+                                friendList[i].nama + '", "' + friendList[i].npm + '")\'>' +
                                 'Tambah sebagai teman </span></span></a>';
                         $("#mhs-list-group").append(html);
                     }
 
-                },
-                error : function (error) {
-                    alert("ID page tidak ditemukan.")
+                    currentPage = page;
+                    history.pushState("", "", '{% url "lab-7:index" %}?page='+page+'&from='+from);
                 }
             });
-        }
-
-        var changePageFriend = function(page, per) {
-
         }
 
         $("#add-friend").on("submit", function () {
@@ -152,5 +149,13 @@
             npm = $(this).val();
             validateNpm(npm);
         });
+
+        $("#to-next").click(function(e) {
+            if (currentPage < pageCount) changePageMahasiswa(currentPage+1, "nav");
+        })
+
+        $("#to-prev").click(function(e) {
+            if (currentPage > 1) changePageMahasiswa(currentPage-1, "nav");
+        })
     </script>
 {% endblock %}

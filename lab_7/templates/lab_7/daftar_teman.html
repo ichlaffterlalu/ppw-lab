@@ -6,14 +6,8 @@
             <h2>Friend: Fasilkom</h2>
             <div id="friend-list" class="list-group"></div>
             <div class="row pagination">
-                    <a href="#">&laquo;</a>
-                    <a onclick="loadPage(1)">1</a>
-                    <a class="active" href="#">2</a>
-                    <a onclick="loadPage(3)">3</a>
-                    <a onclick="loadPage(4)">4</a>
-                    <a onclick="loadPage(5)">5</a>
-                    <a onclick="loadPage(6)">6</a>
-                    <a onclick="#">&raquo;</a>
+                    <a id="to-prev">&laquo;</a>
+                    <a id="to-next">&raquo;</a>
             </div>
         </div>
     </section>
@@ -22,6 +16,8 @@
     <script>
         var currentPage = {{page}};
         var currentCount = {{per}};
+        var friendCount = {{friend_count}};
+        var pageCount = Math.ceil(currentCount/friendCount);
 
         var loadPage = function(page) {
             $("#friend-list").empty();
@@ -39,14 +35,14 @@
                     //tampilkan list teman ke halaman
                     //hint : gunakan fungsi jquery append()
                     friendList = JSON.parse(response);
-                    window.history.pushState({"html":response.html,"pageTitle":response.pageTitle}, "",
-                                '{% url "lab-7:friend-list" %}?page='+currentPage+'&per='+currentCount);
+                    window.history.pushState("", "", '{% url "lab-7:friend-list" %}?page='+currentPage+'&per='+currentCount);
 
                     if (friendList.length === 0) {
                         //tampilkan pesan error
                         html = '<div class="alert alert-danger text-center">' +
                                 '<strong>Oops!</strong> Tidak ada teman</div>';
                         $("#friend-list").append(html);
+                        $("#to-"+currentPage).addClass("active");
                     }
                     else {
                         for (i=0; i<friendList.length; i++) {
@@ -117,7 +113,6 @@
         };
 
         var deleteFriend = function (id) {
-            // lengkapi pemanggilan ajax berikut untuk mengambil daftar teman yang ada di database
             $.ajax({
                 method: "GET",
                 url: '/lab-7/delete-friend/', //URL untuk mendapatkan list teman
@@ -125,6 +120,8 @@
                 success: function(response) {
                     $("#"+id).remove();
                     $("#del-"+id).remove();
+                    friendCount--;
+                    pageCount = Math.ceil(currentCount/friendCount);
                     loadFriendOneAfterPage(currentPage, currentCount);
                 },
                 error: function(error){
@@ -135,6 +132,15 @@
                 }
             });
         };
+
         $( document ).ready(loadFriend());
+
+        $("#to-next").click(function(e) {
+            if (currentPage < pageCount) loadPage(currentPage+1);
+        })
+
+        $("#to-prev").click(function(e) {
+            if (currentPage > 1) loadPage(currentPage-1);
+        })
     </script>
 {% endblock %}

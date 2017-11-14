@@ -16,19 +16,21 @@ def index(request):
     # Page halaman menampilkan list mahasiswa yang ada
     # TODO berikan akses token dari backend dengan menggunakaan helper yang ada
     if request.GET.get("page") != None and request.GET.get("from") != None:
-        mahasiswa_list = csui_helper.instance.get_mahasiswa_list(page=request.GET.get("page",1))
-        return HttpResponse(json.dumps(mahasiswa_list))
+        api_response = csui_helper.instance.get_mahasiswa_list(page=request.GET.get("page",1))
+        return HttpResponse(json.dumps(api_response[0]))
 
     else:
-        mahasiswa_list = csui_helper.instance.get_mahasiswa_list(page=request.GET.get("page",1))
-        friend_list = Friend.objects.all()
-        response = {"mahasiswa_list": mahasiswa_list, "friend_list": friend_list, "page": request.GET.get("page",1)}
+        api_response = csui_helper.instance.get_mahasiswa_list(page=request.GET.get("page",1))
+        friend_list = list(Friend.objects.all())[-50:]
+        response = {"mahasiswa_list": api_response[0], "friend_list": friend_list,
+                    "page": request.GET.get("page",1), "friend_count": Friend.objects.count(),
+                    "mhs_count": api_response[1]}
         html = 'lab_7/lab_7.html'
         return render(request, html, response)
 
 def friend_list(request):
-    friend_list = Friend.objects.all()
-    response['friend_list'] = friend_list
+    response['friend_list'] = Friend.objects.all()
+    response['friend_count'] = Friend.objects.count()
     response['page'] = request.GET.get("page",1)
     response['per'] = request.GET.get("per",10)
     html = 'lab_7/daftar_teman.html'
