@@ -288,70 +288,75 @@ Silahkan tambah pengetahuan kalian, google adalah teman kalian yang baik.
     from django.shortcuts import render
     from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
     from django.views.decorators.csrf import csrf_exempt
-    from django.core import serializers
-
     from .models import Friend
     from .api_csui_helper.csui_helper import CSUIhelper
     import os
-    import json
 
     response = {}
-    csui_helper = CSUIhelper(os.environ.get("SSO_USERNAME", "yourusername"),
-                             os.environ.get("SSO_PASSWORD", "yourpassword"))
+    csui_helper = CSUIhelper()
+
 
     def index(request):
-        # Page halaman menampilkan list mahasiswa yang ada
-        # TODO berikan akses token dari backend dengan menggunakaan helper yang ada
-
         mahasiswa_list = csui_helper.instance.get_mahasiswa_list()
 
         friend_list = Friend.objects.all()
-        response = {"mahasiswa_list": mahasiswa_list, "friend_list": friend_list}
         html = 'lab_7/lab_7.html'
         return render(request, html, response)
+
 
     def friend_list(request):
         friend_list = Friend.objects.all()
         response['friend_list'] = friend_list
         html = 'lab_7/daftar_teman.html'
         return render(request, html, response)
+    
+    def friend_list_json(request): # update
+        friends = [obj.as_dict() for obj in Friend.objects.all()]
+        return JsonResponse({"results": friends}, content_type='application/json')
 
     @csrf_exempt
     def add_friend(request):
         if request.method == 'POST':
-            name = request.POST['name']
             npm = request.POST['npm']
             friend = Friend(friend_name=name, npm=npm)
             friend.save()
-            data = model_to_dict(friend)
-            return HttpResponse(data)
+            return JsonResponse(friend.as_dict())
+
 
     def delete_friend(request, friend_id):
         Friend.objects.filter(id=friend_id).delete()
         return HttpResponseRedirect('/lab-7/')
 
+
     @csrf_exempt
     def validate_npm(request):
         npm = request.POST.get('npm', None)
         data = {
-            'is_taken': #lakukan pengecekan apakah Friend dgn npm tsb sudah ada
+            'is_taken': Friend.objects.filter(npm=npm).exists()
         }
         return JsonResponse(data)
 
-    def model_to_dict(obj):
-        data = serializers.serialize('json', [obj,])
-        struct = json.loads(data)
-        data = json.dumps(struct[0]["fields"])
-        return data
     ```
 1. Buatlah _Models_ untuk `Friend` di dalam `lab_7/models.py`
     ```python
+        # -*- coding: utf-8 -*-
+        from __future__ import unicode_literals
+
         from django.db import models
 
+
+        # Create your models here.
         class Friend(models.Model):
-        	friend_name = models.CharField(max_length=400)
-        	npm = models.CharField(max_length=250)
-        	added_at = models.DateField(auto_now_add=True)
+            friend_name = models.CharField(max_length=400)
+            npm = models.CharField(max_length=250, unique=True)
+            added_at = models.DateField(auto_now_add=True)
+
+            def as_dict(self):
+                return {
+                    "friend_name": self.friend_name,
+                    "npm": self.npm,
+                }
+
     ```
 1. Jalankan perintah `makemigrations` dan `migrate`
 
@@ -491,7 +496,7 @@ Silahkan tambah pengetahuan kalian, google adalah teman kalian yang baik.
                     $("#friend-list").append(html)
                 },
                 error : function (error) {
-                    alert("Mahasiswa tersebut sudah ditambahkan sebagai teman")
+                    alert(error.responseText)
                 }
             });
         };
@@ -555,7 +560,7 @@ Silahkan tambah pengetahuan kalian, google adalah teman kalian yang baik.
                 {# lengkapi pemanggilan ajax berikut untuk mengambil daftar teman yang ada di database #}
                 $.ajax({
                     method: "GET",
-                    url: #URL untuk mendapatkan list teman],
+                    url: "{% url 'lab-7:get-friend-list' %}", // update
                     success: function (response) {
                         #tampilkan list teman ke halaman
                         #hint : gunakan fungsi jquery append()
