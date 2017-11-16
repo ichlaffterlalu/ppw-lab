@@ -6,7 +6,7 @@
     5. [Lab 5](lab_instruction/lab_5/README.md) - Pengenalan _CSS_
     6. [Lab 6](lab_instruction/lab_6/README.md) - Pengenalan _Javascript dan JQuery_
     7. [Lab 7](lab_instruction/lab_7/README.md) - Pengenalan _Web Service_
-    8. [Lab 8](#) - TBA
+    8. [Lab 8](lab_instruction/lab_8/README.md) - Pengenalan Pengenalan _Oauth2_
     9. [Lab 9](#) - TBA
     10. [Lab 10](#) - TBA
 2. [Quickstart Guide](#tldr)
@@ -34,7 +34,7 @@ Working on a tutorial problem set (This instructions applied for 3rd tutorials a
 
 1. Pull any updates from `upstream`
 2. Create new apps on Django Project based on your tutorials `python manage.py startapp lab_n` where **n** is turoial number. E.g. **lab_2**
-3. Do the exercises as instructed in README.md file ([click this](lab_instruction/lab_7/README.md) to see this week Tutorials README.md)
+3. Do the exercises as instructed in README.md file ([click this](lab_instruction/lab_8/README.md) to see this week Tutorials README.md)
 4. Commit your work frequently
 5. Write good commit message(s)
 6. If your work is ready for grading: `git push origin master`
