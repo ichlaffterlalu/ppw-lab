@@ -108,9 +108,10 @@ function facebookLogin(){
    }
 ```
 
-Function facebookLogin tersebut akan memanggil function login dari instance FB (instance dari facebook SDK) yang berfungsi untuk menguthentifikasi dan mengauthorisasi user, function FB.login() ini juga memiliki parameter scope yang berguna untuk mengatur jenis permission apa saja yang aplikasi kita inginkan.
+Fungsi ```facebookLogin()``` tersebut akan memanggil fungsi login dari instance FB (instance dari facebook SDK) yang berfungsi untuk menguthentifikasi dan mengauthorisasi user, function FB.login() ini juga memiliki parameter scope yang berguna untuk mengatur jenis permission apa saja yang aplikasi kita inginkan, sebagai contoh di atas kita telah menambah permission ```public_profile``` agar aplikasi kita dapat mengakses id, name, first_name, last_name dll milik kita (lihat di [sini](https://developers.facebook.com/docs/facebook-login/permissions#reference-public_profile)). Kita juga dapat melihat list permission yang ada melalui tautan berikut
+https://developers.facebook.com/docs/facebook-login/permissions
 
-Function diatas akan mengembalikan response sebagai berikut :
+Fungsi di atas akan mengembalikan response sebagai berikut :
 
 ```json
 {
@@ -124,14 +125,14 @@ Function diatas akan mengembalikan response sebagai berikut :
 }
 ```
 
-Untuk lebih jelasnya, kita dapat melihat dokumentasi mengenai function dan method yang dimiliki oleh facebook javascript sdk, melalui url berikut https://developers.facebook.com/docs/javascript/reference/v2.11
+Untuk lebih jelasnya, kita dapat melihat dokumentasi mengenai fungsi dan method yang dimiliki oleh facebook javascript sdk, melalui url berikut https://developers.facebook.com/docs/javascript/reference/v2.11
 
 Kita juga dapat melihat list permission yang ada melalui tautan berikut
 https://developers.facebook.com/docs/facebook-login/permissions
 
 _Menampilkan informasi user_
 
-Untuk menampilkan informasi User, kita dapat menggunakan Graph API yang dimiliki oleh Facebook, berikut merupakan contoh untuk mendapatkan informasi user
+Untuk menampilkan informasi User, kita dapat menggunakan Graph API yang dimiliki oleh Facebook, berikut merupakan contoh fungsi ```getUserData()```untuk mendapatkan informasi user
 
 ```javascript
 function getUserData(){
@@ -154,7 +155,7 @@ Method api() pada instance FB akan melakukan request dengan method GET dan  url 
 }
 ```
 
-Anda bisa menambahkan fields yang dikembalikan sesuai dengan kebutuhan. Detail mengenai graph API dapat dilihat pada tautan berikut https://developers.facebook.com/docs/graph-api/reference/
+Anda bisa menambahkan fields yang dikembalikan sesuai dengan kebutuhan, tetapi disesuaikan dengan permission yang sudah diatur saat login ke facebook (lihat kembali fungsi facebookLogin()). Detail mengenai graph API dapat dilihat pada tautan berikut https://developers.facebook.com/docs/graph-api/reference/
 
 _Membuat Post ke timeline_
 
@@ -167,6 +168,8 @@ function facebookLogin(){
      }, {scope:'public_profile,user_posts,publish_actions'})
    }
 ```
+
+Dengan menambahkan permission `user_posts` dan `publish_actions`, apa saja yang dapat dilakukan oleh aplikasi kita menggunakan Graph API?
 
 Untuk memposting status pada timeline facebook kita dapat menggunakan Graph API yang digunakan oleh facebook, berikut merupakan contohnya
 
@@ -209,10 +212,10 @@ Anda dapat menggunakan template lab8.js dibawah ini untuk memulai mengerjakan la
     });
 
     // implementasilah sebuah fungsi yang melakukan cek status login (getLoginStatus)
-    // dan jalankanlah fungsi render dibawah, dengan parameter true jika
+    // dan jalankanlah fungsi render di bawah, dengan parameter true jika
     // status login terkoneksi (connected)
 
-    // Hal ini dilakukan agar ketika web dibuka, dan ternyata sudah login, maka secara
+    // Hal ini dilakukan agar ketika web dibuka dan ternyata sudah login, maka secara
     // otomatis akan ditampilkan view sudah login
   };
 
@@ -227,13 +230,13 @@ Anda dapat menggunakan template lab8.js dibawah ini untuk memulai mengerjakan la
 
   // Fungsi Render, menerima parameter loginFlag yang menentukan apakah harus
   // merender atau membuat tampilan html untuk yang sudah login atau belum
-  // Rubah metode ini seperlunya jika kalian perlu mengganti tampilan dengan memberi
+  // Ubah metode ini seperlunya jika kalian perlu mengganti tampilan dengan memberi
   // Class-Class Bootstrap atau CSS yang anda implementasi sendiri
   const render = loginFlag => {
     if (loginFlag) {
       // Jika yang akan dirender adalah tampilan sudah login
 
-      // Panggil Method getUserData yang anda implementasi dengan fungsi callback
+      // Memanggil method getUserData (lihat ke bawah) yang Anda implementasi dengan fungsi callback
       // yang menerima object user sebagai parameter.
       // Object user ini merupakan object hasil response dari pemanggilan API Facebook.
       getUserData(user => {
@@ -253,7 +256,7 @@ Anda dapat menggunakan template lab8.js dibawah ini untuk memulai mengerjakan la
           '<button class="logout" onclick="facebookLogout()">Logout</button>'
         );
 
-        // Setelah merender tampilan diatas, dapatkan data home feed dari akun yang login
+        // Setelah merender tampilan di atas, dapatkan data home feed dari akun yang login
         // dengan memanggil method getUserFeed yang kalian implementasi sendiri.
         // Method itu harus menerima parameter berupa fungsi callback, dimana fungsi callback
         // ini akan menerima parameter object feed yang merupakan response dari pemanggilan API Facebook
@@ -293,24 +296,30 @@ Anda dapat menggunakan template lab8.js dibawah ini untuk memulai mengerjakan la
     // TODO: Implement Method Ini
     // Pastikan method memiliki callback yang akan memanggil fungsi render tampilan sudah login
     // ketika login sukses, serta juga fungsi ini memiliki segala permission yang dibutuhkan
-    // pada scope yang ada.
+    // pada scope yang ada. Anda dapat memodifikasi fungsi facebookLogin di atas.
   };
 
   const facebookLogout = () => {
     // TODO: Implement Method Ini
     // Pastikan method memiliki callback yang akan memanggil fungsi render tampilan belum login
-    // ketika logout sukses.
+    // ketika logout sukses. Anda dapat memodifikasi fungsi facebookLogout di atas.
   };
 
-  const getUserData = () => {
-    // TODO: Implement Method Ini
-    // Pastikan method ini menerima parameter berupa fungsi callback, lalu merequest data User dari akun
-    // yang sedang login dengan semua fields yang dibutuhkan di method render, dan memanggil fungsi callback
-    // tersebut setelah selesai melakukan request dan meneruskan response yang didapat ke fungsi callback
-    // tersebut
+  // TODO: Lengkapi Method Ini
+  // Method ini memodifikasi method getUserData di atas yang menerima fungsi callback bernama fun
+  // lalu merequest data user dari akun yang sedang login dengan semua fields yang dibutuhkan di 
+  // method render, dan memanggil fungsi callback tersebut setelah selesai melakukan request dan 
+  // meneruskan response yang didapat ke fungsi callback tersebut
+  // Apakah yang dimaksud dengan fungsi callback?
+  const getUserData = (fun) => {
+    ...
+    FB.api('/me?fields=....', 'GET', function (response){
+      fun(response);
+    });
+    ...
   };
 
-  const getUserFeed = () => {
+  const getUserFeed = (fun) => {
     // TODO: Implement Method Ini
     // Pastikan method ini menerima parameter berupa fungsi callback, lalu merequest data Home Feed dari akun
     // yang sedang login dengan semua fields yang dibutuhkan di method render, dan memanggil fungsi callback
@@ -334,7 +343,7 @@ Mengenai template ini, jika anda melihat syntax `() => {}`, itu adalah bentuk da
 
 Syntax Arrow Function `(parameter1, parameter2) => { code }` sebenarnya hanyalah bentuk lain dari `function(parameter1, parameter 2) { code }`.
 
-Syntax `const` merupakan bentuk lain dari `var`, akan tetapi `const` menandakan bahwa data tersebut tidak bisa dirubah isinya, ada juga `let`, kebalikan dari `const` dimana data tersebut menandakan dapat dirubah kedepannya. Dua bentuk ini merupakan best practice yang mulai diterapkan pada kode JavaScript versi EcmaScript 6 atau ES6 atau ES2015.
+Syntax `const` merupakan bentuk lain dari `var`, akan tetapi `const` menandakan bahwa data tersebut tidak bisa diubah isinya, ada juga `let`, kebalikan dari `const` dimana data tersebut menandakan dapat diubah kedepannya. Dua bentuk ini merupakan best practice yang mulai diterapkan pada kode JavaScript versi EcmaScript 6 atau ES6 atau ES2015.
 
 Syntax `const funcName = parameter1 => { code }` hanyalah bentuk lain dari `function funcName(parameter1) { code }`.
 
@@ -381,15 +390,17 @@ Pastikan anda menggunakan browser Google Chrome / Mozilla Firefox versi terbaru 
 
 ### Mandatory
 1. Membuat halaman untuk Login menggunakan OAuth
-    1. [ ] Mendaftarkan aplikasi ke facebook developer page.
+    1. [ ] Mendaftarkan aplikasi ke facebook developer page
     2. [ ] Melakukan OAuth Login menggunakan Facebook
     3. [ ] Menampilkan informasi dari user yang login menggunakan API Facebook.
     4. [ ] Melakukan post status facebook
     5. [ ] Menampilkan post status pada halaman lab_8.html
     6. [ ] Melakukan Logout
     7. [ ] Implementasi css yang indah dan responsive
+    
+2. Jawablah pertanyaan yang ada di dokumen ini dengan menuliskannya pada buku catatan atau pada source code kalian yang dapat ditunjukkan saat demo
 
-2. Pastikan kalian memiliki _Code Coverage_ yang baik
+3. Pastikan kalian memiliki _Code Coverage_ yang baik
     1. [ ] Jika kalian belum melakukan konfigurasi untuk menampilkan _Code Coverage_ di Gitlab maka lihat langkah `Show Code Coverage in Gitlab` di [README.md](https://gitlab.com/PPW-2017/ppw-lab/blob/master/README.md)
     2. [ ] Pastikan _Code Coverage_ kalian 100%
 
