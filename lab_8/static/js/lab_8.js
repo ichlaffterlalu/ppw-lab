@@ -29,36 +29,34 @@ window.fbAsyncInit = () => {
 // Class-Class Bootstrap atau CSS yang anda implementasi sendiri
 const render = loginFlag => {
   if (loginFlag) {
-    $('#fblogin').remove();
+    $('#lab8').html("");
     // Jika yang akan dirender adalah tampilan sudah login
     // Panggil Method getUserData yang anda implementasi dengan fungsi callback
     // yang menerima object user sebagai parameter.
     // Object user ini merupakan object hasil response dari pemanggilan API Facebook.
     getUserData(user => {
       // Render tampilan profil, form input post, tombol post status, dan tombol logout
-      about = "No description available.";
+      about = "No descript  ion available.";
       if (user.about) about = user.about;
       $('#lab8').html(
         '<div class="profile" style="background:url(\'' + user.cover.source + '\')"><div class="profile-grad">' +
           '<div class="container">'+
-          '<span class="pull-right">'+
+          '<span class="float-right">'+
           '<div class="row" id="profile-container">'+
           '<div style="float:left">'+
-          '<img style="height:100px;width=100px;border-radius:50%;margin:10px 20px" class="picture" src="' + user.picture.data.url + '" alt="profpic" />' +
+          '<img style="height:100px;width=100px;border-radius:50%;margin:10px" class="picture" src="' + user.picture.data.url + '" alt="profpic" />' +
           '</div>'+
-          '<div style="min-width:240px;float:right">'+
-          '<div class="data">' +
-            '<h1>' + user.name + '</h1>' +
-            '<h3>' + user.email + ' - ' + user.gender + '</h3>' +
-          '</div>' +
-          '</span></div>'+'</div>'+'</div>'+
+          '<div class="data" style="min-width:240px;height:100px;margin:10px;float:right">'+
+            '<h2 style="line-height:48px">' + user.name + '</h2>' +
+            '<h5 style="line-height:28px">' + user.email + ' - ' + user.gender + '</h5>' +
+          '</div></span>'+'</div>'+'</div>'+
         '</div></div>' +
         '<div class="container" id="feed-container">' +
-        '<h2>About Me</h2><br>'+'<p>' + about + '</p>' +
-        '<h2>Post ke Facebook</h2><br>'+
+        '<h2 id="about-me">About Me</h2>'+'<p>' + about + '</p><br>' +
+        '<h2 id="post-field">Post ke Facebook</h2>'+
         '<textarea id="postInput" type="text" class="post" placeholder="Ketik Status Anda"/><br>' +
-        '<span class="pull-right"><button class="postStatus" onclick="postFeed()">Post to Timeline</button></span>' +
-        '<br><h2>Timeline</h2><br></div>'
+        '<span class="float-right"><button class="postStatus" onclick="postFeed()">Post to Timeline</button></span>' +
+        '<br><h2 id="timeline">Timeline</h2></div>'
       );
 
       // Setelah merender tampilan diatas, dapatkan data home feed dari akun yang login
@@ -72,7 +70,7 @@ const render = loginFlag => {
           if (value.message && value.story) {
             message = value.message.replace(/\n/g, "<br/>");
             $('#feed-container').append(
-              '<div class="feed" style="position: relative;" >' +
+              '<div class="feed" style="position: relative;">' +
                 '<p>' + message + '</p>' +
                 '<p>' + value.story + '</p>' +'<span onclick="deletePost(\'' + value.id + '\')" data-id="'+value.id+'" class="glyphicon glyphicon-remove"></span>'+
               '</div>'
@@ -81,15 +79,13 @@ const render = loginFlag => {
           } else if (value.message) {
             message = value.message.replace(/\n/g, "<br/>");
             $('#feed-container').append(
-              '<div class="feed" style=" position: relative;" >' +
+              '<div class="feed" style=" position: relative;">' +
               '<div class="row">'+
-              '<div class="col-xs-1">'+
+              '<div class="col-1">'+
               '<img style="height:50px;width=50px;" class="picture" src="' + user.picture.data.url + '" alt="profpic" /></div>'+
-              '<div class="col-xs-10"><div class="row"><div class="row-xs-6 name">'+
-              '<p>' + user.name + '</p></div>'+
-              '<div class="row-xs-6 date">'+
-              '<p>' + value.created_time + '</p></div></div></div> <div class="col-xs-1"></div></div>'+
-              '<div class="row"><div class="col-xs-12 status-field">'+
+              '<div class="col-10"><div class="row"><div class="row-6 feed-header">'+
+              '<p>' + user.name + '<br/>' + value.created_time + '</p></div></div></div> <div class="col-1"></div></div>'+
+              '<div class="row"><div class="col-12 status-field">'+
                 '<p>' + message + '</p>'+
               '</div>'+
               '</div>'+'<span onclick="deletePost(\'' + value.id + '\')" data-id="'+value.id+'" class="glyphicon glyphicon-remove"></span>'+
@@ -100,33 +96,29 @@ const render = loginFlag => {
             //jika story memiliki gambar dan deskripsi
             if(value.description && value.picture){
             $('#feed-container').append(
-              '<div class="feed" style=" position: relative;" >' +
+              '<div class="feed" style=" position: relative;">' +
               '<div class="row">'+
-              '<div class="col-xs-1">'+
+              '<div class="col-1">'+
               '<img style="height:50px;width=50px;" class="picture" src="' + user.picture.data.url + '" alt="profpic" /></div>'+
-              '<div class="col-xs-10"><div class="row"><div class="row-xs-6 name">'+
-              '<p><a href="'+value.link+'" class="post-link" id="link-'+value.id+'">' + value.story +'</a></p></div>'+
-              '<div class="row-xs-6 date">'+
-              '<p>' + value.created_time + '</p></div></div></div> <div class="col-xs-1"></div></div>'+
-              '<div class="row"><div class="col-xs-12 status-field">'+
+              '<div class="col-10"><div class="row"><div class="row-6 feed-detail">'+
+              '<p><a href="'+value.link+'" class="post-link" id="link-'+value.id+'">' + value.story +
+              '</a><br/>'+ value.created_time + '</p></div></div></div> <div class="col-1"></div></div>'+
+              '<div class="row"><div class="col-xs-4 col-md-2 status-field"><img class="picture" src="' + value.picture + '" alt="pic" /></div>' +
+              '<div class="col-xs-7 col-md-9 status-field">'+
                 '<p>' + value.description + '</p>'+
-                  '<img style="margin: 0px auto;display:block;" class="picture" src="' + value.picture + '" alt="pic" />'+
-              '</div>'+
-              '</div>'+'<span onclick="deletePost(\'' + value.id + '\')" data-id="'+value.id+'" class="glyphicon glyphicon-remove"></span>'+
+                '</div></div>'+'<span onclick="deletePost(\'' + value.id + '\')" data-id="'+value.id+'" class="glyphicon glyphicon-remove"></span>'+
               '</div>'
             );
             //jika story hanya memiliki field gambar (biasanya saat update foto profil)
           }else if(value.picture){
             $('#feed-container').append(
-              '<div class="feed" style=" position: relative;" >' +
+              '<div class="feed" style=" position: relative;">' +
               '<div class="row">'+
-              '<div class="col-xs-1">'+
+              '<div class="col-1">'+
               '<img style="height:50px;width=50px;" class="picture" src="' + user.picture.data.url + '" alt="profpic" /></div>'+
-              '<div class="col-xs-10"><div class="row"><div class="row-xs-6 name">'+
-              '<p>' + value.story + '</p></div>'+
-              '<div class="row-xs-6 date">'+
-              '<p>' + value.created_time + '</p></div></div></div> <div class="col-xs-1"></div></div>'+
-              '<div class="row"><div class="col-xs-12 status-field">'+
+              '<div class="col-10"><div class="row"><div class="row-6 feed-header">'+ '<p>' + value.story + '<br/>'+
+              value.created_time + '</p></div></div></div> <div class="col-1"></div></div>'+
+              '<div class="row"><div class="col-12 status-field">'+
                 '<img style="margin: 0px auto;display:block;" class="picture" src="' + value.picture + '" alt="pic" />'+
               '</div>'+
               '</div>'+'<span onclick="deletePost(\'' + value.id + '\')" data-id="'+value.id+'" class="glyphicon glyphicon-remove"></span>'+
@@ -135,15 +127,14 @@ const render = loginFlag => {
             //jika story hanya memiliki field deskripsi (biasanya saat share suatu tautan/link)
           }else if(value.description){
             $('#feed-container').append(
-              '<div class="feed" style=" position: relative;" >' +
+              '<div class="feed" style=" position: relative;">' +
               '<div class="row">'+
-              '<div class="col-xs-1">'+
+              '<div class="col-1">'+
               '<img style="height:50px;width=50px;" class="picture" src="' + user.picture.data.url + '" alt="profpic" /></div>'+
-              '<div class="col-xs-10"><div class="row"><div class="row-xs-6 name">'+
-              '<p><a href="'+value.link+'" class="post-link" id="link-'+value.id+'">' + value.story + '</a></p></div>'+
-              '<div class="row-xs-6 date">'+
-              '<p>' + value.created_time + '</p></div></div></div> <div class="col-xs-1"></div></div>'+
-              '<div class="row"><div class="col-xs-12 status-field">'+
+              '<div class="col-10"><div class="row"><div class="row-6 feed-detail">'+
+              '<p><a href="'+value.link+'" class="post-link" id="link-'+value.id+'">' + value.story + '</a><br/>'+
+              value.created_time + '</p></div></div></div> <div class="col-1"></div></div>'+
+              '<div class="row"><div class="col-12 status-field">'+
                 '<p>' + value.description + '</p>'+
               '</div>'+
               '</div>'+'<span onclick="deletePost(\'' + value.id + '\')" data-id="'+value.id+'" class="glyphicon glyphicon-remove"></span>'+
@@ -152,15 +143,13 @@ const render = loginFlag => {
             //jika story tidak memiliki field gambar dan deskripsi (biasanya saat seseorang mengirimkan pesan pada dinding)
           }else{
             $('#feed-container').append(
-              '<div class="feed" style=" position: relative;" >' +
+              '<div class="feed" style=" position: relative;">' +
               '<div class="row">'+
-              '<div class="col-xs-1">'+
+              '<div class="col-1">'+
               '<img style="height:50px;width=50px;" class="picture" src="' + user.picture.data.url + '" alt="profpic" /></div>'+
-              '<div class="col-xs-10"><div class="row"><div class="row-xs-6 name">'+
-              '<p>' + value.story + '</p></div>'+
-              '<div class="row-xs-6 date">'+
-              '<p>' + value.created_time + '</p></div></div></div> <div class="col-xs-1"></div></div>'+
-              '<div class="row"><div class="col-xs-12 status-field">'+
+              '<div class="col-10"><div class="row"><div class="row-6 feed-detail">'+ value.story + '<br/>'+
+              value.created_time + '</p></div></div></div> <div class="col-1"></div></div>'+
+              '<div class="row"><div class="col-12 status-field">'+
               '</div>'+
               '</div>'+'<span onclick="deletePost(\'' + value.id + '\')" data-id="'+value.id+'" class="glyphicon glyphicon-remove"></span>'+
               '</div>'
@@ -169,7 +158,7 @@ const render = loginFlag => {
           }
         });
         // Logout Button
-        $('#lab8').append('<button style="margin: 0px auto;display:block;background-color: blue;color: white;"" class="logout" onclick="facebookLogout()">Logout</button>');
+        $('#lab8').append('<button id="fblogout" onclick="facebookLogout()">Logout</button>');
       });
     });
   } else {

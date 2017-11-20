@@ -6,11 +6,12 @@
 {% endblock %}
 {% block title %} Lab 7 {% endblock %}
 {% block stylescript %}
-    <!-- bootstrap css -->
     <link href="{% static 'css/bootstrap-3.3.7.min.css' %}" rel="stylesheet">
+{% endblock %}
+{% block stylescript_app %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/lab_7.css' %}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700">
 {% endblock %}
-{% block stylescript_app %}<link rel="stylesheet" type="text/css" href="{% static 'css/lab_7.css' %}" />{% endblock %}
 {% block header %}{% include "lab_7/partials/header.html" %}{% endblock %}
 {% block footer %}{% include "lab_7/partials/footer.html" %}{% endblock %}
 {% block scripts %}

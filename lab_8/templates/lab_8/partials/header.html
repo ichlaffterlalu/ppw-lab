@@ -1,4 +1,37 @@
-<nav class="navbar navbar-default navbar-expand-lg navbar-fixed-top navbar-dark bg-dark">
+<nav class="navbar navbar-default navbar-expand-lg fixed-top navbar-dark bg-dark" id="navbar">
+    <div class="container">
+    <a class="navbar-brand" href="/"><b>ppw-ichlasulaffan</b></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="{% url 'lab-8:index' %}#">Cover</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'lab-8:index' %}#post-field">New Post</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'lab-8:index' %}#timeline">Timeline</a></li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Other Apps <b class="caret"></b></a>
+                    <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a href="{% url 'lab-1:index' %}" class="nav-dd-item nav-item nav-link">Lab 1: Sandbox</a></li>
+                        <li><a href="{% url 'lab-2:index' %}" class="nav-dd-item nav-item nav-link">Lab 2: Landing Page</a></li>
+                        <li><a href="{% url 'lab-3:index' %}" class="nav-dd-item nav-item nav-link">Lab 3: Diary</a></li>
+                        <li><a href="{% url 'lab-4:index' %}" class="nav-dd-item nav-item nav-link">Lab 4: Messages</a></li>
+                        <li><a href="{% url 'lab-5:index' %}" class="nav-dd-item nav-item nav-link">Lab 5: TODOLIST</a></li>
+                        <li><a href="{% url 'lab-6:index' %}" class="nav-dd-item nav-item nav-link">Lab 6: Chat n Calc</a></li>
+                        <li><a href="{% url 'lab-7:index' %}" class="nav-dd-item nav-item nav-link">Lab 7: FasilkomFriends (UNUSABLE)</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a id="nav-log" class="nav-link" onclick="facebookLogin()">Login</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+<!-- <nav class="navbar navbar-default navbar-expand-lg navbar-fixed-top navbar-dark bg-dark">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -11,21 +44,22 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <!-- LINK MENUJU table, dan link menuju home#form -->
-        <li><a href="{% url 'lab-8:index' %}">Mini Facebook</a></li>
-		<li class="dropdown">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Apps <b class="caret"></b></a>
-			<ul class="dropdown-menu">
-			  <li><a href="{% url 'lab-1:index' %}">Lab 1: Sandbox</a></li>
-			  <li><a href="{% url 'lab-2:index' %}">Lab 2: Landing Page</a></li>
-			  <li><a href="{% url 'lab-3:index' %}">Lab 3: Diary</a></li>
-        <li><a href="{% url 'lab-4:index' %}">Lab 4: Messages</a></li>
-        <li><a href="{% url 'lab-5:index' %}">Lab 5: TODOLIST</a></li>
-        <li><a href="{% url 'lab-6:index' %}">Lab 6: Chat n Calc</a></li>
-        <li><a href="{% url 'lab-7:index' %}">Lab 7: FasilkomFriends (UNUSABLE)</a></li>
-			</ul>
-		</li>
+        <li><a href="{% url 'lab-8:index' %}">Cover</a></li>
+        <li><a href="{% url 'lab-8:index' %}">New Post</a></li>
+        <li><a href="{% url 'lab-8:index' %}">Timeline</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Apps <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="{% url 'lab-1:index' %}">Lab 1: Sandbox</a></li>
+            <li><a href="{% url 'lab-2:index' %}">Lab 2: Landing Page</a></li>
+            <li><a href="{% url 'lab-3:index' %}">Lab 3: Diary</a></li>
+            <li><a href="{% url 'lab-4:index' %}">Lab 4: Messages</a></li>
+            <li><a href="{% url 'lab-5:index' %}">Lab 5: TODOLIST</a></li>
+            <li><a href="{% url 'lab-6:index' %}">Lab 6: Chat n Calc</a></li>
+            <li><a href="{% url 'lab-7:index' %}">Lab 7: FasilkomFriends (UNUSABLE)</a></li>
+          </ul>
+        </li>
       </ul>
-    </div><!--/.nav-collapse -->
+    </div>
   </div>
-</nav>
+</nav> -->

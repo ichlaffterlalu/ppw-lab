@@ -17,7 +17,11 @@ body {
 }
 
 h1#idle_title {
-    margin-top:70px;
+    margin:70px 0 20px;
+}
+
+.glyphicon-remove {
+    background:url('/static/img/glyphicons/remove.png')
 }
 
 #profile-container {
@@ -57,6 +61,10 @@ footer p{
     transition: 1s ease all;
 }
 
+.status-field {
+    margin: 5px;
+}
+
 .postStatus {
     margin: 10px 0;
 }
@@ -77,6 +85,16 @@ textarea {
     resize: none;
 }
 
+#fblogout {
+    margin: 0px auto;
+    display:block;
+}
+
+#fblogin,#fblogout {
+    background-color: blue;
+    color: white;
+}
+
 .glyphicon-remove {
     color: red;
     float: right;
@@ -84,6 +102,9 @@ textarea {
     margin: 10px;
     top: 0;
     right: 0;
+}
+.glyphicon-remove:before {
+    content: "\e014"
 }
 
 p:not(#footer){

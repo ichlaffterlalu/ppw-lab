@@ -1,34 +1,13 @@
 {% extends "base.html" %}
 {% load staticfiles %}
-{% block meta %}
-    <meta name="description" content="LAB 5">
-    <meta name="author" content="{{author}}">
-{% endblock %}
-{% block title %} Lab 5 By {{author}} {% endblock %}
-{% block stylescript %}
-    <!-- bootstrap css -->
-	<link href="{% static 'css/bootstrap-3.3.7.min.css' %}" rel="stylesheet">
-{% endblock %}
+{% block meta %}<meta name="description" content="LAB 5"><meta name="author" content="{{author}}">{% endblock %}
+{% block title %}Lab 5 By {{author}}{% endblock %}
+{% block stylescript %}<link href="{% static 'css/bootstrap-3.3.7.min.css' %}" rel="stylesheet">{% endblock %}
 {% block stylescript_app %}<link rel="stylesheet" type="text/css" href="{% static 'css/lab_5.css' %}" />{% endblock %}
 {% block header %}{% include "lab_5/partials/header.html" %}{% endblock %}
 {% block footer %}{% include "lab_5/partials/footer.html" %}{% endblock %}
 {% block scripts %}
-    <script src="{% static 'js/jquery-3.2.1.slim.min.js' %}"></script>
-    <script type="application/javascript" src="{% static 'js/bootstrap-3.3.7.min.js' %}"></script>
-    <script type="application/javascript">
-      $(function() {
-          $('a[href*="#"]:not([href="#"])').click(function() {
-            if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-              var target = $(this.hash);
-              target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-              if (target.length) {
-                $('html, body').animate({
-                  scrollTop: target.offset().top - 55
-                }, 1000);
-                return false;
-              }
-            }
-          });
-        });
-	</script>
+<script src="{% static 'js/jquery-3.2.1.slim.min.js' %}"></script>
+<script type="application/javascript" src="{% static 'js/bootstrap-3.3.7.min.js' %}"></script>
+<script type="application/javascript">$(function(){$('a[href*="#"]:not([href="#"])').click(function(){if(location.pathname.replace(/^\//,"")==this.pathname.replace(/^\//,"")&&location.hostname==this.hostname){var a=$(this.hash);a=a.length?a:$("[name="+this.hash.slice(1)+"]");if(a.length){$("html, body").animate({scrollTop:a.offset().top-55},1000);return false}}})});</script>
 {% endblock %}

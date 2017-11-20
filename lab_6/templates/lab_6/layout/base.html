@@ -6,12 +6,12 @@
 {% endblock %}
 {% block title %} Lab 6 By {{author}} {% endblock %}
 {% block stylescript %}
-    <!-- bootstrap csss -->
     <link href="{% static 'css/bootstrap-3.3.7.min.css' %}" rel="stylesheet">
+{% endblock %}
+{% block stylescript_app %}
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700">
     <link href="{% static 'css/select2-4.0.6rc0.min.css' %}" rel="stylesheet" />
     <link href="{% static 'css/qunit-git.min.css' %}" rel="stylesheet" />
-
 {% endblock %}
 {% block stylescript_app %}<link rel="stylesheet" type="text/css" href="{% static 'css/lab_6.css' %}" />{% endblock %}
 {% block header %}{% include "lab_6/partials/header.html" %}{% endblock %}
