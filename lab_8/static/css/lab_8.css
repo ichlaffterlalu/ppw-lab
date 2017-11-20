@@ -1,0 +1,91 @@
+/* Custom navbar style */
+.navbar-default .navbar-nav>li>a {
+    cursor: pointer;
+}
+html {
+    min-height: 100%;
+    position: relative;
+}
+body {
+    height: 100%;
+    padding-bottom: 50px;
+    transition: 1s ease all;
+}
+.content-out {
+    margin-top: 0px;
+    transition: 1s ease all;
+}
+
+h1#idle_title {
+    margin-top:70px;
+}
+
+#profile-container {
+    margin-top:100px;
+}
+
+.profile-grad {
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.55) 75%,rgba(0,0,0,1) 100%);
+}
+
+.profile {
+    overflow: hidden;
+    height: 320px;
+    width: 100%;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: 100% !important;
+}
+
+footer p{
+    text-align: center;
+}
+.footer {
+    position: absolute;
+    width: 100%;
+    bottom: 0%;
+    text-align: center;
+}
+
+.feed{
+    background: linear-gradient(45deg, rgba(184,225,252,0.75) 0%,rgba(169,210,243,0.71) 10%,rgba(144,186,228,0.65) 25%,rgba(144,188,234,0.6) 37%,rgba(144,191,240,0.55) 50%,rgba(107,168,229,0.55) 51%,rgba(148,206,241,0.45) 75%,rgba(162,218,245,0.35) 83%,rgba(189,243,253,0.15) 100%);
+    color: white;
+    margin: 25px 2%;
+    padding: 20px 30px;
+    border-radius: 10px;
+    transition: 1s ease all;
+}
+
+.postStatus {
+    margin: 10px 0;
+}
+
+a.post-link,a.post-link:hover,a.post-link:active,a.post-link:visited{
+    color: white;
+    text-decoration: none;
+}
+a.post-link:hover {
+    font-weight: bold;
+}
+
+textarea {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    border-radius: 10px;
+    resize: none;
+}
+
+.glyphicon-remove {
+    color: red;
+    float: right;
+    position: absolute;
+    margin: 10px;
+    top: 0;
+    right: 0;
+}
+
+p:not(#footer){
+    font-size: 14px;
+}

@@ -17,11 +17,6 @@ class Lab7UnitTest(TestCase):
 		found = resolve('/lab-7/')
 		self.assertEqual(found.func, index)
 
-	def test_root_url_now_is_using_index_page_from_lab_7(self):
-		response = Client().get('/')
-		self.assertEqual(response.status_code, 301)
-		self.assertRedirects(response,'/lab-7/',301,200)
-
 	def test_csui_helper_has_auth_param_dict(self):
 		csui_helper = CSUIhelper(username=os.environ.get("SSO_USERNAME", "yourusername"),
                          password=os.environ.get("SSO_PASSWORD", "yourpassword"))
