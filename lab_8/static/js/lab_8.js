@@ -84,6 +84,9 @@ const renderFeed = feed => {
   $('#feed-container').html(""); // Empty #feed-container
   // For every feed item, render (append) to #feed-container
   feed.data.map(value => {
+    // Formatting the created_time
+    created_time = value.created_time.replace("T",", ").replace("+0000","");
+
     if (value.message && value.story) { // If feed item has message and story
       message = value.message.replace(/\n/g, "<br/>");
       $('#feed-container').append(
@@ -95,11 +98,11 @@ const renderFeed = feed => {
     } else if (value.message) { // If feed item has message only
       message = value.message.replace(/\n/g, "<br/>");
       $('#feed-container').append(
-        '<div class="feed" style=" position:relative;">'+
-        '<div class="row"><div class="col-1">'+
+        '<div class="feed" style="position:relative;">'+
+        '<div class="row"><div class="col-4 col-md-2 col-lg-1">'+
         '<img style="height:50px;width=50px;" class="picture" src="'+user.picture.data.url+'" alt="profpic" /></div>'+
-        '<div class="col-10"><div class="row"><div class="row-6 feed-header">'+
-        '<p>'+user.name+'<br/>'+value.created_time+'</p></div></div></div> <div class="col-1"></div></div>'+
+        '<div class="col-7 col-md-9 col-lg-10"><div class="row"><div class="row-6 feed-header">'+
+        '<p>'+user.name+'<br/>'+created_time+'</p></div></div></div> <div class="col-4 col-md-2 col-lg-1"></div></div>'+
         '<div class="row"><div class="col-12 status-field"><p>'+message+'</p></div></div>'+
         '<span onclick="deletePost(\''+value.id+'\')" data-id="'+value.id+'" class="glyphicon glyphicon-remove">'+
         '</span></div>'
@@ -107,24 +110,24 @@ const renderFeed = feed => {
     } else if (value.story) { // If feed item has story only
       if (value.description && value.picture) { // If feed item has description and picture
         $('#feed-container').append(
-          '<div class="feed" style=" position:relative;">'+
-          '<div class="row"><div class="col-1">'+
+          '<div class="feed" style="position:relative;">'+
+          '<div class="row"><div class="col-4 col-md-2 col-lg-1">'+
           '<img style="height:50px;width=50px;" class="picture" src="'+user.picture.data.url+'" alt="profpic" /></div>'+
-          '<div class="col-10"><div class="row"><div class="row-6 feed-detail">'+
+          '<div class="col-7 col-md-9 col-lg-10"><div class="row"><div class="row-6 feed-detail">'+
           '<p><a href="'+value.link+'" class="post-link" id="link-'+value.id+'">'+value.story+
-          '</a><br/>'+value.created_time+'</p></div></div></div> <div class="col-1"></div></div>'+'<div class="row">'+
-          '<div class="col-xs-4 col-md-2 status-field"><img class="picture" src="'+value.picture+'" alt="pic" />'+
-          '</div><div class="col-xs-7 col-md-9 status-field"><p>'+value.description+'</p></div></div>'+
+          '</a><br/>'+created_time+'</p></div></div></div> <div class="col-4 col-md-2 col-lg-1"></div></div>'+'<div class="row">'+
+          '<div class="col-5 col-xs-3 col-md-2 status-field"><img class="picture" src="'+value.picture+'" alt="pic" />'+
+          '</div><div class="col-6 col-xs-8 col-md-9 status-field"><p>'+value.description+'</p></div></div>'+
           '<span onclick="deletePost(\''+value.id+'\')" data-id="'+value.id+'" class="glyphicon glyphicon-remove"></span>'+
           '</div>'
         );
       } else if (value.picture) { // If feed item has picture only
         $('#feed-container').append(
-          '<div class="feed" style=" position:relative;">'+
-          '<div class="row"><div class="col-1">'+
+          '<div class="feed" style="position:relative;">'+
+          '<div class="row"><div class="col-4 col-md-2 col-lg-1">'+
           '<img style="height:50px;width=50px;" class="picture" src="'+user.picture.data.url+'" alt="profpic" /></div>'+
-          '<div class="col-10"><div class="row"><div class="row-6 feed-header">'+'<p>'+value.story+'<br/>'+
-          value.created_time+'</p></div></div></div> <div class="col-1"></div></div>'+
+          '<div class="col-7 col-md-9 col-lg-10"><div class="row"><div class="row-6 feed-header">'+'<p>'+value.story+'<br/>'+
+          created_time+'</p></div></div></div> <div class="col-4 col-md-2 col-lg-1"></div></div>'+
           '<div class="row"><div class="col-12 status-field">'+
           '<img style="margin:0px auto;display:block;" class="picture" src="'+value.picture+'" alt="pic" />'+
           '</div>'+
@@ -133,12 +136,12 @@ const renderFeed = feed => {
         );
       } else if (value.description) { // If feed item has description only
         $('#feed-container').append(
-          '<div class="feed" style=" position:relative;">'+
-          '<div class="row"><div class="col-1">'+
+          '<div class="feed" style="position:relative;">'+
+          '<div class="row"><div class="col-4 col-md-2 col-lg-1">'+
           '<img style="height:50px;width=50px;" class="picture" src="'+user.picture.data.url+'" alt="profpic" /></div>'+
-          '<div class="col-10"><div class="row"><div class="row-6 feed-detail">'+
+          '<div class="col-7 col-md-9 col-lg-10"><div class="row"><div class="row-6 feed-detail">'+
           '<p><a href="'+value.link+'" class="post-link" id="link-'+value.id+'">'+value.story+'</a><br/>'+
-          value.created_time+'</p></div></div></div> <div class="col-1"></div></div>'+
+          created_time+'</p></div></div></div> <div class="col-4 col-md-2 col-lg-1"></div></div>'+
           '<div class="row"><div class="col-12 status-field">'+
           '<p>'+value.description+'</p></div></div>'+
           '<span onclick="deletePost(\''+value.id+'\')" data-id="'+value.id+'" class="glyphicon glyphicon-remove"></span>'+
@@ -146,11 +149,11 @@ const renderFeed = feed => {
         );
       } else { // If feed item has no attributes (usually when somebody else sent a message)
         $('#feed-container').append(
-          '<div class="feed" style=" position:relative;">'+
-          '<div class="row"><div class="col-1">'+
+          '<div class="feed" style="position:relative;">'+
+          '<div class="row"><div class="col-4 col-md-2 col-lg-1">'+
           '<img style="height:50px;width=50px;" class="picture" src="'+user.picture.data.url+'" alt="profpic" /></div>'+
-          '<div class="col-10"><div class="row"><div class="row-6 feed-detail">'+value.story+'<br/>'+
-          value.created_time+'</p></div></div></div> <div class="col-1"></div></div>'+
+          '<div class="col-7 col-md-9 col-lg-10"><div class="row"><div class="row-6 feed-detail">'+value.story+'<br/>'+
+          created_time+'</p></div></div></div> <div class="col-4 col-md-2 col-lg-1"></div></div>'+
           '<div class="row"><div class="col-12 status-field"></div></div>'+
           '<span onclick="deletePost(\''+value.id+'\')" data-id="'+value.id+'" class="glyphicon glyphicon-remove"></span>'+
           '</div>'
