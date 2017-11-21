@@ -21,7 +21,7 @@ Setelah menyelesaikan tutorial ini, mahasiswa diharapkan untuk mengerti:
 _OAuth 2.0 is the industry-standard protocol for authorization_
 
 #### Apa itu Oauth2 ?
-Oauth2 merupakan protokol standard industri dalam melakukan authorisasi.  Oauth2 berupa sebuah authorization framework yang bertujuan agar suatu aplikasi mendapatkan akses tertentu dari user dalam suatu platform, dimana akses tersebut dapat digunakan dalam pemanggilan API yang disediakan oleh platform tersebut. Beberapa platform yang mengimplementasikan Ouath adalah Facebook, Twitter, Google dan lain lain.  
+Oauth2 merupakan protokol standard industri dalam melakukan authorisasi.  Oauth2 berupa sebuah authorization framework yang bertujuan agar suatu aplikasi mendapatkan akses tertentu dari user dalam suatu platform, dimana akses tersebut dapat digunakan dalam pemanggilan API yang disediakan oleh platform tersebut. Beberapa platform yang mengimplementasikan Ouath adalah Facebook, Twitter, Google dan lain lain.
 
 Secara umum, Ouath2 memiliki beberapa roles, yaitu :
 Resource Owner : Resource owner merupakan pengguna platform yang memberikan akses terhadap suatu aplikasi.
@@ -53,7 +53,7 @@ Untuk menggunakan API dari facebook, pertama-tama kita harus membuat dan mendaft
 2. Daftar Sebagai Pengembang Facebook
 3. Buat Aplikasi baru dengan mengklik tombol **Add a New App** dapat ditemukan di kanan atas
 4. Masuk ke halaman aplikasi yang sudah dibuat dan pilih **Add Product**, kemudian tambahkan **Facebook Login**
-5. Pada bagian setting silakan tambahkan platform dan pilih website, lalu sesuaikan isi dari site url. 
+5. Pada bagian setting silakan tambahkan platform dan pilih website, lalu sesuaikan isi dari site url.
    Cara lain: Anda mungkin juga mendapati halaman **Quickstart**, pilih **Web** sebagai platform.
 6. Applikasi telah berhasil didaftarkan.
 
@@ -307,8 +307,8 @@ Anda dapat menggunakan template lab8.js dibawah ini untuk memulai mengerjakan la
 
   // TODO: Lengkapi Method Ini
   // Method ini memodifikasi method getUserData di atas yang menerima fungsi callback bernama fun
-  // lalu merequest data user dari akun yang sedang login dengan semua fields yang dibutuhkan di 
-  // method render, dan memanggil fungsi callback tersebut setelah selesai melakukan request dan 
+  // lalu merequest data user dari akun yang sedang login dengan semua fields yang dibutuhkan di
+  // method render, dan memanggil fungsi callback tersebut setelah selesai melakukan request dan
   // meneruskan response yang didapat ke fungsi callback tersebut
   // Apakah yang dimaksud dengan fungsi callback?
   const getUserData = (fun) => {
@@ -390,23 +390,23 @@ Pastikan anda menggunakan browser Google Chrome / Mozilla Firefox versi terbaru 
 
 ### Mandatory
 1. Membuat halaman untuk Login menggunakan OAuth
-    1. [ ] Mendaftarkan aplikasi ke facebook developer page
-    2. [ ] Melakukan OAuth Login menggunakan Facebook
-    3. [ ] Menampilkan informasi dari user yang login menggunakan API Facebook.
-    4. [ ] Melakukan post status facebook
-    5. [ ] Menampilkan post status pada halaman lab_8.html
-    6. [ ] Melakukan Logout
-    7. [ ] Implementasi css yang indah dan responsive
-    
+    1. [x] Mendaftarkan aplikasi ke facebook developer page
+    2. [x] Melakukan OAuth Login menggunakan Facebook
+    3. [x] Menampilkan informasi dari user yang login menggunakan API Facebook.
+    4. [x] Melakukan post status facebook
+    5. [x] Menampilkan post status pada halaman lab_8.html
+    6. [x] Melakukan Logout
+    7. [x] Implementasi css yang indah dan responsive
+
 2. Jawablah pertanyaan yang ada di dokumen ini dengan menuliskannya pada buku catatan atau pada source code kalian yang dapat ditunjukkan saat demo
 
 3. Pastikan kalian memiliki _Code Coverage_ yang baik
-    1. [ ] Jika kalian belum melakukan konfigurasi untuk menampilkan _Code Coverage_ di Gitlab maka lihat langkah `Show Code Coverage in Gitlab` di [README.md](https://gitlab.com/PPW-2017/ppw-lab/blob/master/README.md)
-    2. [ ] Pastikan _Code Coverage_ kalian 100%
+    1. [x] Jika kalian belum melakukan konfigurasi untuk menampilkan _Code Coverage_ di Gitlab maka lihat langkah `Show Code Coverage in Gitlab` di [README.md](https://gitlab.com/PPW-2017/ppw-lab/blob/master/README.md)
+    2. [x] Pastikan _Code Coverage_ kalian 100%
 
 
 ### Additional
 
 1. Melakukan delete status pada halaman facebook
-    1. [ ] Implementasi tombol delete pada daftar post status
-    2. [ ] Melakukan delete post status dengan menggunakan API Facebook yang ada.
+    1. [x] Implementasi tombol delete pada daftar post status
+    2. [x] Melakukan delete post status dengan menggunakan API Facebook yang ada.
