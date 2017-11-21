@@ -6,12 +6,25 @@ window.fbAsyncInit = () => {
     xfbml      : true,
     version    : 'v2.11'
   });
+
+  // first time loginStatus save to local storage
+  var loginStatus = localStorage.getItem("loginStatus");
+  if (loginStatus === null) {
+    localStorage.setItem('loginStatus', JSON.stringify(false));
+  } else {
+    loginStatus = JSON.parse(localStorage.getItem("loginStatus"));
+    if (loginStatus) {
+      $("#nav-log").html("Logout");
+      $("#nav-log").attr("onclick","facebookLogout()");
+    }
+  }
+
+  render(loginStatus);
 };
 
 var previous = "";
 var next = "";
 var user = {};
-
 
 // Call init facebook. default dari facebook
 (function(d, s, id){
@@ -71,16 +84,16 @@ const renderFeed = feed => {
     if (value.message && value.story) {
       message = value.message.replace(/\n/g, "<br/>");
       $('#feed-container').append(
-        '<div class="feed" style="position: relative;">' +
+        '<div class="feed" style="position:relative;">' +
           '<p>' + message + '</p>' +
           '<p>' + value.story + '</p>' +'<span onclick="deletePost(\'' + value.id + '\')" data-id="'+value.id+'" class="glyphicon glyphicon-remove"></span>'+
         '</div>'
       );
-      //jika hanya ada field message pada feed
+    //jika hanya ada field message pada feed
     } else if (value.message) {
       message = value.message.replace(/\n/g, "<br/>");
       $('#feed-container').append(
-        '<div class="feed" style=" position: relative;">' +
+        '<div class="feed" style=" position:relative;">' +
         '<div class="row">'+
         '<div class="col-1">'+
         '<img style="height:50px;width=50px;" class="picture" src="' + user.picture.data.url + '" alt="profpic" /></div>'+
@@ -92,12 +105,12 @@ const renderFeed = feed => {
         '</div>'+'<span onclick="deletePost(\'' + value.id + '\')" data-id="'+value.id+'" class="glyphicon glyphicon-remove"></span>'+
         '</div>'
       );
-      //jika hanya ada story pada feed
+    //jika hanya ada story pada feed
     } else if (value.story) {
       //jika story memiliki gambar dan deskripsi
       if(value.description && value.picture){
       $('#feed-container').append(
-        '<div class="feed" style=" position: relative;">' +
+        '<div class="feed" style=" position:relative;">' +
         '<div class="row">'+
         '<div class="col-1">'+
         '<img style="height:50px;width=50px;" class="picture" src="' + user.picture.data.url + '" alt="profpic" /></div>'+
@@ -113,14 +126,14 @@ const renderFeed = feed => {
       //jika story hanya memiliki field gambar (biasanya saat update foto profil)
       }else if(value.picture){
         $('#feed-container').append(
-          '<div class="feed" style=" position: relative;">' +
+          '<div class="feed" style=" position:relative;">' +
           '<div class="row">'+
           '<div class="col-1">'+
           '<img style="height:50px;width=50px;" class="picture" src="' + user.picture.data.url + '" alt="profpic" /></div>'+
           '<div class="col-10"><div class="row"><div class="row-6 feed-header">'+ '<p>' + value.story + '<br/>'+
           value.created_time + '</p></div></div></div> <div class="col-1"></div></div>'+
           '<div class="row"><div class="col-12 status-field">'+
-            '<img style="margin: 0px auto;display:block;" class="picture" src="' + value.picture + '" alt="pic" />'+
+            '<img style="margin:0px auto;display:block;" class="picture" src="' + value.picture + '" alt="pic" />'+
           '</div>'+
           '</div>'+'<span onclick="deletePost(\'' + value.id + '\')" data-id="'+value.id+'" class="glyphicon glyphicon-remove"></span>'+
           '</div>'
@@ -128,7 +141,7 @@ const renderFeed = feed => {
         //jika story hanya memiliki field deskripsi (biasanya saat share suatu tautan/link)
         }else if(value.description){
           $('#feed-container').append(
-            '<div class="feed" style=" position: relative;">' +
+            '<div class="feed" style=" position:relative;">' +
             '<div class="row">'+
             '<div class="col-1">'+
             '<img style="height:50px;width=50px;" class="picture" src="' + user.picture.data.url + '" alt="profpic" /></div>'+
@@ -144,7 +157,7 @@ const renderFeed = feed => {
           //jika story tidak memiliki field gambar dan deskripsi (biasanya saat seseorang mengirimkan pesan pada dinding)
         }else{
           $('#feed-container').append(
-            '<div class="feed" style=" position: relative;">' +
+            '<div class="feed" style=" position:relative;">' +
             '<div class="row">'+
             '<div class="col-1">'+
             '<img style="height:50px;width=50px;" class="picture" src="' + user.picture.data.url + '" alt="profpic" /></div>'+
@@ -161,18 +174,33 @@ const renderFeed = feed => {
   )
 };
 
+const renderNotLoggedIn = () => {
+  user = {};
+  $('#lab8').html('<div class="container">' +
+                  '<h1 id="idle_title">Simple Facebook API Implementation</h1>' +
+                  '<button id="fblogin" class="login" onclick="facebookLogin()">Login with Facebook</button>' +
+                  ' Login here to use the feature.' +
+                  '</div>');
+};
+
 // Retrieves loginFlag to determine what should be rendered to web
 const render = loginFlag => {
   if (loginFlag) {
-    getUserData(renderData);
+    // Another check login to prevent failures when user intentionally change local storage
+    FB.getLoginStatus(function(response) {
+      if (response.status === 'connected') {
+        getUserData(renderData);
+        localStorage.setItem('loginStatus', JSON.stringify(true));
+        $("#nav-log").html("Logout");
+        $("#nav-log").attr("onclick","facebookLogout()");
+      }
+      else {
+        localStorage.setItem('loginStatus', JSON.stringify(false));
+        renderNotLoggedIn(); // Tampilan ketika belum login
+      }
+    });
   } else {
-    // Tampilan ketika belum login
-    user = {};
-    $('#lab8').html('<div class="container">' +
-                    '<h1 id="idle_title">Simple Facebook API Implementation</h1>' +
-                    '<button id="fblogin" class="login" onclick="facebookLogin()">Login with Facebook</button>' +
-                    ' Login here to use the feature.' +
-                    '</div>');
+    renderNotLoggedIn(); // Tampilan ketika belum login
   }
 };
 
@@ -180,6 +208,9 @@ const facebookLogin = () => {
   FB.login(function(response){
     console.log(response);
     render(response.status==='connected');
+    localStorage.setItem('loginStatus', JSON.stringify(response.status==='connected'));
+    $("#nav-log").html("Logout");
+    $("#nav-log").attr("onclick","facebookLogout()");
   }, {scope:'public_profile,user_posts,publish_actions,email,user_about_me,publish_pages,user_managed_groups'});
 };
 
@@ -188,6 +219,9 @@ const facebookLogout = () => {
     if (response.status === 'connected') {
       FB.logout();
       render(false);
+      localStorage.setItem('loginStatus', JSON.stringify(false));
+      $("#nav-log").html("Login");
+      $("#nav-log").attr("onclick","facebookLogin()");
     }
   });
 };
@@ -207,7 +241,7 @@ const getUserData = (func) => {
 const getUserFeed = (func) => {
   FB.getLoginStatus(function(response) {
     if (response.status === 'connected') {
-      FB.api('/me/feed?fields=story,message,full_picture,link,description,caption,name,picture,attachments,created_time', 'GET', function(response){
+      FB.api("/me/feed?fields=story,message,full_picture,link,description,caption,name,picture,attachments,created_time", 'GET', function(response){
         console.log(response);
         func(response);
       });
@@ -220,6 +254,7 @@ const renderPrevious = () => {
     if (response.status === 'connected') {
       console.log(response);
       FB.api(previous, 'GET', function(response){
+        current = previous;
         renderFeed(response);
       });
     }
@@ -231,6 +266,7 @@ const renderNext = () => {
     if (response.status === 'connected') {
       console.log(response);
       FB.api(next, 'GET', function(response){
+        current = next;
         renderFeed(response);
       });
     }
@@ -240,13 +276,13 @@ const renderNext = () => {
 const postFeed = () => {
   var message = $('#postInput').val();
   FB.api('/me/feed', 'POST', {message:message});
-  render(true);
+  getUserFeed(renderFeed);
 };
 
 const deletePost = (id) => {
   FB.api('/'+id, 'DELETE',function(response){
     if (response.success) {
-      render(true);
+      getUserFeed(renderFeed);
     } else {
       alert("Can't remove posts that doesn't exist or already removed.");
     }
