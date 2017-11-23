@@ -1,0 +1,17 @@
+{% extends "lab_9/layout/base.html" %}
+{% load staticfiles %}
+{% block content %}
+<br>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2> [Cookie] Profile </h2>
+    </div>
+    <div class="panel-body">
+        <p> Username : {{ request.COOKIES.user_login }} </p>
+    </div>
+    <div class="panel-footer">
+        <a href="{% url 'lab-9:cookie_clear' %}" class="btn btn-danger"> Reset Cookies (Logout) </a>
+    </div>
+</div>
+{% endblock %}
+{% block scripts_page %}{% endblock %}

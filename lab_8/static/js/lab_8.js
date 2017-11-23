@@ -200,7 +200,7 @@ const facebookLogin = () => {
     localStorage.setItem('loginStatus', JSON.stringify(response.status === 'connected')); // Save loginStatus to local storage
 
     // Change log button in navbar to "Logout"
-    $("#nav-log").html("Logout");
+    $("#nav-log").html('<img src="/static/img/glyphicons/facebook.png"> Logout');
     $("#nav-log").attr("onclick", "facebookLogout()");
   }, {
     scope: 'public_profile,user_posts,publish_actions,email,user_about_me,publish_pages,user_managed_groups'

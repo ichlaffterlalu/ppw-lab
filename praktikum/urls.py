@@ -29,6 +29,7 @@ import lab_5.urls as lab_5
 import lab_6.urls as lab_6
 import lab_7.urls as lab_7
 import lab_8.urls as lab_8
+import lab_9.urls as lab_9
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -41,6 +42,7 @@ urlpatterns = [
     url(r'^lab-6/', include(lab_6, namespace='lab-6')),
     url(r'^lab-7/', include(lab_7, namespace='lab-7')),
     url(r'^lab-8/', include(lab_8, namespace='lab-8')),
+    url(r'^lab-9/', include(lab_9, namespace='lab-9')),
     url(r'^favicon.ico', RedirectView.as_view(url="/static/favicon.ico", permanent="True"), name='index'),
-	url(r'^$', RedirectView.as_view(url="/lab-8/", permanent="True"), name='index')
+	url(r'^$', RedirectView.as_view(url="/lab-9/", permanent="True"), name='index')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

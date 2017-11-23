@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block meta %}
+    <meta name="description" content="LAB 9">
+    <meta name="author" content="{{author}}">
+{% endblock %}
+{% block title %} Lab 9 {% endblock %}
+{% block stylescript %}<link href="{% static 'css/bootstrap-3.3.7.min.css' %}" rel="stylesheet">{% endblock %}
+{% block stylescript_app %}
+<style>
+    .rata-tengah {
+        text-align: center;
+        margin : 20px;
+    }
+    .judul {
+        text-transform:uppercase;
+        margin-bottom: 50px;
+        margin-top: 50px;
+    }
+</style>
+{% endblock %}
+{% block header %}{% include "lab_9/partials/header.html" %}{% endblock %}
+{% block content %}
+        <div class="container">
+            {% for message in messages %}
+            <div class="alert {{ message.tags }} alert-dismissible" role="alert" id="django-messages">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="margin-right: 15px;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message }}
+            </div>
+            {% endfor %}
+
+            {% block content_page %}{% endblock %}
+        </div>
+{% endblock %}
+{% block footer %}{% include "lab_9/partials/footer.html" %}{% endblock %}
