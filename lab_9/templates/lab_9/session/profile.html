@@ -1,11 +1,9 @@
 {% extends "lab_9/layout/base.html" %}
 {% load staticfiles %}
 {% block content %}
-<div class="pojok-kanan">
-</div>
-<br>
-<div class="panel panel-default">
-    <div class="panel-heading">
+<div class="pojok-kanan"></div>
+<div class="panel panel-default container">
+    <div class="panel-heading" id="main-panel-heading">
         <h2> [Session] Profile </h2>
     </div>
     <div class="panel-body">
@@ -15,23 +13,22 @@
     </div>
     <div class="panel-footer">
         <a href="{% url 'lab-9:auth_logout' %}" class="btn btn-danger pull-right" onclick="return confirm('Keluar?')">
-            Logout </a>
-        <a href="{% url 'lab-9:cookie_login' %}" class="btn btn-info"> Masuk Halaman Cookies </a>
+            Logout</a>
+        <a href="{% url 'lab-9:cookie_login' %}" class="btn btn-info"> Cookies Login</a>
     </div>
 </div>
 
-<div>
-
+<div class="container">
     <!-- Nav tabs -->
-    <ul class="nav nav-tabs nav-justified" role="tablist">
-        <li role="presentation">
-            <a href="#drone" aria-controls="home" role="tab" data-toggle="tab">Drones</a>
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" aria-controls="home">
+            <a href="#drone" role="tab" data-toggle="tab">Drones</a>
         </li>
-        <li role="presentation">
-            <a href="#soundcard" aria-controls="settings" role="tab" data-toggle="tab">Soundcard</a>
+        <li role="presentation" aria-controls="home">
+            <a href="#soundcard" role="tab" data-toggle="tab">Soundcard</a>
         </li>
-        <li role="presentation">
-            <a href="#optical" aria-controls="settings" role="tab" data-toggle="tab"> Optical </a>
+        <li role="presentation" aria-controls="home">
+            <a  href="#optical" role="tab" data-toggle="tab"> Optical </a>
         </li>
     </ul>
 
@@ -51,4 +48,11 @@
     </div>
 </div>
 {% endblock %}
-{% block scripts_page %}{% endblock %}
+{% block scripts_page %}
+    <script>
+        $(document).ready(function() {
+            $('#logout').attr('href','{% url "lab-9:auth_logout" %}');
+            $('#logout').attr('onclick', "return confirm('Keluar?')");
+        });
+    </script>
+{% endblock %}

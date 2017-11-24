@@ -1,21 +1,24 @@
 {% extends "lab_9/layout/base.html" %}
 {% load staticfiles %}
+{% block stylescript %}{% endblock %}
+{% block stylescript_app %}{% endblock %}
+{% block header %}{% endblock %}
 {% block content %}
 <div class="panel panel-info">
     <div class="panel-heading">
-        <h2> Daftar Optical : {{opticals | length}} </h2>
-        <a href="{% url 'lab-9:clear_session_item' 'opticals' %}" class="btn btn-danger" onclick="return confirm('Reset data?')">
-            Reset Favorite Optical
+        <a href="{% url 'lab-9:clear_session_item' 'opticals' %}" class="btn btn-danger pull-right" onclick="return confirm('Reset data?')">
+            Reset Favorites
         </a>
+        <h2>Optical List: {{opticals | length}}</h2>
     </div>
     <div class="panel-body">
         <table class="table">
             <thead>
             <th>No</th>
-            <th>Nama</th>
-            <th>Harga</th>
-            <th>Jumlah</th>
-            <th>Aksi</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Qty</th>
+            <th>Fav</th>
             </thead>
 
             <tbody>
@@ -27,9 +30,9 @@
                 <td>{{optical.quantity}}</td>
                 <td>
                     {% if not optical.id in fav_opticals %}
-                    <a href="{% url 'lab-9:add_session_item' 'opticals' optical.id %}" class="btn btn-primary"> Favoritkan </a>
+                    <a href="{% url 'lab-9:add_session_item' 'opticals' optical.id %}" class="btn fav btn-primary">Add</a>
                     {% else %}
-                    <a href="{%url 'lab-9:del_session_item' 'opticals' optical.id %}" class="btn btn-primary"> Hapus dari favorit </a>
+                    <a href="{%url 'lab-9:del_session_item' 'opticals' optical.id %}" class="btn fav btn-primary">Remove</a>
                     {% endif %}
                 </td>
             </tr>
@@ -39,4 +42,6 @@
     </div>
 </div>
 {% endblock %}
+{% block footer %}{% endblock %}
+{% block scripts %}{% endblock %}
 {% block scripts_page %}{% endblock %}

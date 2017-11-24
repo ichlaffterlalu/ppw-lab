@@ -25,4 +25,6 @@
     </div>
 </div>
 {% endblock %}
-{% block scripts_page %}{% endblock %}
+{% block scripts_page %}
+    <script>$(document).ready($('#nav-log').remove());</script>
+{% endblock %}

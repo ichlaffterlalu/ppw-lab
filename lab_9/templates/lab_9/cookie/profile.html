@@ -1,17 +1,23 @@
 {% extends "lab_9/layout/base.html" %}
 {% load staticfiles %}
 {% block content %}
-<br>
-<div class="panel panel-default">
-    <div class="panel-heading">
+<div class="panel panel-default container">
+    <div class="panel-heading" id="main-panel-heading">
         <h2> [Cookie] Profile </h2>
     </div>
     <div class="panel-body">
         <p> Username : {{request.COOKIES.user_login}} </p>
     </div>
     <div class="panel-footer">
-        <a href="{% url 'lab-9:cookie_clear' %}" class="btn btn-danger"> Reset Cookies (Logout) </a>
+        <a href="{% url 'lab-9:cookie_clear' %}" class="btn btn-danger" onclick="return confirm('Keluar?')"> Reset Cookies (Logout) </a>
     </div>
 </div>
 {% endblock %}
-{% block scripts_page %}{% endblock %}
+{% block scripts_page %}
+    <script>
+        $(document).ready(function() {
+            $('#logout').attr('href','{% url "lab-9:cookie_clear" %}');
+            $('#logout').attr('onclick', "return confirm('Keluar?')");
+        });
+    </script>
+{% endblock %}
