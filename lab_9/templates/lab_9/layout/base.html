@@ -23,11 +23,11 @@
 {% block content %}
         <div class="container">
             {% for message in messages %}
-            <div class="alert {{ message.tags }} alert-dismissible" role="alert" id="django-messages">
+            <div class="alert {Pmessage.tags}} alert-dismissible" role="alert" id="django-messages">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="margin-right: 15px;">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                {{ message }}
+                {{message}}
             </div>
             {% endfor %}
 

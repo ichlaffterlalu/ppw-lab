@@ -3,9 +3,9 @@
 {% block content %}
 <div class="panel panel-info">
     <div class="panel-heading">
-        <h2> Daftar Drones : {{drones | length}} </h2>
-        <a href="{% url 'lab-9:clear_session_item' 'drones' %}" class="btn btn-danger" onclick="return confirm('Reset data?')">
-            Reset Favorite Drones
+        <h2> Daftar Optical : {{opticals | length}} </h2>
+        <a href="{% url 'lab-9:clear_session_item' 'opticals' %}" class="btn btn-danger" onclick="return confirm('Reset data?')">
+            Reset Favorite Optical
         </a>
     </div>
     <div class="panel-body">
@@ -19,17 +19,17 @@
             </thead>
 
             <tbody>
-            {% for drone in drones %}
+            {% for optical in opticals %}
             <tr>
                 <td>{{forloop.counter}}</td>
-                <td>{{drone.name}}</td>
-                <td>{{drone.price}}</td>
-                <td>{{drone.quantity}}</td>
+                <td>{{optical.name}}</td>
+                <td>{{optical.price}}</td>
+                <td>{{optical.quantity}}</td>
                 <td>
-                    {% if not drone.id in fav_drones %}
-                    <a href="{% url 'lab-9:add_session_item' 'drones' drone.id %}" class="btn btn-primary"> Favoritkan </a>
+                    {% if not optical.id in fav_opticals %}
+                    <a href="{% url 'lab-9:add_session_item' 'opticals' optical.id %}" class="btn btn-primary"> Favoritkan </a>
                     {% else %}
-                    <a href="{%url 'lab-9:del_session_item' 'drones' drone.id %}" class="btn btn-primary"> Hapus dari favorit </a>
+                    <a href="{%url 'lab-9:del_session_item' 'opticals' optical.id %}" class="btn btn-primary"> Hapus dari favorit </a>
                     {% endif %}
                 </td>
             </tr>

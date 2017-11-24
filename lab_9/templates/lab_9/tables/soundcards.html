@@ -1,0 +1,42 @@
+{% extends "lab_9/layout/base.html" %}
+{% load staticfiles %}
+{% block content %}
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h2> Daftar Soundcard : {{soundcards | length}} </h2>
+        <a href="{% url 'lab-9:clear_session_item' 'soundcards' %}" class="btn btn-danger" onclick="return confirm('Reset data?')">
+            Reset Favorite Soundcard
+        </a>
+    </div>
+    <div class="panel-body">
+        <table class="table">
+            <thead>
+            <th>No</th>
+            <th>Nama</th>
+            <th>Harga</th>
+            <th>Jumlah</th>
+            <th>Aksi</th>
+            </thead>
+
+            <tbody>
+            {% for soundcard in soundcards %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{soundcard.name}}</td>
+                <td>{{soundcard.price}}</td>
+                <td>{{soundcard.quantity}}</td>
+                <td>
+                    {% if not soundcard.id in fav_soundcards %}
+                    <a href="{% url 'lab-9:add_session_item' 'soundcards' soundcard.id %}" class="btn btn-primary"> Favoritkan </a>
+                    {% else %}
+                    <a href="{%url 'lab-9:del_session_item' 'soundcards' soundcard.id %}" class="btn btn-primary"> Hapus dari favorit </a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+{% block scripts_page %}{% endblock %}

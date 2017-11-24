@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib import messages
 #catatan: tidak bisa menampilkan messages jika bukan menggunakan method 'render'
-from .api_enterkomputer import get_drones
+from .api_enterkomputer import get_drones, get_soundcards, get_opticals
 
 response = {}
 
@@ -31,15 +31,27 @@ def set_data_for_session(res, request):
     response['kode_identitas'] = request.session['kode_identitas']
     response['role'] = request.session['role']
     response['drones'] = get_drones().json()
+    response['soundcards'] = get_soundcards().json()
+    response['opticals'] = get_opticals().json()
 
     # print ("#drones = ", get_drones().json(), " - response = ", response['drones'])
     ## handling agar tidak error saat pertama kali login (session kosong)
-    if 'drones' in request.session.keys():
-        response['fav_drones'] = request.session['drones']
     # jika tidak ditambahkan else, cache akan tetap menyimpan data
     # sebelumnya yang ada pada response, sehingga data tidak up-to-date
+    if 'drones' in request.session.keys():
+        response['fav_drones'] = request.session['drones']
     else:
         response['fav_drones'] = []
+
+    if 'soundcards' in request.session.keys():
+        response['fav_soundcards'] = request.session['soundcards']
+    else:
+        response['fav_soundcards'] = []
+
+    if 'opticals' in request.session.keys():
+        response['fav_opticals'] = request.session['opticals']
+    else:
+        response['fav_opticals'] = []
 
 def profile(request):
     print ("#==> profile")
@@ -55,41 +67,8 @@ def profile(request):
 
 # ======================================================================== #
 
-### Drones
-def add_session_drones(request, id):
-    ssn_key = request.session.keys()
-    if not 'drones' in ssn_key:
-        print ("# init drones ")
-        request.session['drones'] = [id]
-    else:
-        drones = request.session['drones']
-        print ("# existing drones => ", drones)
-        if id not in drones:
-            print ('# add new item, then save to session')
-            drones.append(id)
-            request.session['drones'] = drones
+### General Session Items
 
-    messages.success(request, "Berhasil tambah drone favorite")
-    return HttpResponseRedirect(reverse('lab-9:profile'))
-
-def del_session_drones(request, id):
-    print ("# DEL drones")
-    drones = request.session['drones']
-    print ("before = ", drones)
-    drones.remove(id) #untuk remove id tertentu dari list
-    request.session['drones'] = drones
-    print ("after = ", drones)
-
-    messages.error(request, "Berhasil hapus dari favorite")
-    return HttpResponseRedirect(reverse('lab-9:profile'))
-
-def clear_session_drones(request):
-    print ("# CLEAR session drones")
-    print ("before 1 = ", request.session['drones'])
-    del request.session['drones']
-
-    messages.error(request, "Berhasil reset favorite drones")
-    return HttpResponseRedirect(reverse('lab-9:profile'))
 
 # ======================================================================== #
 # COOKIES
@@ -167,39 +146,42 @@ def my_cookie_auth(in_uname, in_pwd):
 def is_login(request):
     return 'user_login' in request.COOKIES and 'user_password' in request.COOKIES
 
+# ======================================================================== #
+# SESSION ITEM FUNCTIONS (GENERAL)
 
-### General Function
 def add_session_item(request, key, id):
-    print ("#ADD session item")
     ssn_key = request.session.keys()
     if not key in ssn_key:
+        print ("# init " + key)
         request.session[key] = [id]
     else:
         items = request.session[key]
+        print ("# existing " + key + " => ", items)
         if id not in items:
+            print ('# add new item, then save to session')
             items.append(id)
             request.session[key] = items
 
-    msg = "Berhasil tambah " + key +" favorite"
-    messages.success(request, msg)
+    messages.success(request, "Berhasil tambah " + key + "favorite")
     return HttpResponseRedirect(reverse('lab-9:profile'))
 
 def del_session_item(request, key, id):
-    print ("# DEL session item")
+    print ("# DEL " + key)
     items = request.session[key]
     print ("before = ", items)
-    items.remove(id)
+    items.remove(id) #untuk remove id tertentu dari list
     request.session[key] = items
     print ("after = ", items)
 
-    msg = "Berhasil hapus item " + key + " dari favorite"
-    messages.error(request, msg)
+    messages.error(request, "Berhasil hapus dari favorite")
     return HttpResponseRedirect(reverse('lab-9:profile'))
 
 def clear_session_item(request, key):
+    print ("# CLEAR session " + key + "s")
+    print ("before 1 = ", request.session[key])
     del request.session[key]
-    msg = "Berhasil hapus session : favorite " + key
-    messages.error(request, msg)
-    return HttpResponseRedirect(reverse('lab-9:index'))
+
+    messages.error(request, "Berhasil reset favorite " + key + "s")
+    return HttpResponseRedirect(reverse('lab-9:profile'))
 
 # ======================================================================== #

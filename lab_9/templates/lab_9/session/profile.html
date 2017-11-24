@@ -9,9 +9,9 @@
         <h2> [Session] Profile </h2>
     </div>
     <div class="panel-body">
-        <p> Username : {{ author }} </p>
+        <p> Username : {{author}} </p>
         <p> NPM : {{kode_identitas}} </p>
-        <p> Role : {{ role }} </p>
+        <p> Role : {{role}} </p>
     </div>
     <div class="panel-footer">
         <a href="{% url 'lab-9:auth_logout' %}" class="btn btn-danger pull-right" onclick="return confirm('Keluar?')">
@@ -24,27 +24,29 @@
 
     <!-- Nav tabs -->
     <ul class="nav nav-tabs nav-justified" role="tablist">
-        <li role="presentation" class="active">
-            <a href="#drones" aria-controls="home" role="tab" data-toggle="tab"> Drones </a>
+        <li role="presentation">
+            <a href="#drone" aria-controls="home" role="tab" data-toggle="tab">Drones</a>
         </li>
         <li role="presentation">
-            <a href="#soundcard" aria-controls="settings" role="tab" data-toggle="tab"> Soundcard </a>
+            <a href="#soundcard" aria-controls="settings" role="tab" data-toggle="tab">Soundcard</a>
         </li>
         <li role="presentation">
-            <a href="#" aria-controls="settings" role="tab" data-toggle="tab"> Optical </a>
+            <a href="#optical" aria-controls="settings" role="tab" data-toggle="tab"> Optical </a>
         </li>
     </ul>
 
     <!-- Tab panes -->
     <div class="tab-content">
-        <div role="tabpanel" class="tab-pane fade in active" id="drones">
+        <div role="tabpanel" class="tab-pane fade in out active" id="drone">
             {% include 'lab_9/tables/drones.html' %}
         </div>
-        <div role="tabpanel" class="tab-pane fade" id="soundcard">
+        <div role="tabpanel" class="tab-pane fade in out" id="soundcard">
             <!-- Apply the same here -->
+            {% include 'lab_9/tables/soundcards.html' %}
         </div>
-        <div role="tabpanel" class="tab-pane fade" id="optical">
+        <div role="tabpanel" class="tab-pane fade in out" id="optical">
             <!-- Apply the same here -->
+            {% include 'lab_9/tables/opticals.html' %}
         </div>
     </div>
 </div>
