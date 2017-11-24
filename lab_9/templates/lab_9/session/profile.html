@@ -2,17 +2,17 @@
 {% load staticfiles %}
 {% block content %}
 <div class="pojok-kanan"></div>
-<div class="panel panel-default container">
+<div class="panel panel-default container" id="profile-panel">
     <div class="panel-heading" id="main-panel-heading">
         <h2> [Session] Profile </h2>
     </div>
     <div class="panel-body">
-        <p> Username : {{author}} </p>
+        <p> Username : {{user_login}} </p>
         <p> NPM : {{kode_identitas}} </p>
         <p> Role : {{role}} </p>
     </div>
     <div class="panel-footer">
-        <a href="{% url 'lab-9:auth_logout' %}" class="btn btn-danger pull-right" onclick="return confirm('Keluar?')">
+        <a href="{% url 'auth_logout' %}" class="btn btn-danger pull-right" onclick="return confirm('Keluar?')">
             Logout</a>
         <a href="{% url 'lab-9:cookie_login' %}" class="btn btn-info"> Cookies Login</a>
     </div>
@@ -51,7 +51,7 @@
 {% block scripts_page %}
     <script>
         $(document).ready(function() {
-            $('#logout').attr('href','{% url "lab-9:auth_logout" %}');
+            $('#logout').attr('href','{% url "auth_logout" %}');
             $('#logout').attr('onclick', "return confirm('Keluar?')");
         });
     </script>

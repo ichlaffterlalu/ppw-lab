@@ -1,0 +1,38 @@
+.rata-tengah {
+    text-align: center;
+    margin : 20px;
+}
+.judul {
+    text-transform:uppercase;
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+#main-panel-heading {
+    padding-top: 50px;
+}
+.panel-body {
+    color:#000;
+}
+.nav-tabs li {
+    background: #444;
+    border-radius: 4px 4px 0 0;
+    margin: 0 1px;
+}
+.fav {
+    padding: 5px;
+    font-size: 11px !important;
+}
+.table {
+    margin: 0;
+}
+#profile-panel {
+    padding: 0;
+}
+@media only screen and (max-width:500px){
+    p,table {font-size:12px !important}
+    .panel-body {padding:5px}
+}
+@media only screen and (max-width:360px){
+    .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {padding: 5px!important}
+    p,table {font-size:11px !important}
+}

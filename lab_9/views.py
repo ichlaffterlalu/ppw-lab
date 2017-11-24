@@ -7,6 +7,7 @@ from django.urls import reverse
 from django.contrib import messages
 #catatan: tidak bisa menampilkan messages jika bukan menggunakan method 'render'
 from .api_enterkomputer import get_drones, get_soundcards, get_opticals
+from praktikum.custom_auth import check_login
 
 response = {}
 
@@ -18,15 +19,15 @@ response = {}
 # User Func
 # Apa yang dilakukan fungsi INI? #silahkan ganti ini dengan penjelasan kalian
 def index(request):
-    print ("#==> masuk index")
-    if 'user_login' in request.session:
-        return HttpResponseRedirect(reverse('lab-9:profile'))
-    else:
-        html = 'lab_9/session/login.html'
-        return render(request, html, response)
+    print("#==> masuk index")
+    html = HttpResponseRedirect(reverse('lab-9:profile'))
+    html = check_login(request, html, response)
 
-def set_data_for_session(res, request):
-    response['author'] = request.session['user_login']
+    if type(html) == HttpResponseRedirect: return html
+    else: return render(request, html, response)
+
+def set_data_for_session(response, request):
+    response['user_login'] = request.session['user_login']
     response['access_token'] = request.session['access_token']
     response['kode_identitas'] = request.session['kode_identitas']
     response['role'] = request.session['role']

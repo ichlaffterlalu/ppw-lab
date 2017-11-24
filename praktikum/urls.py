@@ -31,8 +31,18 @@ import lab_7.urls as lab_7
 import lab_8.urls as lab_8
 import lab_9.urls as lab_9
 
+# /sol
+from .custom_auth import auth_login, auth_logout
+
 urlpatterns = [
+    # authentication using CSUI account
+    url(r'^custom_auth/login/$', auth_login, name='auth_login'),
+    url(r'^custom_auth/logout/$', auth_logout, name='auth_logout'),
+
+    # admin page
     url(r'^admin/', admin.site.urls),
+
+    # lab pages
     url(r'^lab-1/', include(lab_1,namespace='lab-1')),
     url(r'^lab-2/', include(lab_2,namespace='lab-2')),
     url(r'^lab-2-addon/', include(lab_2_addon,namespace='lab-2-addon')),

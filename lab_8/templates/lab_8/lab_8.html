@@ -2,7 +2,12 @@
 {% load staticfiles %}
 {% block content %}
 <section name="facebook">
-    <div id="lab8"></div>
+    <div id="lab8">
+        <div class="container">
+            <h1 id="idle_title">Simple Facebook API Implementation</h1>
+            <button id="fblogin" class="login" onclick="facebookLogin()"><img src="/static/img/glyphicons/facebook.png" style="margin:5px"> Login with Facebook</button> Login here to use the feature.
+        </div>
+    </div>
 </section>
 {% endblock %}
 {% block scripts_page %}{% endblock %}

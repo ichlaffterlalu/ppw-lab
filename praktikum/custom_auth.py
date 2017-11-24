@@ -2,9 +2,16 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
-from .csui_helper import get_access_token, verify_user
+from .csui_login_helper import get_access_token, verify_user
 
 #authentication
+def check_login(request, html, response):
+    if 'user_login' in request.session:
+        return html
+    else:
+        response['user_login'] = ""
+        return 'login.html'
+
 def auth_login(request):
     print ("#==> auth_login ")
 
@@ -27,11 +34,11 @@ def auth_login(request):
             messages.success(request, "Anda berhasil login")
         else:
             messages.error(request, "Username atau password salah")
-    return HttpResponseRedirect(reverse('lab-9:index'))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
 
 def auth_logout(request):
     print ("#==> auth logout")
     request.session.flush() # menghapus semua session
 
     messages.info(request, "Anda berhasil logout. Semua session Anda sudah dihapus")
-    return HttpResponseRedirect(reverse('lab-9:index'))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))

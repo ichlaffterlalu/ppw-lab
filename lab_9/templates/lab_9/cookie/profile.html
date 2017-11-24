@@ -1,7 +1,7 @@
 {% extends "lab_9/layout/base.html" %}
 {% load staticfiles %}
 {% block content %}
-<div class="panel panel-default container">
+<div class="panel panel-default container" id="profile-panel">
     <div class="panel-heading" id="main-panel-heading">
         <h2> [Cookie] Profile </h2>
     </div>
@@ -16,6 +16,7 @@
 {% block scripts_page %}
     <script>
         $(document).ready(function() {
+            $('#nav-user').html('[COOKIE LOGIN] {{request.COOKIES.user_login}}');
             $('#logout').attr('href','{% url "lab-9:cookie_clear" %}');
             $('#logout').attr('onclick', "return confirm('Keluar?')");
         });

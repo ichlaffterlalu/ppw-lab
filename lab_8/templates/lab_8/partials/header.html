@@ -23,10 +23,12 @@
           </ul>
         </li>
       </ul>
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item"><a id="nav-log" class="nav-link" onclick="facebookLogin()">
-          <img src="/static/img/glyphicons/facebook.png"> Login
+      <ul class="navbar-nav ml-auto" id="nav-log">
+          <li class="nav-item"><a id="nav-user" class="nav-link">[CSUI] {{user_login}}</a></li>
+        <li class="nav-item"><a id="nav-log-fb" class="nav-link" onclick="facebookLogin()">
+          <img src="/static/img/glyphicons/facebook.png"> Login FB
         </a></li>
+        <li class="nav-item"><a id="logout" class="nav-link" style='background:#800'>Logout CSUI</a></li>
       </ul>
     </div>
   </div>

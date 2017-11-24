@@ -3,16 +3,11 @@ from .views import index, profile, \
     add_session_item, del_session_item, clear_session_item, \
     cookie_login, cookie_auth_login, cookie_profile, cookie_clear
 
-# /sol
-from .custom_auth import auth_login, auth_logout
-
 urlpatterns = [
     url(r'^$', index, name='index'),
     url(r'^profile/$', profile, name='profile'),
 
-    # custom auth
-    url(r'^custom_auth/login/$', auth_login, name='auth_login'),
-    url(r'^custom_auth/logout/$', auth_logout, name='auth_logout'),
+    # custom auth moved to praktikum/urls.py for challenge
 
     #general function : solution to challenge
     url(r'^add_session_item/(?P<key>\w+)/(?P<id>\d+)/$', add_session_item, name='add_session_item'),

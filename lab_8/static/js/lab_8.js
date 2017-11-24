@@ -7,19 +7,9 @@ window.fbAsyncInit = () => {
     version: 'v2.11'
   });
 
-  // First time loginStatus save to local storage
-  var loginStatus = localStorage.getItem("loginStatus");
-  if (loginStatus === null) {
-    localStorage.setItem('loginStatus', JSON.stringify(false));
-  } else {
-    loginStatus = JSON.parse(localStorage.getItem("loginStatus"));
-    if (loginStatus) {
-      $("#nav-log").html("Logout");
-      $("#nav-log").attr("onclick", "facebookLogout()");
-    }
-  }
-
-  render(loginStatus);
+  FB.getLoginStatus(function (response) {
+    render(response.status === 'connected');
+  });
 };
 
 var previous = "";
@@ -72,7 +62,7 @@ const renderData = user => {
   getUserFeed(renderFeed);
 
   // Logout button
-  $('#lab8').append('<button id="fblogout" onclick="facebookLogout()">Logout</button>');
+  $('#lab8').append('<button id="fblogout" onclick="facebookLogout()">Logout FB</button>');
 };
 
 // Function to print feed to the webpage
@@ -170,25 +160,18 @@ const renderNotLoggedIn = () => {
     '<h1 id="idle_title">Simple Facebook API Implementation</h1>'+
     '<button id="fblogin" class="login" onclick="facebookLogin()"><img src="/static/img/glyphicons/facebook.png" style="margin:5px">'+
     'Login with Facebook</button> Login here to use the feature.</div>');
+    $("#nav-log-fb").html('<img src="/static/img/glyphicons/facebook.png"> Login');
+    $("#nav-log-fb").attr("onclick", "facebookLogin()");
 };
 
 // Retrieves loginFlag to determine what should be rendered to web
 const render = loginFlag => {
   if (loginFlag) {
-    // Another check login to prevent failures when user intentionally change local storage
-    FB.getLoginStatus(function (response) {
-      if (response.status === 'connected') { // If user has already logged in
-        getUserData(renderData); // Get user data, and render it
-        localStorage.setItem('loginStatus', JSON.stringify(true)); // Save loginStatus to local storage
+    getUserData(renderData); // Get user data, and render it
 
-        // Change log button in navbar to "Logout"
-        $("#nav-log").html('<img src="/static/img/glyphicons/facebook.png"> Logout');
-        $("#nav-log").attr("onclick", "facebookLogout()");
-      } else {
-        localStorage.setItem('loginStatus', JSON.stringify(false)); // Save loginStatus to local storage
-        renderNotLoggedIn(); // Renders main login page
-      }
-    });
+    // Change log button in navbar to "Logout"
+    $("#nav-log-fb").html('<img src="/static/img/glyphicons/facebook.png"> Logout FB');
+    $("#nav-log-fb").attr("onclick", "facebookLogout()");
   } else {
     renderNotLoggedIn(); // Renders main login page
   }
@@ -197,11 +180,6 @@ const render = loginFlag => {
 const facebookLogin = () => {
   FB.login(function (response) { // Login to facebook
     render(response.status === 'connected'); // Render depends on the success status of login
-    localStorage.setItem('loginStatus', JSON.stringify(response.status === 'connected')); // Save loginStatus to local storage
-
-    // Change log button in navbar to "Logout"
-    $("#nav-log").html('<img src="/static/img/glyphicons/facebook.png"> Logout');
-    $("#nav-log").attr("onclick", "facebookLogout()");
   }, {
     scope: 'public_profile,user_posts,publish_actions,email,user_about_me,publish_pages,user_managed_groups'
   });
@@ -212,11 +190,6 @@ const facebookLogout = () => {
     if (response.status === 'connected') {
       FB.logout(); // Logout from Facebook
       render(false); // Renders main login page
-      localStorage.setItem('loginStatus', JSON.stringify(false)); // Save loginStatus to local storage
-
-      // Change log button in navbar to "Login"
-      $("#nav-log").html('<img src="/static/img/glyphicons/facebook.png"> Login');
-      $("#nav-log").attr("onclick", "facebookLogin()");
     }
   });
 };
