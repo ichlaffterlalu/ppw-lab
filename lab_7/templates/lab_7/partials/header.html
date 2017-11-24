@@ -27,6 +27,12 @@
           </ul>
         </li>
       </ul>
-    </div><!--/.nav-collapse -->
+      {% if user_login %}
+        <ul class="nav navbar-nav navbar-right" id="nav-log">
+          <li><a id="nav-user">{{user_login}}</a></li>
+          <li><a id="logout" style='background:#800' href='{% url "auth_logout" %}'>Logout</a></li>
+        </ul>
+      {% endif %}
+    </div>
   </div>
 </nav>

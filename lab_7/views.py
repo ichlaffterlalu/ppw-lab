@@ -4,43 +4,58 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core import serializers
 
 from .models import Friend
-from .api_csui_helper.csui_helper import CSUIhelper
+from .api_csui_helper.csui_helper import get_auth_param_dict, get_mahasiswa_list, get_detail_mhs_by_npm
+
+from praktikum.custom_auth import check_login
 import os
 import json
 
 response = {}
-csui_helper = CSUIhelper(username=os.environ.get("SSO_USERNAME", "yourusername"),
-                         password=os.environ.get("SSO_PASSWORD", "yourpassword"))
 
 def index(request):
-    # Page halaman menampilkan list mahasiswa yang ada
-    # TODO berikan akses token dari backend dengan menggunakaan helper yang ada
-    if request.GET.get("page") != None and request.GET.get("from") != None:
-        api_response = csui_helper.instance.get_mahasiswa_list(page=request.GET.get("page",1))
-        return HttpResponse(json.dumps(api_response[0]))
-
+    response = {}
+    dummy_response = check_login(request, False, response)
+    if dummy_response: # user need to authenticate, redirect to login
+        return render(request, dummy_response, response)
     else:
-        api_response = csui_helper.instance.get_mahasiswa_list(page=request.GET.get("page",1))
-        friend_list = list(Friend.objects.all())[-50:]
-        response = {"mahasiswa_list": api_response[0], "friend_list": friend_list,
-                    "page": request.GET.get("page",1), "friend_count": Friend.objects.count(),
-                    "mhs_count": api_response[1]}
-        html = 'lab_7/lab_7.html'
-        return render(request, html, response)
+        # Page halaman menampilkan list mahasiswa yang ada
+        # TODO berikan akses token dari backend dengan menggunakaan helper yang ada
+        if request.GET.get("page") != None and request.GET.get("from") != None:
+            api_response = get_mahasiswa_list(request.session['access_token'], page=request.GET.get("page",1))
+            return HttpResponse(json.dumps(api_response[0]))
+
+        else:
+            api_response = get_mahasiswa_list(request.session['access_token'], page=request.GET.get("page",1))
+            friend_list = list(Friend.objects.all())[-50:]
+            response = {"mahasiswa_list": api_response[0], "friend_list": friend_list,
+                        "page": request.GET.get("page",1), "friend_count": Friend.objects.count(),
+                        "mhs_count": api_response[1], "user_login": request.session.get("user_login","")}
+            html = 'lab_7/lab_7.html'
+            return render(request, html, response)
 
 def friend_list(request):
     response['friend_list'] = Friend.objects.all()
     response['friend_count'] = Friend.objects.count()
     response['page'] = request.GET.get("page",1)
     response['per'] = request.GET.get("per",10)
+    response['user_login'] = request.session.get("user_login","")
+
     html = 'lab_7/daftar_teman.html'
+    html = check_login(request, html, response)
     return render(request, html, response)
 
 def friend_detail(request):
-    if request.method == 'GET':
+    dummy_response = check_login(request, False, response)
+    if dummy_response: return render(request, dummy_response, response)
+    elif request.method == 'GET':
+        response['user_login'] = request.session.get("user_login","")
+
         npm = request.GET.get("npm",0)
-        api_response = csui_helper.instance.get_detail_mhs_by_npm(npm)
-        response['friend'] = Friend.objects.filter(npm=npm)[0]
+        api_response = get_detail_mhs_by_npm(request.session['access_token'], npm)
+        try:
+            response['friend'] = Friend.objects.filter(npm=npm)[0]
+        except:
+            response['friend'] = api_response.get("nama_mhs","-")
         response['alamat_mhs'] = api_response.get("alamat_mhs","-")
         response['kd_pos_mhs'] = api_response.get("kd_pos_mhs","-")
         response['kota_lahir'] = api_response.get("kota_lahir","-")
@@ -55,6 +70,7 @@ def friend_detail(request):
             response['nm_org'] = "-"
             response['nm_prg'] = "-"
             response['angkatan'] = "-"
+
         html = 'lab_7/detil_teman.html'
         return render(request, html, response)
 
@@ -69,7 +85,11 @@ def friend_list_json(request):
         for i in range(start, end):
             result.append(model_to_dict(friend_list[i]))
 
-        return HttpResponse(json.dumps(result))
+        http_response = HttpResponse(json.dumps(result))
+        http_response = check_login(request, http_response, response)
+
+        if type(http_response) == HttpResponse: return http_response
+        else: return render(request, http_response, response)
 
 @csrf_exempt
 def add_friend(request):
@@ -79,10 +99,18 @@ def add_friend(request):
         friend = Friend(friend_name=name, npm=npm)
         friend.save()
         data = model_to_dict(friend)
-        return HttpResponse(data)
+
+        http_response = HttpResponse(data)
+        http_response = check_login(request, http_response, response)
+
+        if type(http_response) == HttpResponse: return http_response
+        else: return render(request, http_response, response)
 
 def delete_friend(request):
-    if request.method == 'GET':
+    dummy_response = check_login(request, False, response)
+    if dummy_response: # user needs to authenticate
+        return render(request, dummy_response, response)
+    elif request.method == 'GET':
         try:
             friend_id = int(request.GET["friend_id"])
             obj = Friend.objects.get(id=friend_id)
@@ -97,7 +125,12 @@ def validate_npm(request):
     data = {
         'is_taken': find_friend(npm) #lakukan pengecekan apakah Friend dgn npm tsb sudah ada
     }
-    return JsonResponse(data)
+
+    http_response = JsonResponse(data)
+    http_response = check_login(request, http_response, response)
+
+    if type(http_response) == JsonResponse: return http_response
+    else: return render(request, http_response, response)
 
 def find_friend(npm):
     try:
@@ -113,5 +146,6 @@ def model_to_dict(obj):
     struct = json.loads(data)
     data_dict = struct[0]["fields"]
     data_dict.update({"id":obj.id})
+
     data = json.dumps(data_dict)
     return data

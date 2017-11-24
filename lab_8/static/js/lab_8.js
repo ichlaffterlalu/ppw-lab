@@ -160,7 +160,7 @@ const renderNotLoggedIn = () => {
     '<h1 id="idle_title">Simple Facebook API Implementation</h1>'+
     '<button id="fblogin" class="login" onclick="facebookLogin()"><img src="/static/img/glyphicons/facebook.png" style="margin:5px">'+
     'Login with Facebook</button> Login here to use the feature.</div>');
-    $("#nav-log-fb").html('<img src="/static/img/glyphicons/facebook.png"> Login');
+    $("#nav-log-fb").html('<img src="/static/img/glyphicons/facebook.png"> Login FB');
     $("#nav-log-fb").attr("onclick", "facebookLogin()");
 };
 

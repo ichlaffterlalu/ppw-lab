@@ -142,3 +142,7 @@ p:not(#footer){
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
 }
+#nav-log img {
+    height: 19px;
+    width: 19px;
+}
