@@ -23,7 +23,7 @@
 </div>
 </form>
 {% if messages %}
-<div class="error-messages"><b>{% for message in messages %}{{ message }}<br />{% endfor %}</b></div>
+<div class="error-messages"><b>{% for message in messages %}{% if message.level_tag == "danger" %}{{ message }}<br />{% endif %}{% endfor %}</b></div>
 {% endif %}
 </div>
 </div>

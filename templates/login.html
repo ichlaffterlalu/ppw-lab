@@ -1,8 +1,15 @@
-{% extends "lab_9/layout/base.html" %}
+{% extends "base.html" %}
 {% load staticfiles %}
+{% block meta %}
+    <meta name="description" content="ppw-ichlasulaffan Main Login Page">
+    <meta name="author" content="Ichlasul Affan">
+{% endblock %}
+{% block title %}ppw-ichlasulaffan: Login using CSUI Account{% endblock %}
+{% block stylescript_app %}<link rel=stylesheet href="{% static 'css/login.css' %}">{% endblock %}
+{% block header %}{% include "login-header.html" %}{% endblock %}
 {% block content %}
 <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-6 offset-md-3">
         <div class="rata-tengah">
             <div class="judul">
                 <h1> Halaman Login </h1>
@@ -23,4 +30,7 @@
         </div>
     </div>
 </div>
+{% endblock %}
+{% block footer %}
+    <p class="copyright">{% if user_login %}Currently logged in: {{user_login}}{% else %}&copy; 2017 Ichlasul Affan.{% endif %}</p>
 {% endblock %}

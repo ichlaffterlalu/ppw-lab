@@ -29,7 +29,7 @@ def index(request):
             friend_list = list(Friend.objects.all())[-50:]
             response = {"mahasiswa_list": api_response[0], "friend_list": friend_list,
                         "page": request.GET.get("page",1), "friend_count": Friend.objects.count(),
-                        "mhs_count": api_response[1], "user_login": request.session.get("user_login","")}
+                        "mhs_count": api_response[1]}
             html = 'lab_7/lab_7.html'
             return render(request, html, response)
 
@@ -38,7 +38,6 @@ def friend_list(request):
     response['friend_count'] = Friend.objects.count()
     response['page'] = request.GET.get("page",1)
     response['per'] = request.GET.get("per",10)
-    response['user_login'] = request.session.get("user_login","")
 
     html = 'lab_7/daftar_teman.html'
     html = check_login(request, html, response)
@@ -48,8 +47,6 @@ def friend_detail(request):
     dummy_response = check_login(request, False, response)
     if dummy_response: return render(request, dummy_response, response)
     elif request.method == 'GET':
-        response['user_login'] = request.session.get("user_login","")
-
         npm = request.GET.get("npm",0)
         api_response = get_detail_mhs_by_npm(request.session['access_token'], npm)
         try:
