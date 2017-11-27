@@ -7,7 +7,7 @@ from django.urls import reverse
 from django.contrib import messages
 #catatan: tidak bisa menampilkan messages jika bukan menggunakan method 'render'
 from .api_enterkomputer import get_drones, get_soundcards, get_opticals
-from praktikum.custom_auth import check_login
+from lab_login.custom_auth import check_login
 
 response = {}
 
@@ -20,7 +20,6 @@ response = {}
 # Apa yang dilakukan fungsi INI? melakukan cek apakah login atau tidak, lalu
 # apabila sudah login, akan dialihkan ke profile page
 def index(request):
-    print("#==> masuk index")
     html = HttpResponseRedirect(reverse('lab-9:profile'))
     html = check_login(request, html, response)
 
@@ -36,7 +35,6 @@ def set_data_for_session(response, request):
     response['soundcards'] = get_soundcards().json()
     response['opticals'] = get_opticals().json()
 
-    # print ("#drones = ", get_drones().json(), " - response = ", response['drones'])
     ## handling agar tidak error saat pertama kali login (session kosong)
     # jika tidak ditambahkan else, cache akan tetap menyimpan data
     # sebelumnya yang ada pada response, sehingga data tidak up-to-date
@@ -56,7 +54,6 @@ def set_data_for_session(response, request):
         response['fav_opticals'] = []
 
 def profile(request):
-    print ("#==> profile")
     html = 'lab_9/session/profile.html'
     html_after = check_login(request, html, response)
     if html != html_after: return render(request, html_after, response)
@@ -69,7 +66,6 @@ def profile(request):
 
 # Apa yang dilakukan fungsi INI? Merupakan mekanisme login menggunakan cookie
 def cookie_login(request):
-    print ("#==> masuk login")
     if is_login(request):
         return HttpResponseRedirect(reverse('lab-9:cookie_profile'))
     else:
@@ -77,13 +73,11 @@ def cookie_login(request):
         return render(request, html, response)
 
 def cookie_auth_login(request):
-    print ("# Auth login")
     if request.method == "POST":
         user_login = request.POST['username']
         user_password = request.POST['password']
 
         if my_cookie_auth(user_login, user_password):
-            print ("#SET cookies")
             res = HttpResponseRedirect(reverse('lab-9:cookie_login'))
 
             res.set_cookie('user_login', user_login)
@@ -98,13 +92,10 @@ def cookie_auth_login(request):
         return HttpResponseRedirect(reverse('lab-9:cookie_login'))
 
 def cookie_profile(request):
-    print ("# cookie profile ")
     # method ini untuk mencegah error ketika akses URL secara langsung
     if not is_login(request):
-        print ("belum login")
         return HttpResponseRedirect(reverse('lab-9:cookie_login'))
     else:
-        # print ("cookies => ", request.COOKIES)
         in_uname = request.COOKIES['user_login']
         in_pwd= request.COOKIES['user_password']
 
@@ -115,7 +106,6 @@ def cookie_profile(request):
             res =  render(request, html, response)
             return res
         else:
-            print ("#login dulu")
             msg = "Kamu tidak punya akses :P "
             messages.error(request, msg)
             html = "lab_9/cookie/login.html"
@@ -147,16 +137,12 @@ def add_session_item(request, key, id):
     dummy_response = check_login(request, False, response)
     if dummy_response: return render(request, dummy_response, response)
     else:
-        print("#ADD session item")
         ssn_key = request.session.keys()
         if not key in ssn_key:
-            print ("# init " + key)
             request.session[key] = [id]
         else:
             items = request.session[key]
-            print ("# existing " + key + " => ", items)
             if id not in items:
-                print ('# add new item, then save to session')
                 items.append(id)
                 request.session[key] = items
 
@@ -164,12 +150,9 @@ def add_session_item(request, key, id):
         return HttpResponseRedirect(reverse('lab-9:profile'))
 
 def del_session_item(request, key, id):
-    print ("# DEL " + key)
     items = request.session[key]
-    print ("before = ", items)
     items.remove(id) #untuk remove id tertentu dari list
     request.session[key] = items
-    print ("after = ", items)
 
     messages.error(request, "Berhasil hapus item " + key + " dari favorite")
     http_response = HttpResponseRedirect(reverse('lab-9:profile'))
@@ -181,7 +164,6 @@ def clear_session_item(request, key):
     dummy_response = check_login(request, False, response)
     if dummy_response: return render(request, dummy_response, response)
     else:
-        print ("# CLEAR session " + key)
         ssn_key = request.session.keys()
         if key in ssn_key:
             del request.session[key]

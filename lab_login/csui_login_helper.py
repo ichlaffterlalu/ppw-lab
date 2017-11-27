@@ -23,16 +23,11 @@ def get_client_id():
     return client_id
 
 def verify_user(access_token):
-    print ("#get identity number")
     parameters = {"access_token": access_token, "client_id": get_client_id()}
     response = requests.get(API_VERIFY_USER, params=parameters)
-    print ("response => ", response.json())
     return response.json()
 
 def get_data_user(access_token, id):
-    print ("#get data user => ", id)
     parameters = {"access_token": access_token, "client_id": get_client_id()}
     response = requests.get(API_MAHASISWA+id, params=parameters)
-    print ("response => ", response.text)
-    print ("response => ", response.json())
     return response.json()

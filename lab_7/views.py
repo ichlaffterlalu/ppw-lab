@@ -6,7 +6,7 @@ from django.core import serializers
 from .models import Friend
 from .api_csui_helper.csui_helper import get_mahasiswa_list, get_detail_mhs_by_npm
 
-from praktikum.custom_auth import check_login
+from lab_login.custom_auth import check_login
 import os
 import json
 
@@ -27,9 +27,9 @@ def index(request):
         else:
             api_response = get_mahasiswa_list(request.session['access_token'], page=request.GET.get("page",1))
             friend_list = list(Friend.objects.all())[-50:]
-            response = {"mahasiswa_list": api_response[0], "friend_list": friend_list,
+            response.update({"mahasiswa_list": api_response[0], "friend_list": friend_list,
                         "page": request.GET.get("page",1), "friend_count": Friend.objects.count(),
-                        "mhs_count": api_response[1]}
+                        "mhs_count": api_response[1]})
             html = 'lab_7/lab_7.html'
             return render(request, html, response)
 

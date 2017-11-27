@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from datetime import datetime, date
-from praktikum.custom_auth import check_login
+from lab_login.custom_auth import check_login
 
 # Enter your name here
 mhs_name = 'Ichlasul Affan'

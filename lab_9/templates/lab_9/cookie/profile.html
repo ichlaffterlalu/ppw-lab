@@ -16,9 +16,16 @@
 {% block scripts_page %}
     <script>
         $(document).ready(function() {
-            $('#nav-user').html('[COOKIE LOGIN] {{request.COOKIES.user_login}}');
+            $('#nav-user').html('[COOKIE] {{request.COOKIES.user_login}}');
+            $('#logout').html('Reset Cookie (Logout)')
             $('#logout').attr('href','{% url "lab-9:cookie_clear" %}');
             $('#logout').attr('onclick', "return confirm('Keluar?')");
         });
     </script>
+{% endblock %}
+{% block footer %}
+<p class="copyright">
+    {% if request.COOKIES.user_login %}Currently logged in (cookies, custom): {{request.COOKIES.user_login}}{% else %}&copy; 2017 Ichlasul Affan.{% endif %}<br/>
+    {% if user_login %}Currently logged in (session, CSUI): {{user_login}}{% endif %}
+</p>
 {% endblock %}

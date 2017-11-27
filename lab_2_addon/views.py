@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from lab_1.views import mhs_name, birth_date
-from praktikum.custom_auth import check_login
+from lab_login.custom_auth import check_login
 
 #My biodata
 bio_dict = [{'subject' : 'Name', 'value' : mhs_name},\

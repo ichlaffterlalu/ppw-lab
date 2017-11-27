@@ -31,8 +31,7 @@ import lab_7.urls as lab_7
 import lab_8.urls as lab_8
 import lab_9.urls as lab_9
 
-# /sol
-from .custom_auth import auth_login, auth_logout
+from lab_login.custom_auth import auth_login, auth_logout
 
 urlpatterns = [
     # authentication using CSUI account

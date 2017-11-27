@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from .forms import Todo_Form
 from .models import Todo
-from praktikum.custom_auth import check_login
+from lab_login.custom_auth import check_login
 
 # Create your views here.
 response = {}

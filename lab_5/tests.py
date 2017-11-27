@@ -21,6 +21,7 @@ env = environ.Env(DEBUG=(bool, False),)
 environ.Env.read_env('.env')
 
 def setUpModule():
+	print("\nTesting Lab 5")
 	client_main.post('/custom_auth/login/', {"username": env("SSO_USERNAME"), "password": env("SSO_PASSWORD")})
 
 class Lab5UnitTest(TestCase):
@@ -121,6 +122,8 @@ class Lab5FunctionalTest(TestCase):
 		password.send_keys(self.env("SSO_PASSWORD"))
 
 		self.selenium.find_element_by_id("submit").click()
+
+		self.selenium.get('http://127.0.0.1:8000/lab-5/')
 
 	def tearDown(self):
 		self.selenium.quit()

@@ -1,4 +1,4 @@
-from praktikum.csui_login_helper import get_client_id
+from lab_login.csui_login_helper import get_client_id
 import requests
 
 API_MAHASISWA_LIST_URL = "https://api.cs.ui.ac.id/siakngcs/mahasiswa-list/"

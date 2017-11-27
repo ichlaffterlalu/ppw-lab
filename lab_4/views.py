@@ -4,7 +4,7 @@ from lab_2.views import landing_page_content
 from django.http import HttpResponseRedirect
 from .forms import Message_Form
 from .models import Message
-from praktikum.custom_auth import check_login
+from lab_login.custom_auth import check_login
 
 # Create your views here.
 response = {'author': "Ichlasul Affan"}

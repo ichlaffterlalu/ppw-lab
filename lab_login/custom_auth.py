@@ -14,8 +14,6 @@ def check_login(request, html, response):
         return 'login.html'
 
 def auth_login(request):
-    print ("#==> auth_login ")
-
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
@@ -38,8 +36,6 @@ def auth_login(request):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
 
 def auth_logout(request):
-    print ("#==> auth logout")
     request.session.flush() # menghapus semua session
-
     messages.warning(request, "Logout successful. Your session has been removed.")
     return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))

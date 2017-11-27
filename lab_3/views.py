@@ -3,7 +3,7 @@ from django.contrib import messages
 from .models import Diary
 from datetime import datetime
 import json
-from praktikum.custom_auth import check_login
+from lab_login.custom_auth import check_login
 
 # Create your views here.
 diary_dict = {}

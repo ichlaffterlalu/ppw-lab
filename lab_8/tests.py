@@ -13,6 +13,7 @@ env = environ.Env(DEBUG=(bool, False),)
 environ.Env.read_env('.env')
 
 def setUpModule():
+	print("\nTesting Lab 8")
 	client_main.post('/custom_auth/login/', {"username": env("SSO_USERNAME"), "password": env("SSO_PASSWORD")})
 
 class Lab8UnitTest(TestCase):

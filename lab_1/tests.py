@@ -14,7 +14,8 @@ env = environ.Env(DEBUG=(bool, False),)
 environ.Env.read_env('.env')
 
 def setUpModule():
-        client_main.post('/custom_auth/login/', {"username": env("SSO_USERNAME"), "password": env("SSO_PASSWORD")})
+    print("\nTesting Lab 1")
+    client_main.post('/custom_auth/login/', {"username": env("SSO_USERNAME"), "password": env("SSO_PASSWORD")})
 
 class Lab1UnitTest(TestCase):
     def test_hello_name_is_exist(self):
