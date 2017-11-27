@@ -3,11 +3,11 @@
 {% block content %}
 <section name="friend-list" id="friend-list-section">
     <div class="container">
-        <h2>Details of {{friend.friend_name}}</h2>
+        <h2>Details of {% if friend %}{{friend.friend_name}}{% else %}-{% endif %}</h2>
         <h4>{{nm_org}} angkatan {{angkatan}}</h4>
         <ul>
             <li>Curriculum Code: [{{kd_org}}] {{nm_prg}}</li>
-            <li>Student Number: {{friend.npm}}</li>
+            <li>Student Number: {{npm}}</li>
             <li>Place, Date of Birth: {{kota_lahir}}, {{tgl_lahir}}</li>
             <li>Home Address: {{alamat_mhs}}, postal code: {{kd_pos_mhs}}</li>
         </ul>

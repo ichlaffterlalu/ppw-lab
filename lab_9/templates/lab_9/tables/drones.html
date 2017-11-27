@@ -32,7 +32,7 @@
                     {% if not drone.id in fav_drones %}
                     <a href="{% url 'lab-9:add_session_item' 'drones' drone.id %}" class="btn fav btn-primary">Add</a>
                     {% else %}
-                    <a href="{%url 'lab-9:del_session_item' 'drones' drone.id %}" class="btn fav btn-primary">Remove</a>
+                    <a href="{% url 'lab-9:del_session_item' 'drones' drone.id %}" class="btn fav btn-primary">Remove</a>
                     {% endif %}
                 </td>
             </tr>

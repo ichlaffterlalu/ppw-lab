@@ -19,9 +19,14 @@
 </div>
 
 <div class="container">
+    <!-- Error messages -->
+    {% for message in messages %}{% if message.level_tag == "danger" %}
+        <div class="alert alert-{{message.level_tag}} alert-dismissable text-center">{{message}}</div>
+    {% endif %}{% endfor %}
+
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" aria-controls="home">
+        <li role="presentation" aria-controls="home" class="active">
             <a href="#drone" role="tab" data-toggle="tab">Drones</a>
         </li>
         <li role="presentation" aria-controls="home">

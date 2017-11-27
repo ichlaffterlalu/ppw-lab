@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core import serializers
 
 from .models import Friend
-from .api_csui_helper.csui_helper import get_auth_param_dict, get_mahasiswa_list, get_detail_mhs_by_npm
+from .api_csui_helper.csui_helper import get_mahasiswa_list, get_detail_mhs_by_npm
 
 from praktikum.custom_auth import check_login
 import os
@@ -49,10 +49,12 @@ def friend_detail(request):
     elif request.method == 'GET':
         npm = request.GET.get("npm",0)
         api_response = get_detail_mhs_by_npm(request.session['access_token'], npm)
-        try:
-            response['friend'] = Friend.objects.filter(npm=npm)[0]
-        except:
-            response['friend'] = api_response.get("nama_mhs","-")
+        friends = Friend.objects.filter(npm=npm)
+
+        if len(friends) == 0: response['friend'] = False
+        else: response['friend'] = friends[0]
+
+        response['npm'] = npm
         response['alamat_mhs'] = api_response.get("alamat_mhs","-")
         response['kd_pos_mhs'] = api_response.get("kd_pos_mhs","-")
         response['kota_lahir'] = api_response.get("kota_lahir","-")

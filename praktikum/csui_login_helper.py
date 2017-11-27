@@ -15,9 +15,8 @@ def get_access_token(username, password):
         response = requests.request("POST", url, data=payload, headers=headers)
 
         return response.json()["access_token"]
-    except Exception as e:
+    except:
         return None
-        # raise Exception("username atau password sso salah, input : [{}, {}]".format(username, password,))
 
 def get_client_id():
     client_id = 'X3zNkFmepkdA47ASNMDZRX3Z9gqSU1Lwywu5WepG'

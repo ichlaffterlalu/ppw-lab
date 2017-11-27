@@ -17,7 +17,8 @@ response = {}
 
 # ======================================================================== #
 # User Func
-# Apa yang dilakukan fungsi INI? #silahkan ganti ini dengan penjelasan kalian
+# Apa yang dilakukan fungsi INI? melakukan cek apakah login atau tidak, lalu
+# apabila sudah login, akan dialihkan ke profile page
 def index(request):
     print("#==> masuk index")
     html = HttpResponseRedirect(reverse('lab-9:profile'))
@@ -56,25 +57,17 @@ def set_data_for_session(response, request):
 
 def profile(request):
     print ("#==> profile")
-    ## sol : bagaimana cara mencegah error, jika url profile langsung diakses
-    if 'user_login' not in request.session.keys():
-        return HttpResponseRedirect(reverse('lab-9:index'))
-    ## end of sol
+    html = 'lab_9/session/profile.html'
+    html_after = check_login(request, html, response)
+    if html != html_after: return render(request, html_after, response)
 
     set_data_for_session(response, request)
-
-    html = 'lab_9/session/profile.html'
     return render(request, html, response)
-
-# ======================================================================== #
-
-### General Session Items
-
 
 # ======================================================================== #
 # COOKIES
 
-# Apa yang dilakukan fungsi INI? #silahkan ganti ini dengan penjelasan kalian
+# Apa yang dilakukan fungsi INI? Merupakan mekanisme login menggunakan cookie
 def cookie_login(request):
     print ("#==> masuk login")
     if is_login(request):
@@ -151,20 +144,24 @@ def is_login(request):
 # SESSION ITEM FUNCTIONS (GENERAL)
 
 def add_session_item(request, key, id):
-    ssn_key = request.session.keys()
-    if not key in ssn_key:
-        print ("# init " + key)
-        request.session[key] = [id]
+    dummy_response = check_login(request, False, response)
+    if dummy_response: return render(request, dummy_response, response)
     else:
-        items = request.session[key]
-        print ("# existing " + key + " => ", items)
-        if id not in items:
-            print ('# add new item, then save to session')
-            items.append(id)
-            request.session[key] = items
+        print("#ADD session item")
+        ssn_key = request.session.keys()
+        if not key in ssn_key:
+            print ("# init " + key)
+            request.session[key] = [id]
+        else:
+            items = request.session[key]
+            print ("# existing " + key + " => ", items)
+            if id not in items:
+                print ('# add new item, then save to session')
+                items.append(id)
+                request.session[key] = items
 
-    messages.success(request, "Berhasil tambah " + key + "favorite")
-    return HttpResponseRedirect(reverse('lab-9:profile'))
+        messages.success(request, "Berhasil tambah " + key + "favorite")
+        return HttpResponseRedirect(reverse('lab-9:profile'))
 
 def del_session_item(request, key, id):
     print ("# DEL " + key)
@@ -174,15 +171,24 @@ def del_session_item(request, key, id):
     request.session[key] = items
     print ("after = ", items)
 
-    messages.error(request, "Berhasil hapus dari favorite")
-    return HttpResponseRedirect(reverse('lab-9:profile'))
+    messages.error(request, "Berhasil hapus item " + key + " dari favorite")
+    http_response = HttpResponseRedirect(reverse('lab-9:profile'))
+    http_response = check_login(request, http_response, response)
+    if type(http_response) == str: return (request, http_response, response)
+    else: return http_response
 
 def clear_session_item(request, key):
-    print ("# CLEAR session " + key + "s")
-    print ("before 1 = ", request.session[key])
-    del request.session[key]
-
-    messages.error(request, "Berhasil reset favorite " + key + "s")
-    return HttpResponseRedirect(reverse('lab-9:profile'))
+    dummy_response = check_login(request, False, response)
+    if dummy_response: return render(request, dummy_response, response)
+    else:
+        print ("# CLEAR session " + key)
+        ssn_key = request.session.keys()
+        if key in ssn_key:
+            del request.session[key]
+            messages.error(request, "Berhasil hapus session: favorite " + key)
+            return HttpResponseRedirect(reverse('lab-9:index'))
+        else:
+            messages.error(request, "Favorite " + key + " kosong")
+            return HttpResponseRedirect(reverse('lab-9:index'))
 
 # ======================================================================== #

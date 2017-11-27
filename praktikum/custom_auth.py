@@ -41,5 +41,5 @@ def auth_logout(request):
     print ("#==> auth logout")
     request.session.flush() # menghapus semua session
 
-    messages.success(request, "Logout successful. Your session has been removed.")
+    messages.warning(request, "Logout successful. Your session has been removed.")
     return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))

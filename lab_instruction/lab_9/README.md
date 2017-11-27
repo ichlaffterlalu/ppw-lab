@@ -791,8 +791,8 @@ Untuk membantu kalian dalam mengerjakan challenge, telah disiapkan beberapa bari
     3. [x] Menggunakan fungsi umum untuk menghapus/reset kategori (drones/optical/soundcard) dari session.
 
 3. Implementasi _session_ untuk semua halaman yang telah dibuat pada Lab Sebelumnya
-    1. [ ] Jika halaman lab diakses tanpa login terlebih dahulu, maka mereka akan ditampilkan halaman login
-    2. [ ] Ketika halaman Lab ke-**N** diakses tanpa login, maka setelah login, pengguna akan diberikan tampilan Lab ke-**N**
-    3. [ ] Ubahlah implementasi `csui_helper.py` pada Lab 9 sehingga bisa digunakan oleh Lab 7 (Kalian boleh menghapus berkas `csui_helper.py`
+    1. [x] Jika halaman lab diakses tanpa login terlebih dahulu, maka mereka akan ditampilkan halaman login
+    2. [x] Ketika halaman Lab ke-**N** diakses tanpa login, maka setelah login, pengguna akan diberikan tampilan Lab ke-**N**
+    3. [x] Ubahlah implementasi `csui_helper.py` pada Lab 9 sehingga bisa digunakan oleh Lab 7 (Kalian boleh menghapus berkas `csui_helper.py`
     yang ada di Lab 7)
 

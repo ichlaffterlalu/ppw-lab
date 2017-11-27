@@ -11,6 +11,9 @@
             </div>
             <form action="{% url 'lab-9:cookie_auth_login' %}" method="POST">
                 {% csrf_token %}
+                {% for message in messages %}{% if message.level_tag == "danger" %}
+                    <div class="alert alert-danger alert-dismissable text-center">{{message}}</div>
+                {% endif %}{% endfor %}
                 <p>
                     <label for="username"> Your username* </label>
                     <input type="text" id="username" name="username" required>

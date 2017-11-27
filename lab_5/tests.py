@@ -11,10 +11,21 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.action_chains import ActionChains
 
+import os
+import environ
+
 # Create your tests here.
+client_main = Client()
+root = environ.Path(__file__) - 3 # three folder back (/a/b/c/ - 3 = /)
+env = environ.Env(DEBUG=(bool, False),)
+environ.Env.read_env('.env')
+
+def setUpModule():
+	client_main.post('/custom_auth/login/', {"username": env("SSO_USERNAME"), "password": env("SSO_PASSWORD")})
+
 class Lab5UnitTest(TestCase):
 	def test_lab_5_url_is_exist(self):
-		response = Client().get('/lab-5/')
+		response = client_main.get('/lab-5/')
 		self.assertEqual(response.status_code, 200)
 
 	def test_lab5_using_index_func(self):
@@ -47,55 +58,69 @@ class Lab5UnitTest(TestCase):
 			form.errors['title'],
 			["Please fill the title with real thing."]
 		)
-		
+
 	def test_lab5_post_success_and_render_the_result(self):
 		test = 'Anonymous'
-		response_post = Client().post('/lab-5/add_todo', {'title': test, 'description': test})
+		response_post = client_main.post('/lab-5/add_todo', {'title': test, 'description': test})
 		self.assertEqual(response_post.status_code, 302)
 
-		response= Client().get('/lab-5/')
+		response= client_main.get('/lab-5/')
 		html_response = response.content.decode('utf8')
 		self.assertIn(test, html_response)
 
 	def test_lab5_post_error_and_render_the_result(self):
 		test = 'Anonymous'
-		response_post = Client().post('/lab-5/add_todo', {'title': '', 'description': ''})
+		response_post = client_main.post('/lab-5/add_todo', {'title': '', 'description': ''})
 		self.assertEqual(response_post.status_code, 302)
 
-		response= Client().get('/lab-5/')
+		response= client_main.get('/lab-5/')
 		html_response = response.content.decode('utf8')
 		self.assertNotIn(test, html_response)
 
 	def test_lab5_can_delete_todo(self):
 		previous_count = Todo.objects.all().count()
-		response_post = Client().post('/lab-5/add_todo', {'title': 'bener', 'description': 'bener'})
-		
+		response_post = client_main.post('/lab-5/add_todo', {'title': 'bener', 'description': 'bener'})
+
 		idPost = Todo.objects.all()[0].id
-		
-		response=Client().get('/lab-5/delete_todo?id=' + str(idPost), follow=True)
-		
+
+		response=client_main.get('/lab-5/delete_todo?id=' + str(idPost), follow=True)
+
 		counting_all_available_todo = Todo.objects.all().count()
 		self.assertEqual(counting_all_available_todo, previous_count)
-		
+
 		html_response = response.content.decode('utf8')
 		self.assertIn("Todo has been deleted.", html_response)
-	
+
 	def test_lab5_handled_error_delete_todo(self):
-		response=Client().get('/lab-5/delete_todo?id=10000000000000', follow=True)
+		response=client_main.get('/lab-5/delete_todo?id=10000000000000', follow=True)
 		html_response = response.content.decode('utf8')
 		self.assertIn("The todo does not exist.", html_response)
-		
-		
+
+
 class Lab5FunctionalTest(TestCase):
 	def setUp(self):
 		chrome_options = Options()
 		chrome_options.add_argument('--dns-prefetch-disable')
-		chrome_options.add_argument('--no-sandbox')        
+		chrome_options.add_argument('--no-sandbox')
 		chrome_options.add_argument('--headless')
 		chrome_options.add_argument('disable-gpu')
 		try: self.selenium  = webdriver.Chrome('./chromedriver.exe', chrome_options=chrome_options)
 		except: self.selenium  = webdriver.Chrome('./chromedriver', chrome_options=chrome_options)
 		super(Lab5FunctionalTest, self).setUp()
+
+		# Login
+		self.root = environ.Path(__file__) - 3 # three folder back (/a/b/c/ - 3 = /)
+		self.env = environ.Env(DEBUG=(bool, False),)
+		environ.Env.read_env('.env')
+
+		self.selenium.get('http://127.0.0.1:8000/lab-5/')
+		username = self.selenium.find_element_by_id("username")
+		password = self.selenium.find_element_by_id("password")
+
+		username.send_keys(self.env("SSO_USERNAME"))
+		password.send_keys(self.env("SSO_PASSWORD"))
+
+		self.selenium.find_element_by_id("submit").click()
 
 	def tearDown(self):
 		self.selenium.quit()
@@ -117,25 +142,25 @@ class Lab5FunctionalTest(TestCase):
 
 		# submitting the form
 		submit.send_keys(Keys.RETURN)
-		
+
 		# check if there's a success message
 		self.assertIn('Todo has been created.', selenium.page_source)
-	
+
 	def test_delete_todo(self):
 		selenium = self.selenium
 		# Opening the link we want to test
 		self.test_input_todo()
 		selenium.get('http://127.0.0.1:8000/lab-5/')
-		
+
 		# find the delete button
 		todo_item = selenium.find_element_by_css_selector("div[id*='todo-']")
 		delete_button = selenium.find_element_by_css_selector("a[href*='/lab-5/delete_todo?id=']")
-		
+
 		# click the delete button
 		hover = ActionChains(selenium).move_to_element(todo_item)
 		hover.perform()
 		time.sleep(1)
 		delete_button.click()
-		
+
 		# check if there's a success message
 		self.assertIn('Todo has been deleted.', selenium.page_source)
