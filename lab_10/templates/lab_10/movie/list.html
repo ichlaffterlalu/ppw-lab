@@ -53,7 +53,7 @@
                     "data": "Poster",
                     "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
                         if (oData.Poster == "N/A") {
-                            $(nTd).html("<img class='poster' src=\"{% static '/img/lab_10_poster_notfound.jpg' %}\" class='img-responsive img-thumbnail'/>");
+                            $(nTd).html("<img class='poster' src=\"{% static 'img/lab_10_poster_notfound.jpg' %}\" class='img-responsive img-thumbnail'/>");
                         } else {
                             $(nTd).html("<img src='" + oData.Poster + "' class='poster img-responsive img-thumbnail'/>");
                         }

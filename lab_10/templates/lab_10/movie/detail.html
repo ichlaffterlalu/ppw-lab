@@ -2,6 +2,13 @@
 {% load staticfiles %}
 {% block content %}
 <div class="container">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{message.level_tag}} text-center">
+                {{message|striptags}}
+            </div>
+        {% endfor %}
+    {% endif %}
     <div class="panel panel-info">
         <div class="panel-heading">
             <div class="box pull-right text-right">
@@ -16,7 +23,7 @@
         </div>
         <div class="panel-body w3-theme-l5">
             {% if movie.poster|stringformat:"s" == "b'N/A'" %}
-            <img style="margin: 0px auto;display:block;" src="{% static '/img/lab_10_poster_notfound.jpg' %}"/>
+            <img style="margin: 0px auto;display:block;" src="{% static 'img/lab_10_poster_notfound.jpg' %}"/>
             {% else %}
             <img style="margin: 0px auto;display:block;" src="{{movie.poster}}" />
             {% endif %}

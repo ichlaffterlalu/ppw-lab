@@ -33,11 +33,6 @@ class Lab9UnitTest(TestCase):
 		found = resolve('/lab-9/')
 		self.assertEqual(found.func, index)
 
-	def test_root_url_now_is_using_index_page_from_lab_9(self):
-		response = client_main.get('/')
-		self.assertEqual(response.status_code, 301)
-		self.assertRedirects(response,'/lab-9/',301,302)
-
 	def test_lab_9_profile_url_is_exist(self):
 		response = client_main.get('/lab-9/profile/')
 		self.assertEqual(response.status_code, 200)

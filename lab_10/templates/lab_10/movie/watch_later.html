@@ -26,7 +26,7 @@
                                 <td>{{movie.title}}</td>
                                 <td>
                                     {% if movie.poster|stringformat:"s" == "b'N/A'" %}
-                                    <img class="poster" src="{% static '/img/lab_10_poster_notfound.jpg' %}"/>
+                                    <img class="poster" src="{% static 'img/lab_10_poster_notfound.jpg' %}"/>
                                     {% else %}
                                     <img class="poster" src="{{movie.poster}}"/>
                                     {% endif %}
