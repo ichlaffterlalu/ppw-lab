@@ -8,8 +8,8 @@ def get_mahasiswa_list(access_token, page=1):
     response = requests.get(API_MAHASISWA_LIST_URL,
                             params={"access_token": access_token, "client_id": get_client_id(), "page":page})
     json_response = response.json()
-    mahasiswa_list = json_response["results"]
-    count = json_response["count"]
+    mahasiswa_list = json_response.get("results",{})
+    count = json_response.get("count", 0)
     return (mahasiswa_list, count)
 
 def get_detail_mhs_by_npm(access_token, npm=0):
