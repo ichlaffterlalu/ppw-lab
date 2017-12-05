@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block meta %}
+    <meta name="description" content="LAB 9">
+    <meta name="author" content="Ichlasul Affan">
+{% endblock %}
+{% block title %}Lab 9{% endblock %}
+{% block stylescript %}<link href="{% static 'css/bootstrap-3.3.7.min.css' %}" rel="stylesheet">{% endblock %}
+{% block stylescript_app %}
+    <link href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+    <link href="{% static 'css/lab_10.css' %}" rel="stylesheet">
+{% endblock %}
+{% block header %}{% include "lab_10/partials/header.html" %}{% endblock %}
+{% block content %}
+        <div class="container">
+            {% for message in messages %}
+            <div class="alert {Pmessage.tags}} alert-dismissible" role="alert" id="django-messages">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="margin-right: 15px;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{message}}
+            </div>
+            {% endfor %}
+
+            {% block content_page %}{% endblock %}
+        </div>
+{% endblock %}
+{% block scripts %}
+    <script type="application/javascript" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <script type="application/javascript" src="{% static 'js/bootstrap-3.3.7.min.js' %}"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+{% endblock %}
+{% block footer %}{% include "lab_10/partials/footer.html" %}{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "lab_10/layout/base.html" %}
+{% load staticfiles %}
+{% block content %}
+<!-- Content Here -->
+<section id="data-dashboard">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2> Dashboard </h2>
+        </div>
+        <div class="panel-body">
+            <p> Username : {{ author }} </p>
+            <p> NPM : {{kode_identitas}} </p>
+            <p> Role : {{ role }} </p>
+            <p>
+                <a href="{% url 'lab-10:movie_list' %}" class="btn btn-primary"> Daftar Movie </a> |
+                <a href="{% url 'lab-10:list_watch_later' %}" class="btn btn-warning"> Daftar Watch Later </a>
+            </p>
+        </div>
+        <div class="panel-footer">
+            <a href="{% url 'auth_logout' %}" class="btn btn-danger" onclick="return confirm('Keluar?')">
+                Logout </a>
+        </div>
+    </div>
+</section>
+<hr>
+{% endblock %}

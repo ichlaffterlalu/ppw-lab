@@ -1,0 +1,75 @@
+{% extends "lab_10/layout/base.html" %}
+{% load staticfiles %}
+{% block content %}
+<!-- User Login Here -->
+{% if user_login %}
+<a href="" class="btn btn-primary btn-lg"> Logout </a>
+{% else %}
+<p>
+    <a href="{% url 'lab-10:list_watch_later' %}" class="btn btn-primary btn-lg "> Daftar <em>Watch Later </em> </a>
+</p>
+{% endif %}
+<br>
+<!-- List Movie -->
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h2> List Movie </h2>
+    </div>
+    <div class="panel-body">
+        <div style="margin:20px; padding:20px; background-color:lightsteelblue; border-radius:3px;">
+            <form method="GET" action="{% url 'lab-10:movie_list' %}" class="form-inline">
+                <label> Nama </label> <input type="text" class="form-control" name="judul" placeholder="Judul"
+                                             value="{{judul}}">
+                <label> Tahun </label> <input type="text" class="form-control" name="tahun" placeholder="Tahun "
+                                              value="{{tahun}}">
+                <input type="submit" class="btn btn-primary pull-right">
+            </form>
+        </div>
+        <hr>
+        <div class="table table-responsive">
+            <table class="table table-hover" id="myTable" style="width: none;">
+                <thead>
+                <th> Judul</th>
+                <th> Tahun</th>
+                <th> Poster</th>
+                <th> Detail</th>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts_page %}
+<script type="text/javascript">
+    $(document).ready(function (e) {
+        $('#myTable').DataTable({
+            "ajax": {
+                "dataType": 'json',
+                "contentType": "application/json; charset=utf-8",
+                "url": {% autoescape off %} {{ jsonUrlDT }} {% endautoescape %},
+                "dataSrc": "dataku",
+            },
+            "columns" : [
+                { "data": "Title" },
+                { "data": "Year" },
+                {
+                    "data": "Poster",
+                    "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                        if (oData.Poster == "N/A") {
+                            $(nTd).html("<img src='" + 'https://i5.walmartimages.com/asr/f752abb3-1b49-4f99-b68a-7c4d77b45b40_1.39d6c524f6033c7c58bd073db1b99786.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF' + "' style='height:50%' class='img-responsive img-thumbnail'/>");
+                        } else {
+                            $(nTd).html("<img src='" + oData.Poster + "' style='height:50%' class='img-responsive img-thumbnail'/>");
+                        }
+                    }
+                },
+                {
+                    "data": null,
+                    "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                        $(nTd).html("<a href='/lab-10/movie/detail/" + oData.imdbID + "' class='btn btn-primary'> Detail </a>");
+                    }
+                }
+            ]
+        });
+    });
+</script>
+{% endblock %}
