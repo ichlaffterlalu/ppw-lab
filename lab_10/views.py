@@ -17,13 +17,11 @@ response = {}
 
 ### USER
 def index(request):
-    print ("#==> masuk index")
     returned = check_login(request, HttpResponseRedirect(reverse('lab-10:dashboard')), response)
     if type(returned) == HttpResponseRedirect: return returned
     else: return render(request, returned, response)
 
 def dashboard(request):
-    print ("#==> dashboard")
     if not 'user_login' in request.session.keys():
         return HttpResponseRedirect(reverse('lab-10:index'))
     else:
@@ -64,11 +62,11 @@ def movie_list(request):
     return render(request, html, response)
 
 def movie_detail(request, id):
-    print ("MOVIE DETAIL = ", id)
     response['id'] = id
     if request.session.get('user_login'):
         is_added = check_movie_in_database(request, id)
     else:
+        response.pop('user_login', None)
         is_added = check_movie_in_session(request, id)
 
     response['added'] = is_added
@@ -78,19 +76,16 @@ def movie_detail(request, id):
 
 ### WATCH LATER : ADD and LIST
 def add_watch_later(request, id):
-    print ("ADD WL => ", id)
     msg = "Berhasil tambah movie ke Watch Later"
     check_exist = get_detail_movie(id)
     if str(check_exist["response"])=="b'True'" :
     	if request.session.get('user_login'):
-    		print ("TO DB")
     		is_in_db = check_movie_in_database(request, id)
     		if not is_in_db:
     			add_item_to_database(request, id)
     		else:
     			msg = "Movie already exist on DATABASE! Hacking detected!"
     	else:
-    		print ("TO SESSION")
     		is_in_ssn = check_movie_in_session(request, id)
     		if not is_in_ssn:
     			add_item_to_session(request, id)
@@ -132,7 +127,6 @@ def set_data_for_session(request):
 
 ### API : SEARCH movie
 def api_search_movie(request, judul, tahun):
-    print ("API SEARCH MOVIE")
     if judul == "-" and tahun == "-":
         items = []
     else:

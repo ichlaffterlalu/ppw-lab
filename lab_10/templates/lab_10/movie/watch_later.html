@@ -1,4 +1,5 @@
 {% extends "lab_10/layout/base.html" %}
+{% load staticfiles %}
 {% block content %}
 <div class="container">
     <div class="panel panel-info">
@@ -19,19 +20,23 @@
                     </tr>
                     </thead>
                     <tbody>
-                        {% for movie in watch_later_movies %}
-                        <tr>
-                            <td>{{movie.title}}</td>
-                            <td>
-                                {% if movie.poster|stringformat:"s" == "b'N/A'" %}
-                                <img class="poster" src="https://i5.walmartimages.com/asr/f752abb3-1b49-4f99-b68a-7c4d77b45b40_1.39d6c524f6033c7c58bd073db1b99786.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF"/>
-                                {% else %}
-                                <img class="poster" src="{{movie.poster}}"/>
-                                {% endif %}
-                            </td>
-                            <td style="text-align: center"><a href='/lab-10/movie/detail/{{movie.imdbid}}' class='btn btn-primary btn-xs'>Detail</a></td>
-                        </tr>
-                        {% endfor %}
+                        {% if watch_later_movies %}
+                            {% for movie in watch_later_movies %}
+                            <tr>
+                                <td>{{movie.title}}</td>
+                                <td>
+                                    {% if movie.poster|stringformat:"s" == "b'N/A'" %}
+                                    <img class="poster" src="{% static '/img/lab_10_poster_notfound.jpg' %}"/>
+                                    {% else %}
+                                    <img class="poster" src="{{movie.poster}}"/>
+                                    {% endif %}
+                                </td>
+                                <td style="text-align:center"><a href='/lab-10/movie/detail/{{movie.imdbid}}' class='btn btn-primary btn-xs'>Detail</a></td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                        <td colspan=3 style="text-align:center"><i>You have no movies to watch later.</i></td>
+                        {% endif %}
                     </tbody>
                 </table>
         </div>

@@ -2,7 +2,6 @@ import requests
 API_KEY = "8df7c7e5" #TODO Implement, fill your OMDB API Key Here
 
 def search_movie(judul, tahun):
-    print ("METHOD SEARCH MOVIE")
     get_tahun = ""
     if not tahun == "-":
         get_tahun = "&y="+tahun
@@ -12,7 +11,6 @@ def search_movie(judul, tahun):
 
     data_exist = False
     stResponse = resp['Response']
-    print ("RESPONSE => ", stResponse)
     if stResponse == "True":
         count_results = resp['totalResults']
 

@@ -23,7 +23,7 @@
             </div>
             <hr>
             <div class="table table-responsive">
-                <table class="table table-hover" id="myTable" style="width:none;">
+                <table class="table table-hover" id="myTable">
                     <thead>
                     <th>Title</th>
                     <th>Year</th>
@@ -53,9 +53,9 @@
                     "data": "Poster",
                     "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
                         if (oData.Poster == "N/A") {
-                            $(nTd).html("<img src='" + 'https://i5.walmartimages.com/asr/f752abb3-1b49-4f99-b68a-7c4d77b45b40_1.39d6c524f6033c7c58bd073db1b99786.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF' + "' style='height:50%' class='img-responsive img-thumbnail'/>");
+                            $(nTd).html("<img class='poster' src=\"{% static '/img/lab_10_poster_notfound.jpg' %}\" class='img-responsive img-thumbnail'/>");
                         } else {
-                            $(nTd).html("<img src='" + oData.Poster + "' style='height:50%' class='img-responsive img-thumbnail'/>");
+                            $(nTd).html("<img src='" + oData.Poster + "' class='poster img-responsive img-thumbnail'/>");
                         }
                     }
                 },

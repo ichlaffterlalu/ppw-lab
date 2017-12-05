@@ -52,6 +52,11 @@ body {
 .poster {
     margin: 0px auto;
     display: block;
+    object-fit: scale-down;
+}
+
+#myTable {
+    width:100%!important
 }
 
 footer p {
@@ -176,7 +181,7 @@ td {
 
 /* Responsive */
 
-@media only screen and (max-width:500px) {
+@media only screen and (max-width:640px) {
     p,
     table,
     .table {
@@ -186,11 +191,11 @@ td {
         padding: 5px
     }
     .poster {
-        width:200px;
+        max-width:100px;
     }
 }
 
-@media only screen and (max-width:360px) {
+@media only screen and (max-width:480px) {
     .table>tbody>tr>td,
     .table>tbody>tr>th,
     .table>tfoot>tr>td,
@@ -205,6 +210,6 @@ td {
         font-size: 11px !important
     }
     .poster {
-        width:100px;
+        max-width:50px;
     }
 }

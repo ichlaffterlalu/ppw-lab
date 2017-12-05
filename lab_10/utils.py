@@ -95,7 +95,6 @@ def get_my_movies_from_session(request):
 
 #get detail list movie from api
 def get_list_movie_from_api(my_list):
-    print ("GET LIST DATA")
     list_movie = []
     for movie in my_list:
         list_movie.append(get_detail_movie(movie))
