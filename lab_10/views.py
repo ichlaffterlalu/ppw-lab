@@ -46,6 +46,11 @@ def dashboard(request):
 
 ### MOVIE : LIST and DETAIL
 def movie_list(request):
+    if request.session.get('user_login'):
+        response['user_login'] = request.session.get('user_login')
+    else:
+        response.pop('user_login', None)
+
     judul, tahun = get_parameter_request(request)
     urlDataTables = "/lab-10/api/movie/" + judul + "/" + tahun
     jsonUrlDT = json.dumps(urlDataTables)
@@ -103,9 +108,11 @@ def list_watch_later(request):
     get_data_session(request)
     moviesku = []
     if request.session.get('user_login'):
-    	moviesku = get_my_movies_from_database(request)
+        moviesku = get_my_movies_from_database(request)
+        response['user_login'] = request.session.get('user_login')
     else:
-    	moviesku = get_my_movies_from_session(request)
+        response.pop('user_login', None)
+        moviesku = get_my_movies_from_session(request)
 
     watch_later_movies = get_list_movie_from_api(moviesku)
     response['watch_later_movies'] = watch_later_movies

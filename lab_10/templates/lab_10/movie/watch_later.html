@@ -1,34 +1,40 @@
 {% extends "lab_10/layout/base.html" %}
 {% block content %}
-<div class="panel panel-info">
-    <div class="panel-heading" style="text-align: center">
-        <h2> List Movie for Watch Later </h2>
-    </div>
-    <div class="panel-body">
-            <table class="table table-hover" id="myTable" style="width: none;">
-                <thead>
-                <tr>
-                <th style="text-align: center"> Judul</th>
-                <th style="text-align: center"> Poster</th>
-                <th style="text-align: center"> Detail</th>
-            	</tr>
-                </thead>
-                <tbody>
-                	{% for movie in watch_later_movies %}
-                	<tr>
-                		<td>{{movie.title}}</td>
-                		<td>
-                			{% if movie.poster|stringformat:"s" == "b'N/A'" %}
-                			<img style="margin: 0px auto;display:block;" src="https://i5.walmartimages.com/asr/f752abb3-1b49-4f99-b68a-7c4d77b45b40_1.39d6c524f6033c7c58bd073db1b99786.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF"/>
-                			{% else %}
-                			<img style="margin: 0px auto;display:block;" src="{{movie.poster}}"/>
-                			{% endif %}
-                		</td>
-                		<td style="text-align: center"><a href='/lab-10/movie/detail/{{movie.imdbid}}' class='btn btn-primary'> Detail </a></td>
-                	</tr>
-                	{% endfor %}
-                </tbody>
-            </table>
+<div class="container">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <div class="pull-right text-right">
+                <a href="{% url 'lab-10:movie_list' %}" class="btn btn-primary btn-sm" style="margin-bottom:2px">Movie Search</a><br/>
+                {% if user_login %}<a href="{% url 'lab-10:dashboard' %}" class="btn btn-primary btn-sm" style="margin-top:2px">Dashboard</a>{% endif %}
+            </div>
+            <h2>Movies to Watch Later</h2>
+        </div>
+        <div class="panel-body">
+                <table class="table table-hover" id="myTable" style="width: none;">
+                    <thead>
+                    <tr>
+                    <th style="text-align: center">Title</th>
+                    <th style="text-align: center">Poster</th>
+                    <th style="text-align: center">Detail</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for movie in watch_later_movies %}
+                        <tr>
+                            <td>{{movie.title}}</td>
+                            <td>
+                                {% if movie.poster|stringformat:"s" == "b'N/A'" %}
+                                <img class="poster" src="https://i5.walmartimages.com/asr/f752abb3-1b49-4f99-b68a-7c4d77b45b40_1.39d6c524f6033c7c58bd073db1b99786.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF"/>
+                                {% else %}
+                                <img class="poster" src="{{movie.poster}}"/>
+                                {% endif %}
+                            </td>
+                            <td style="text-align: center"><a href='/lab-10/movie/detail/{{movie.imdbid}}' class='btn btn-primary btn-xs'>Detail</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+        </div>
     </div>
 </div>
 {% endblock %}

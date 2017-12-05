@@ -11,6 +11,9 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
+        {% if user_login %}<li><a href="{% url 'lab-10:dashboard' %}">Dashboard</a></li>{% endif %}
+        <li><a href="{% url 'lab-10:movie_list' %}">Search Movie</a></li>
+        <li><a href="{% url 'lab-10:list_watch_later' %}">Watch Later</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Apps <b class="caret"></b></a>
           <ul class="dropdown-menu">
@@ -22,15 +25,19 @@
             <li><a href="{% url 'lab-6:index' %}">Lab 6: Chat n Calc</a></li>
             <li><a href="{% url 'lab-7:index' %}">Lab 7: FasilkomFriends</a></li>
             <li><a href="{% url 'lab-8:index' %}">Lab 8: Mini Facebook</a></li>
+            <li><a href="{% url 'lab-8:index' %}">Lab 9: Electron Shop</a></li>
           </ul>
         </li>
       </ul>
-      {% if user_login %}
-        <ul class="nav navbar-nav navbar-right" id="nav-log">
+      <ul class="nav navbar-nav navbar-right" id="nav-log">
+        {% if user_login %}
           <li><a id="nav-user">{{user_login}}</a></li>
-          <li><a id="logout" style='background:#800'>Logout</a></li>
-        </ul>
-      {% endif %}
+          <li><a id="logout" href='{% url "auth_logout" %}' style='background:#800'>Logout</a></li>
+        {% else %}
+          <li><a id="nav-user">Anonymous</a></li>
+          <li><a id="login" href='{% url "lab-10:index" %}' style='background:#080'>Login</a></li>
+        {% endif %}
+      </ul>
     </div>
   </div>
 </nav>

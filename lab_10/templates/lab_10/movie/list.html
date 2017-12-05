@@ -1,40 +1,37 @@
 {% extends "lab_10/layout/base.html" %}
 {% load staticfiles %}
 {% block content %}
-<!-- User Login Here -->
-{% if user_login %}
-<a href="" class="btn btn-primary btn-lg"> Logout </a>
-{% else %}
-<p>
-    <a href="{% url 'lab-10:list_watch_later' %}" class="btn btn-primary btn-lg "> Daftar <em>Watch Later </em> </a>
-</p>
-{% endif %}
-<br>
-<!-- List Movie -->
-<div class="panel panel-info">
-    <div class="panel-heading">
-        <h2> List Movie </h2>
-    </div>
-    <div class="panel-body">
-        <div style="margin:20px; padding:20px; background-color:lightsteelblue; border-radius:3px;">
-            <form method="GET" action="{% url 'lab-10:movie_list' %}" class="form-inline">
-                <label> Nama </label> <input type="text" class="form-control" name="judul" placeholder="Judul"
-                                             value="{{judul}}">
-                <label> Tahun </label> <input type="text" class="form-control" name="tahun" placeholder="Tahun "
-                                              value="{{tahun}}">
-                <input type="submit" class="btn btn-primary pull-right">
-            </form>
+<div class="container">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <div class="pull-right text-right">
+                <a href="{% url 'lab-10:list_watch_later' %}" class="btn btn-primary btn-sm" style="margin-bottom:2px;font">Watch Later Playlist</a><br/>
+                {% if user_login %}<a href="{% url 'lab-10:dashboard' %}" class="btn btn-primary btn-sm" style="margin-top:2px">Dashboard</a>{% endif %}
+            </div>
+            <h2>Movie List</h2>
         </div>
-        <hr>
-        <div class="table table-responsive">
-            <table class="table table-hover" id="myTable" style="width: none;">
-                <thead>
-                <th> Judul</th>
-                <th> Tahun</th>
-                <th> Poster</th>
-                <th> Detail</th>
-                </thead>
-            </table>
+        <div class="panel-body">
+            <div style="margin:20px; padding:20px; background-color:lightsteelblue; border-radius:3px;">
+                <form method="GET" action="{% url 'lab-10:movie_list' %}" class="form-inline">
+                    <label>Title</label> <input type="text" class="form-control" name="judul" placeholder="Movie Title"
+                                                value="{{judul}}">
+                    <label>Year</label> <input type="text" class="form-control" name="tahun" placeholder="Release Year"
+                                                value="{{tahun}}">
+                    <input type="submit" class="btn btn-primary btn-sm pull-right" style="margin:4px 0">
+                    <br>
+                </form>
+            </div>
+            <hr>
+            <div class="table table-responsive">
+                <table class="table table-hover" id="myTable" style="width:none;">
+                    <thead>
+                    <th>Title</th>
+                    <th>Year</th>
+                    <th>Poster</th>
+                    <th>Detail</th>
+                    </thead>
+                </table>
+            </div>
         </div>
     </div>
 </div>
@@ -65,7 +62,7 @@
                 {
                     "data": null,
                     "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                        $(nTd).html("<a href='/lab-10/movie/detail/" + oData.imdbID + "' class='btn btn-primary'> Detail </a>");
+                        $(nTd).html("<a href='/lab-10/movie/detail/" + oData.imdbID + "' class='btn btn-primary btn-xs'>Detail</a>");
                     }
                 }
             ]

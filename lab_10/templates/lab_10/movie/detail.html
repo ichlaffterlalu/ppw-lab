@@ -1,126 +1,166 @@
 {% extends "lab_10/layout/base.html" %}
 {% load staticfiles %}
 {% block content %}
-<div class="box">
-    {% if added %}
-    <button class="btn btn-success"> Added to Watch Later </button>
-    {% else %}
-    <a href="{% url 'lab-10:add_watch_later' id %}" class="btn btn-warning"> Add to Watch Later </a>
-    {% endif%}
-</div>
-<br>
-<div class="panel panel-info">
-    <div class="panel-heading">
-        <h1 style="text-align: center;"> {{movie.title}} </h1>
+<div class="container">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <div class="box pull-right text-right">
+                {% if added %}
+                <button class="btn btn-success btn-sm" style="margin-bottom:2px">Added to Watch Later</button><br/>
+                {% else %}
+                <a href="{% url 'lab-10:add_watch_later' id %}" class="btn btn-warning btn-sm" style="margin-bottom:2px"> Add to Watch Later </a><br/>
+                {% endif %}
+                {% if user_login %}<a href="{% url 'lab-10:dashboard' %}" class="btn btn-primary btn-sm" style="margin-top:2px">Dashboard</a>{% endif %}
+            </div>
+            <h2 style="text-align:center"> {{movie.title}} </h1>
+        </div>
+        <div class="panel-body w3-theme-l5">
+            {% if movie.poster|stringformat:"s" == "b'N/A'" %}
+            <img style="margin: 0px auto;display:block;" src="https://i5.walmartimages.com/asr/f752abb3-1b49-4f99-b68a-7c4d77b45b40_1.39d6c524f6033c7c58bd073db1b99786.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF"/>
+            {% else %}
+            <img style="margin: 0px auto;display:block;" src="{{movie.poster}}" />
+            {% endif %}
+            <br>
+            <p style="text-align: center;font-size: 18px">{{movie.plot}}
+                <hr/>
+                <h3>Details: </h3>
+                <table style="width:100%">
+                    <tr>
+                        <td>
+                            <b>Title</b>
+                        </td>
+                        <td>{{movie.title}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Year</b>
+                        </td>
+                        <td>{{movie.year}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Rated</b>
+                        </td>
+                        <td>{{movie.rated}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Released Date</b>
+                        </td>
+                        <td>{{movie.released}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Duration</b>
+                        </td>
+                        <td>{{movie.runtime}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Genre</b>
+                        </td>
+                        <td>{{movie.genre}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Director</b>
+                        </td>
+                        <td>{{movie.director}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Writer</b>
+                        </td>
+                        <td>{{movie.writer}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Actors</b>
+                        </td>
+                        <td>{{movie.actors}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Language</b>
+                        </td>
+                        <td>{{movie.language}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Country</b>
+                        </td>
+                        <td>{{movie.country}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Awards</b>
+                        </td>
+                        <td>{{movie.awards}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Rating:</b>
+                            <br> {% for sc in movie.ratings %}
+                            <b>{{sc.Source}}
+                                <b>
+                                    <br> {% endfor %}
+                        </td>
+                        <td>
+                            <br> {% for sc in movie.ratings %} {{sc.Value}}
+                            <br> {% endfor %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Metascore</b>
+                        </td>
+                        <td>{{movie.metascore}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>IMDb Rating</b>
+                        </td>
+                        <td>{{movie.imdbrating}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>IMDb Votes</b>
+                        </td>
+                        <td>{{movie.imdbvotes}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>DVD Release</b>
+                        </td>
+                        <td>{{movie.dvd}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Box Office</b>
+                        </td>
+                        <td>{{movie.boxoffice}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Production</b>
+                        </td>
+                        <td>{{movie.production}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Website</b>
+                        </td>
+                        <td>
+                            {% if movie.website|stringformat:"s" == "b'N/A'" %}
+                            <p>N/A</p>
+                            {% else %}
+                            <a href="{{movie.website}}">{{movie.website}}</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                </table>
+            </p>
+        </div>
     </div>
-<div class="panel-body w3-theme-l5">
-    {% if movie.poster|stringformat:"s" == "b'N/A'" %}
-        <img style="margin: 0px auto;display:block;" src="https://i5.walmartimages.com/asr/f752abb3-1b49-4f99-b68a-7c4d77b45b40_1.39d6c524f6033c7c58bd073db1b99786.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF"/>
-    {% else %}
-        <img style="margin: 0px auto;display:block;" src="{{movie.poster}}"/>
-    {% endif %}
-    <br>
-    <p style="text-align: center;font-size: 20px" >{{movie.plot}}<p>
-    <br>
-    <h2>Details : </h2>
-    <hr/>
-<table style="width:100%">
-  <tr>
-    <td><b>Title</b></td>
-    <td>{{movie.title}}</td>
-  </tr>
-  <tr>
-    <td><b>Year</b></td>
-    <td>{{movie.year}}</td>
-  </tr>
-  <tr>
-    <td><b>Rated</b></td>
-    <td>{{movie.rated}}</td>
-  </tr>
-  <tr>
-    <td><b>Released Date</b></td>
-    <td>{{movie.released}}</td>
-  </tr>
-  <tr>
-    <td><b>Duration</b></td>
-    <td>{{movie.runtime}}</td>
-  </tr>
-  <tr>
-    <td><b>Genre</b></td>
-    <td>{{movie.genre}}</td>
-  </tr>
-  <tr>
-    <td><b>Director</b></td>
-    <td>{{movie.director}}</td>
-  </tr>
-  <tr>
-    <td><b>Writer</b></td>
-    <td>{{movie.writer}}</td>
-  </tr>
-  <tr>
-    <td><b>Actors</b></td>
-    <td>{{movie.actors}}</td>
-  </tr>
-  <tr>
-    <td><b>Language</b></td>
-    <td>{{movie.language}}</td>
-  </tr>
-  <tr>
-    <td><b>Country</b></td>
-    <td>{{movie.country}}</td>
-  </tr>
-  <tr>
-    <td><b>Awards</b></td>
-    <td>{{movie.awards}}</td>
-  </tr>
-  <tr>
-    <td><b>Rating:</b><br>
-        {% for sc in movie.ratings %}
-            <b>{{sc.Source}}<b><br>
-        {% endfor %}
-    </td>
-    <td><br>
-        {% for sc in movie.ratings %}
-            {{sc.Value}}<br>
-        {% endfor %}
-    </td>
-  </tr>
-  <tr>
-    <td><b>Metascore</b></td>
-    <td>{{movie.metascore}}</td>
-  </tr>
-  <tr>
-    <td><b>IMDb Rating</b></td>
-    <td>{{movie.imdbrating}}</td>
-  </tr>
-  <tr>
-    <td><b>IMDb Votes</b></td>
-    <td>{{movie.imdbvotes}}</td>
-  </tr>
-  <tr>
-    <td><b>DVD Release</b></td>
-    <td>{{movie.dvd}}</td>
-  </tr>
-  <tr>
-    <td><b>Box Office</b></td>
-    <td>{{movie.boxoffice}}</td>
-  </tr>
-  <tr>
-    <td><b>Production</b></td>
-    <td>{{movie.production}}</td>
-  </tr>
-  <tr>
-    <td><b>Website</b></td>
-    <td>
-        {% if movie.website|stringformat:"s" == "b'N/A'" %}
-            <p>N/A</p>
-        {% else %}
-            <a href="{{movie.website}}">{{movie.website}}</a>
-        {% endif %}
-
-    </td>
-  </tr>
-</table>
-</div>
 </div>
 {% endblock %}

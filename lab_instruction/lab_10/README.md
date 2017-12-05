@@ -580,29 +580,29 @@ membuat sebuah _web_ yang baik dengan kreasi kalian sendiri.
 ### Mandatory
 
 1. Autentikasi :
-    1. [ ] Implementasi fungsi Login & Logout
-    1. [ ] Melakukan pengecekan setiap mengakses suatu halaman, apakah sudah login
+    1. [x] Implementasi fungsi Login & Logout
+    1. [x] Melakukan pengecekan setiap mengakses suatu halaman, apakah sudah login
     apa belum (jika belum login, arahkan ke halaman login)
-    1. [ ] (Jelaskan) Bagaimana Django Apps kalian mengetahui bahwa setiap _user_ yang menagkses Apps kalian,
+    1. [x] (Jelaskan) Bagaimana Django Apps kalian mengetahui bahwa setiap _user_ yang menagkses Apps kalian,
     akan dilayani secara berbeda? (Data milik pengguna tidak akan saling tertukar). Tunjukkan didalam baris kode
 
 1. Dashboard :
-    1. [ ] Mendaftar dan menggunakan OMDb API untuk menampilkan daftar film
-    1. [ ] Menggunakan DataTables untuk menampilkan daftar film dan filtering
-    1. [ ] Membuat fungsi pencarian film berdasarkan judul dan tahun
-    1. [ ] (Jelaskan) Bagaimana Django Apps kalian bisa melakukan _pagination_ dan melakukan pencarian?
+    1. [x] Mendaftar dan menggunakan OMDb API untuk menampilkan daftar film
+    1. [x] Menggunakan DataTables untuk menampilkan daftar film dan filtering
+    1. [x] Membuat fungsi pencarian film berdasarkan judul dan tahun
+    1. [x] (Jelaskan) Bagaimana Django Apps kalian bisa melakukan _pagination_ dan melakukan pencarian?
 
 1. Koleksi Film
-    1. [ ] Membuat daftar film "tonton nanti" (disimpan di session)
-    1. [ ] Membuat daftar film "sudah ditonton" (disimpan di model)
-    1. [ ] (Jelaskan) Bagaimana Django Apps kalian bisa menyimpan film yang ingin ditonton, tanpa Login terlebih dahulu?
-    1. [ ] (Jelaskan) Bagaimana Django Apps kalian bisa menyimpan film yang ingin ditonton kedalam _database_, dan membedakan
+    1. [x] Membuat daftar film "tonton nanti" (disimpan di session)
+    1. [x] Membuat daftar film "sudah ditonton" (disimpan di model)
+    1. [x] (Jelaskan) Bagaimana Django Apps kalian bisa menyimpan film yang ingin ditonton, tanpa Login terlebih dahulu?
+    1. [x] (Jelaskan) Bagaimana Django Apps kalian bisa menyimpan film yang ingin ditonton kedalam _database_, dan membedakan
     kepemilikan dari massing - masing daftar film? Tunjukkan dalam baris kode
 
 1. Pastikan kalian memiliki _Code Coverage_ yang baik
-    1. [ ] Jika kalian belum melakukan konfigurasi untuk menampilkan _Code Coverage_ di Gitlab maka lihat langkah `Show Code Coverage in Gitlab` di [README.md](https://gitlab.com/PPW-2017/ppw-lab/blob/master/README.md)
-    2. [ ] Pastikan _Code Coverage_ kalian 100%
+    1. [x] Jika kalian belum melakukan konfigurasi untuk menampilkan _Code Coverage_ di Gitlab maka lihat langkah `Show Code Coverage in Gitlab` di [README.md](https://gitlab.com/PPW-2017/ppw-lab/blob/master/README.md)
+    2. [x] Pastikan _Code Coverage_ kalian 100%
 
 #### Challenge
-1. Membuat halaman untuk fitur List My Watch Later
-1. Membuat penanganan jika suatu movie ditambahkan secara manual
+1. [x] Membuat halaman untuk fitur List My Watch Later
+2. [x] Membuat penanganan jika suatu movie ditambahkan secara manual
